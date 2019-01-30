@@ -24,5 +24,10 @@ namespace APP2000V_DesktopApp_g11
         {
             InitializeComponent();
         }
+
+        private void TextBlock_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Tekstblokk.Content = "Det funka";
+        }
     }
 }

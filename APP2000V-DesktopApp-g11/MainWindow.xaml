@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:APP2000V_DesktopApp_g11"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        FontSize="18"
+        FontFamily="Arial"
+        Title="Workflow Management System" Height="450" Width="800" >
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Button 
+            x:Name="Tekstblokk"
+            Grid.Column="1"
+            Grid.Row="1"
+            FontSize="28"
+            Content="Dette er en test" Click="TextBlock_GotFocus" />
     </Grid>
 </Window>
