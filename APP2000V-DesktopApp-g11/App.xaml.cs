@@ -19,6 +19,8 @@ namespace APP2000V_DesktopApp_g11
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            new CreateDatabase();
         }
 
     }
