@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace APP2000V_DesktopApp_g11
+namespace APP2000V_DesktopApp_g11.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DesktopGUI.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DesktopGUI : Window
     {
-        public MainWindow()
+        public DesktopGUI()
         {
             InitializeComponent();
-        }
-
-        private void TextBlock_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Tekstblokk.Content = "Det funka";
         }
     }
 }

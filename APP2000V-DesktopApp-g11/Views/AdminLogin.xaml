@@ -1,4 +1,4 @@
-﻿<Window x:Class="APP2000V_DesktopApp_g11.MainWindow"
+﻿<Window x:Class="APP2000V_DesktopApp_g11.AdminLogin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,12 +19,5 @@
             <RowDefinition Height="200"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-
-        <Button 
-            x:Name="Tekstblokk"
-            Grid.Column="1"
-            Grid.Row="1"
-            FontSize="28"
-            Content="Dette er en test" Click="TextBlock_GotFocus" />
     </Grid>
 </Window>
