@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace APP2000V_DesktopApp_g11.Models
+namespace APP2000V_DesktopApp_g11.Models.Database
 {
     class Project
     {
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
+        public string ProjectDescription { get; set; }
+        public DateTime ProjectStart { get; set; }
+        public DateTime ProjectDeadline { get; set; }
+        //public ICollection<Task> Tasks { get; set; }
     }
 }

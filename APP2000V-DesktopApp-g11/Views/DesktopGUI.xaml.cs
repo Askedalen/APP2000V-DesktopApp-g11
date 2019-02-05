@@ -23,5 +23,11 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Hellø from bøttn");
+            Tekstblokk.Text = "Testen fungerte ye boi";
+        }
     }
 }

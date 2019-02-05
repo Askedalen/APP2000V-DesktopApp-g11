@@ -1,12 +1,7 @@
-﻿using APP2000V_DesktopApp_g11.Models;
+﻿using APP2000V_DesktopApp_g11.Models.Database;
 using MySql.Data.Entity;
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APP2000V_DesktopApp_g11
 {
@@ -15,6 +10,7 @@ namespace APP2000V_DesktopApp_g11
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
         public WMSDbContext() 
             : base()

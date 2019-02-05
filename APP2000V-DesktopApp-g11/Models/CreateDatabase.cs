@@ -1,9 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using APP2000V_DesktopApp_g11.Models.Database;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APP2000V_DesktopApp_g11.Models
 {
@@ -12,12 +10,14 @@ namespace APP2000V_DesktopApp_g11.Models
 
         public CreateDatabase()
         {
-            string connectionString = "server=localhost;port=3306;database=app2000v;uid=root";
+            string connectionString = "server=localhost;port=3306;database=app2000v;uid=root;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (WMSDbContext contextDB = new WMSDbContext(connection, false))
                 {
+                    contextDB.Database.Delete();
+
                     contextDB.Database.CreateIfNotExists();
                 }
 
@@ -34,7 +34,27 @@ namespace APP2000V_DesktopApp_g11.Models
                         List<Employee> employees = new List<Employee>();
                         employees.Add(new Employee { FirstName = "Benjamin", LastName = "Askedalen", Id = 1 });
 
+                        List<Project> projects = new List<Project>();
+                        projects.Add(new Project {
+                                         ProjectID          = 1,
+                                         ProjectName        = "Testprosjekt",
+                                         ProjectDescription = "Dette er en test",
+                                         ProjectStart       = new DateTime(2019, 02, 05),
+                                         ProjectDeadline    = new DateTime(2019, 05, 01)
+                                         });
+
+                        List<Task> tasks = new List<Task>();
+                        tasks.Add(new Task {
+                                      TaskID           = 1,
+                                      TaskName         = "TestOppgave",
+                                      TaskDescription  = "Dette er også en test",
+                                      TaskCreationDate = new DateTime(2019, 02, 05),
+                                      TaskDeadline     = new DateTime(2019, 03, 15)
+                                      });
+
                         context.Employees.AddRange(employees);
+                        context.Projects.AddRange(projects);
+                        context.Tasks.AddRange(tasks);
                         context.SaveChanges();
                     }
                     transaction.Commit();

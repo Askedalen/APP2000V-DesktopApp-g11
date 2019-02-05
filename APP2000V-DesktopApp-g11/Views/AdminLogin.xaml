@@ -3,21 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:APP2000V_DesktopApp_g11"
+        xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
         mc:Ignorable="d"
-        FontSize="18"
-        FontFamily="Arial"
-        Title="Workflow Management System" Height="450" Width="800" >
+        Title="Workflow Management System Login" Height="450" Width="800" >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="100"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>
+        
     </Grid>
 </Window>
