@@ -9,17 +9,20 @@
         Width="1920" Height="1080"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
-    <Grid>
+
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="Sidebar" Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+        
+        <Border 
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            BorderThickness="0,1,1,0" 
+            BorderBrush="Black"
+            />
 
         <StackPanel Grid.Column="0" Grid.Row="1">
 
@@ -27,7 +30,8 @@
                 x:Name="logoImage"
                 Grid.Row="0"
                 Width="200" Height="200" 
-                Margin="50,0,50,10" />
+                Margin="50,50,50,10"
+                Source="../Assets/Logo.png"/>
             <TextBlock 
                 Grid.Row="0"
                 Margin="0, 0, 0, 100"
@@ -40,11 +44,13 @@
             <Button 
                 Height="60" 
                 Content="Dashboard" 
-                FontSize="36" Click="Button_Click"/>
+                FontSize="36" Background="#FFAAAAAA"/>
             <Button 
+                x:Name="ProjectsBtn"
                 Height="60" 
                 Content="Projects" 
-                FontSize="36"/>
+                FontSize="36"
+                Click="ProjectsBtn_Click"/>
             <Button 
                 Height="60" 
                 Content="Employees" 
@@ -52,12 +58,12 @@
             <Button 
                 Height="60" 
                 Content="Archive" 
-                FontSize="36"/>
-
-            <TextBlock 
-                x:Name="Tekstblokk"
-                Text="Dette er en test" FontSize="24"/>
+                FontSize="36"
+                />
         </StackPanel>
+        <DockPanel Grid.Column="1">
+            <ContentControl x:Name="ContentArea" />
+        </DockPanel>
     </Grid>
 
 </Window>

@@ -17,7 +17,6 @@ namespace APP2000V_DesktopApp_g11.Models
                 using (WMSDbContext contextDB = new WMSDbContext(connection, false))
                 {
                     contextDB.Database.Delete();
-
                     contextDB.Database.CreateIfNotExists();
                 }
 
@@ -52,9 +51,17 @@ namespace APP2000V_DesktopApp_g11.Models
                                       TaskDeadline     = new DateTime(2019, 03, 15)
                                       });
 
+                        List<User> users = new List<User>();
+                        users.Add(new User { 
+                                      Username = "benjamin",
+                                      Password = "1234",
+                                      UserType = 0
+                                      });
+
                         context.Employees.AddRange(employees);
                         context.Projects.AddRange(projects);
                         context.Tasks.AddRange(tasks);
+                        context.Users.AddRange(users);
                         context.SaveChanges();
                     }
                     transaction.Commit();

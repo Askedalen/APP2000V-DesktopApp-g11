@@ -7,6 +7,50 @@
         mc:Ignorable="d"
         Title="Workflow Management System Login" Height="450" Width="800" >
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Column="1" Grid.Row="1">
+            <TextBlock
+                x:Name="ErrorMessage" 
+                Foreground="Red" 
+                FontWeight="Bold"
+                />
+            <TextBlock 
+                Grid.Row="1"
+                Text="Username"
+                />
+            <TextBox 
+                x:Name="UsernameInput"
+                Background="#FF999999" 
+                Height="20" 
+                Width="100" 
+                />
+            <TextBlock 
+                Grid.Row="2"
+                Text="Password"
+                />
+            <TextBox 
+                x:Name="PasswordInput"
+                Background="#FF999999" 
+                Height="20" 
+                Width="100" 
+                />
+            <Button
+                x:Name="LoginBtn"
+                Grid.Column="1" Grid.Row="3"
+                Height="20"
+                Content="Login" Click="LoginBtn_Click"
+                />
+        </StackPanel>
     </Grid>
 </Window>

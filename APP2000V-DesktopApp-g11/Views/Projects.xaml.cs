@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace APP2000V_DesktopApp_g11.Views
 {
     /// <summary>
-    /// Interaction logic for DesktopGUI.xaml
+    /// Interaction logic for Projects.xaml
     /// </summary>
-    public partial class DesktopGUI : Window
+    public partial class Projects : UserControl
     {
-        public DesktopGUI()
+        public Projects()
         {
             InitializeComponent();
-            ContentArea.Content = new Dashboard();
-        }
-        private void ProjectsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ContentArea.Content = new Projects();
         }
     }
 }
