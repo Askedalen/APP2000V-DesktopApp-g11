@@ -20,7 +20,7 @@ namespace APP2000V_DesktopApp_g11
         {
             base.OnStartup(e);
 
-            //new CreateDatabase();
+            new CreateDatabase();
         }
 
     }

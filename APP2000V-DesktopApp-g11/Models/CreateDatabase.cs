@@ -31,16 +31,17 @@ namespace APP2000V_DesktopApp_g11.Models
                         context.Database.UseTransaction(transaction);
 
                         List<Employee> employees = new List<Employee>();
-                        employees.Add(new Employee { FirstName = "Benjamin", LastName = "Askedalen", Id = 1 });
+                        employees.Add(new Employee { FirstName = "Benjamin", LastName = "Askedalen", EmpId = 1 });
 
                         List<Project> projects = new List<Project>();
-                        projects.Add(new Project {
-                                         ProjectID          = 1,
-                                         ProjectName        = "Testprosjekt",
-                                         ProjectDescription = "Dette er en test",
-                                         ProjectStart       = new DateTime(2019, 02, 05),
-                                         ProjectDeadline    = new DateTime(2019, 05, 01)
-                                         });
+                        Project addProject = new Project {
+                                             ProjectID          = 1,
+                                             ProjectName        = "Testprosjekt",
+                                             ProjectDescription = "Dette er en test",
+                                             ProjectStart       = new DateTime(2019, 02, 05),
+                                             ProjectDeadline    = new DateTime(2019, 05, 01),
+                                             };
+                        projects.Add(addProject);
 
                         List<Task> tasks = new List<Task>();
                         tasks.Add(new Task {
@@ -48,7 +49,8 @@ namespace APP2000V_DesktopApp_g11.Models
                                       TaskName         = "TestOppgave",
                                       TaskDescription  = "Dette er også en test",
                                       TaskCreationDate = new DateTime(2019, 02, 05),
-                                      TaskDeadline     = new DateTime(2019, 03, 15)
+                                      TaskDeadline     = new DateTime(2019, 03, 15),
+                                      //ProjectID        = 1
                                       });
 
                         List<User> users = new List<User>();

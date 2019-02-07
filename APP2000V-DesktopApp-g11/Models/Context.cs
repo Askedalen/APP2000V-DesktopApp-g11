@@ -1,5 +1,5 @@
 ﻿using APP2000V_DesktopApp_g11.Models.Database;
-using MySql.Data.Entity;
+using MySql.Data.EntityFramework;
 using System.Data.Common;
 using System.Data.Entity;
 
