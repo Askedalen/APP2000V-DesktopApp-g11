@@ -26,7 +26,7 @@ namespace APP2000V_DesktopApp_g11.Views
         }
         private void ProjectsBtn_Click(object sender, RoutedEventArgs e)
         {
-            ContentArea.Content = new Projects();
+            ContentArea.Content = new Projects(ContentArea);
         }
 
         private void EmployeesBtn_Click(object sender, RoutedEventArgs e)

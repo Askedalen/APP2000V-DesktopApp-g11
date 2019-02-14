@@ -27,12 +27,8 @@
         <StackPanel
             Grid.Row="1"
             Orientation="Vertical"
-            Width="100"
+            Width="200"
             HorizontalAlignment="Left">
-            <TextBlock
-                Text="Project ID"/>
-            <TextBox 
-                x:Name="ProjectIdInput"/>
             <TextBlock
                 Text="Project name"/>
             <TextBox
@@ -42,16 +38,19 @@
             <TextBox
                 x:Name="ProjectDescInput"/>
             <TextBlock
-                Text="Project start"/>
+                Text="Project start (yyyy-mm-dd)"/>
             <TextBox
                 x:Name="ProjectStartInput"/>
             <TextBlock
-                Text="Project deadline"/>
+                Text="Project deadline (yyyy-mm-dd)"/>
             <TextBox
                 x:Name="ProjectDeadlineInput"/>
             <Button
                 x:Name="RegisterProjectBtn"
-                Content="Register project" Click="RegisterProjectBtn_Click_1" />
+                Content="Register project" 
+                Click="RegisterProjectBtn_Click" />
+            <TextBlock
+                x:Name="ConfirmationBox"/>
         </StackPanel>
     </Grid>
 </UserControl>

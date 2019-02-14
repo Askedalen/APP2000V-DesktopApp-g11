@@ -24,9 +24,10 @@
             FontSize="30"
             />
         <Button 
+            x:Name="NewProjectBtn"
             Width="200"
             Content="New project"
-            FontSize="28" Click="Button_Click"
+            FontSize="28" Click="NewProjectBtn_Click"
             />
     </Grid>
 </UserControl>

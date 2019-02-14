@@ -20,14 +20,16 @@ namespace APP2000V_DesktopApp_g11.Views
     /// </summary>
     public partial class Projects : UserControl
     {
-        public Projects()
+        private ContentControl ContentArea;
+        public Projects(ContentControl contentControl)
         {
             InitializeComponent();
+            ContentArea = contentControl;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NewProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            this.ContentArea.Content = new CreateProject();
         }
     }
 }
