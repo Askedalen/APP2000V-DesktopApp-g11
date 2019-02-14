@@ -88,11 +88,17 @@
     <Compile Include="Models\CreateDatabase.cs" />
     <Compile Include="Models\Database\Task.cs" />
     <Compile Include="Models\Database\User.cs" />
+    <Compile Include="Views\CreateProject.xaml.cs">
+      <DependentUpon>CreateProject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DesktopGUI.xaml.cs">
       <DependentUpon>DesktopGUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employees.xaml.cs">
+      <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Projects.xaml.cs">
       <DependentUpon>Projects.xaml</DependentUpon>

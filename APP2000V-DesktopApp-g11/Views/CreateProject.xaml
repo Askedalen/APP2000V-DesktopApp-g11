@@ -51,8 +51,7 @@
                 x:Name="ProjectDeadlineInput"/>
             <Button
                 x:Name="RegisterProjectBtn"
-                Content="Register project" 
-                Click="RegisterProjectBtn_Click"/>
+                Content="Register project" Click="RegisterProjectBtn_Click_1" />
         </StackPanel>
     </Grid>
 </UserControl>

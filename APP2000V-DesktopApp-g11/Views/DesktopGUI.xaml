@@ -51,12 +51,14 @@
                 Content="Projects" 
                 FontSize="36"
                 Click="ProjectsBtn_Click"/>
-            <Button x:Name="EmployeesBtn" 
+            <Button 
+                x:Name="EmployeesBtn" 
                 Height="60" 
                 Content="Employees" 
                 FontSize="36" 
                 Click="EmployeesBtn_Click"/>
             <Button 
+                x:Name="ArchiveBtn"
                 Height="60" 
                 Content="Archive" 
                 FontSize="36"

@@ -29,5 +29,10 @@ namespace APP2000V_DesktopApp_g11.Views
         {
 
         }
+
+        private void RegisterProjectBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
