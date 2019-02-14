@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="APP2000V_DesktopApp_g11.Views.CreateProject"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1620">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border 
+            Grid.Column="0"
+            Grid.Row="0"
+            BorderThickness="0,1,0,1" 
+            BorderBrush="Black"
+            />
+
+        <TextBlock
+            Text="Create new project"
+            FontSize="30"
+            />
+
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Vertical"
+            Width="100"
+            HorizontalAlignment="Left">
+            <TextBlock
+                Text="Project ID"/>
+            <TextBox 
+                x:Name="ProjectIdInput"/>
+            <TextBlock
+                Text="Project name"/>
+            <TextBox
+                x:Name="ProjectNameInput"/>
+            <TextBlock
+                Text="Project description"/>
+            <TextBox
+                x:Name="ProjectDescInput"/>
+            <TextBlock
+                Text="Project start"/>
+            <TextBox
+                x:Name="ProjectStartInput"/>
+            <TextBlock
+                Text="Project deadline"/>
+            <TextBox
+                x:Name="ProjectDeadlineInput"/>
+            <Button
+                x:Name="RegisterProjectBtn"
+                Content="Register project" 
+                Click="RegisterProjectBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

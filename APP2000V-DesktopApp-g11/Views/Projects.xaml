@@ -15,14 +15,18 @@
         <Border 
             Grid.Column="0"
             Grid.Row="0"
-            Grid.RowSpan="2"
-            BorderThickness="0,1,0,0" 
+            BorderThickness="0,1,0,1" 
             BorderBrush="Black"
             />
 
         <TextBlock
             Text="Projects"
             FontSize="30"
+            />
+        <Button 
+            Width="200"
+            Content="New project"
+            FontSize="28" Click="Button_Click"
             />
     </Grid>
 </UserControl>

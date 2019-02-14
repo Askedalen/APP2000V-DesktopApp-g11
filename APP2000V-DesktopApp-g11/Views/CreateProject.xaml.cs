@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace APP2000V_DesktopApp_g11.Views
 {
     /// <summary>
-    /// Interaction logic for Projects.xaml
+    /// Interaction logic for CreateProject.xaml
     /// </summary>
-    public partial class Projects : UserControl
+    public partial class CreateProject : UserControl
     {
-        public Projects()
+        public CreateProject()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void RegisterProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
