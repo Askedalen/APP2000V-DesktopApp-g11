@@ -104,6 +104,9 @@
     <Compile Include="Views\Projects.xaml.cs">
       <DependentUpon>Projects.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\Employees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Projects.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\WorkMotion.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
