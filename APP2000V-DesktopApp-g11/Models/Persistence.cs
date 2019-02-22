@@ -29,8 +29,29 @@ namespace APP2000V_DesktopApp_g11.Models
                 }
                 catch (Exception exc)
                 {
-                    Console.WriteLine(exc);
+                    Console.WriteLine(exc.Message);
                     return 1;
+                }
+            }
+        }
+
+        public List<Project> GetAllProjects()
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        List<Project> projects = context.Projects.ToList();
+                        return projects;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
                 }
             }
         }

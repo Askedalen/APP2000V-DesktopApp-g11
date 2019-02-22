@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1620">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -29,5 +30,13 @@
             Content="New project"
             FontSize="28" Click="NewProjectBtn_Click"
             />
+        <StackPanel
+            Grid.Row="1"
+            x:Name="ProjectsDisplay"
+            Orientation="Horizontal"
+            Background="LightBlue">
+
+
+        </StackPanel>
     </Grid>
 </UserControl>
