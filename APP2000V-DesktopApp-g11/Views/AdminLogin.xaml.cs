@@ -27,7 +27,7 @@ namespace APP2000V_DesktopApp_g11
             InitializeComponent();
         }
 
-        DesktopGUI desktopGUI = new DesktopGUI();
+        DesktopGUI desktopGUI;
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -58,6 +58,7 @@ namespace APP2000V_DesktopApp_g11
                                         ErrorMessage.Text = "Username and password do not match.";
                                     else
                                     {
+                                        desktopGUI = new DesktopGUI();
                                         desktopGUI.Show();
                                         this.Hide();
                                     }

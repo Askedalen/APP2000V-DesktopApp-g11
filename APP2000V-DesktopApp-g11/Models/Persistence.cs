@@ -35,6 +35,27 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        public Project GetSingleProject(int pid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        Project project = context.Projects.Where(p => p.ProjectID == pid).FirstOrDefault<Project>();
+                        return project;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
         public List<Project> GetAllProjects()
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))

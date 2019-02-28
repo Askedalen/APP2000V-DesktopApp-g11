@@ -22,16 +22,26 @@ namespace APP2000V_DesktopApp_g11.Views
         public DesktopGUI()
         {
             InitializeComponent();
-            ContentArea.Content = new Dashboard();
+            NavBtn_Click(DashboardBtn, null);
         }
-        private void ProjectsBtn_Click(object sender, RoutedEventArgs e)
+        private void NavBtn_Click(object sender, RoutedEventArgs e)
         {
-            ContentArea.Content = new Projects(this);
+            Button btn = sender as Button;
+            ClearBtnColor();
+            btn.Background = Brushes.Gray;
+            if (sender.Equals(DashboardBtn)) ContentArea.Content = new Dashboard();
+            else if (sender.Equals(ProjectsBtn)) ContentArea.Content = new Projects(this);
+            else if (sender.Equals(EmployeesBtn)) ContentArea.Content = new Employees();
+            //else if (sender.Equals(ArchiveBtn)) ContentArea.Content = new Archive();
+            
         }
 
-        private void EmployeesBtn_Click(object sender, RoutedEventArgs e)
+        private void ClearBtnColor()
         {
-            ContentArea.Content = new Employees();
+            DashboardBtn.Background = Brushes.LightGray;
+            ProjectsBtn.Background = Brushes.LightGray;
+            EmployeesBtn.Background = Brushes.LightGray;
+            ArchiveBtn.Background = Brushes.LightGray;
         }
     }
 }

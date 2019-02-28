@@ -12,6 +12,6 @@ namespace APP2000V_DesktopApp_g11.Models.Database
         public string TaskDescription { get; set; }
         public DateTime TaskCreationDate { get; set; }
         public DateTime TaskDeadline { get; set; }
-        //public int ProjectID { get; set; }
+        public int TaskProjectID { get; set; }
     }
 }

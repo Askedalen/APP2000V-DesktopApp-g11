@@ -51,27 +51,33 @@
                 FontFamily="Verdana" Cursor="None" />
 
             <Button 
+                x:Name="DashboardBtn"
                 Height="60" 
                 Content="Dashboard" 
-                FontSize="36" Background="#FFAAAAAA"/>
+                FontSize="36"
+                Click="NavBtn_Click"
+                Background="LightGray"/>
             <Button 
                 x:Name="ProjectsBtn"
                 Height="60" 
                 Content="Projects" 
                 FontSize="36"
-                Click="ProjectsBtn_Click"/>
+                Click="NavBtn_Click"
+                Background="LightGray"/>
             <Button 
                 x:Name="EmployeesBtn" 
                 Height="60" 
                 Content="Employees" 
                 FontSize="36" 
-                Click="EmployeesBtn_Click"/>
+                Click="NavBtn_Click"
+                Background="LightGray"/>
             <Button 
                 x:Name="ArchiveBtn"
                 Height="60" 
                 Content="Archive" 
                 FontSize="36"
-                />
+                Click="NavBtn_Click"
+                Background="LightGray"/>
         </StackPanel>
         <DockPanel Grid.Column="1">
             <ContentControl x:Name="ContentArea" />

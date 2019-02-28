@@ -50,7 +50,7 @@ namespace APP2000V_DesktopApp_g11.Models
                                       TaskDescription  = "Dette er også en test",
                                       TaskCreationDate = new DateTime(2019, 02, 05),
                                       TaskDeadline     = new DateTime(2019, 03, 15),
-                                      //ProjectID        = 1
+                                      TaskProjectID        = 1
                                       });
 
                         List<User> users = new List<User>();

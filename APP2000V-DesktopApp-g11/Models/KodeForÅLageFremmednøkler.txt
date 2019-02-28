@@ -1,0 +1,5 @@
+
+-- Fremmednøkkel for tasks
+ALTER TABLE tasks 
+ADD CONSTRAINT FK_TaskProjectID
+FOREIGN KEY (TaskProjectID) REFERENCES projects(ProjectID);

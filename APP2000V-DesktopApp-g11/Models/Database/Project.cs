@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APP2000V_DesktopApp_g11.Models.Database
 {
-    class Project
+    public class Project
     {
         [Key]
         public int ProjectID { get; set; }
@@ -13,7 +13,5 @@ namespace APP2000V_DesktopApp_g11.Models.Database
         public string ProjectDescription { get; set; }
         public DateTime ProjectStart { get; set; }
         public DateTime ProjectDeadline { get; set; }
-
-        //public ICollection<Task> Tasks { get; set; }
     }
 }

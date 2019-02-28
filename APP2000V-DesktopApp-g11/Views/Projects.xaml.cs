@@ -26,7 +26,10 @@ namespace APP2000V_DesktopApp_g11.Views
         private void DisplayAllProjects()
         {
             List<Project> allProjects = Db.GetAllProjects();
-            if (allProjects != null && allProjects.Count != 0) allProjects.ForEach(DisplaySingleProject);
+            if (allProjects != null && allProjects.Count != 0)
+            {
+                allProjects.ForEach(DisplaySingleProject);
+            }
             else
             {
                 TextBlock noProjectsMessage = new TextBlock();
@@ -39,6 +42,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void DisplaySingleProject(Project obj)
         {
+            ProjectButton projectButton = new ProjectButton(obj);
             StackPanel projectPanel = new StackPanel();
             TextBlock headline = new TextBlock();
             TextBlock participantCount = new TextBlock();
@@ -73,12 +77,31 @@ namespace APP2000V_DesktopApp_g11.Views
 
             projectPanel.Children.Add(tasksScroll);
             projectPanel.Style = AppWindow.FindResource("ProjectPanel") as Style;
-            ProjectsDisplay.Children.Add(projectPanel);
+
+            projectButton.Style = AppWindow.FindResource("ProjectButton") as Style;
+            projectButton.Content = projectPanel;
+            projectButton.Click += new RoutedEventHandler(ProjectButton_Click);
+            ProjectsDisplay.Children.Add(projectButton);
+        }
+
+        private void ProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectButton btn = sender as ProjectButton;
+            this.ContentArea.Content = new ProjectPage(btn.ProjectID);
         }
 
         private void NewProjectBtn_Click(object sender, RoutedEventArgs e)
         {
             this.ContentArea.Content = new CreateProject();
+        }
+    }
+
+    public class ProjectButton : Button
+    {
+        public int ProjectID { get; set; }
+        public ProjectButton(Project p) : base()
+        {
+            ProjectID = p.ProjectID;
         }
     }
 }

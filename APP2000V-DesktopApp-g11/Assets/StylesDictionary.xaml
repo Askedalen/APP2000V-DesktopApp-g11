@@ -8,12 +8,17 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="70" />
     </Style>
-    
+
+    <Style x:Key="ProjectButton" TargetType="Button">
+        <Setter Property="Margin" Value="20, 20, 0, 20" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Width" Value="400" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
     <Style x:Key="ProjectPanel" TargetType="StackPanel">
         <Setter Property="Orientation" Value="Vertical" />
         <Setter Property="Background" Value="LightGray" />
         <Setter Property="Width" Value="400" />
-        <Setter Property="Margin" Value="20, 20, 0, 20" />
     </Style>
     <Style x:Key="ProjectHeadline" TargetType="TextBlock">
         <Setter Property="Margin" Value="15, 20, 0, 10" />
