@@ -1,4 +1,5 @@
-﻿using APP2000V_DesktopApp_g11.Models;
+﻿using APP2000V_DesktopApp_g11.Assets;
+using APP2000V_DesktopApp_g11.Models;
 using APP2000V_DesktopApp_g11.Models.Database;
 using MySql.Data.MySqlClient;
 using System;
@@ -21,10 +22,10 @@ namespace APP2000V_DesktopApp_g11.Views
     /// <summary>
     /// Interaction logic for CreateProject.xaml
     /// </summary>
-    public partial class CreateProject : UserControl
+    public partial class CreateProject : AnimatedUserControl
     {
         Persistence Db = new Persistence();
-        public CreateProject()
+        public CreateProject(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
         }

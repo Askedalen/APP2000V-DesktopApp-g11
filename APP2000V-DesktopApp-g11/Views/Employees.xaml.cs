@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APP2000V_DesktopApp_g11.Assets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,9 @@ namespace APP2000V_DesktopApp_g11.Views
     /// <summary>
     /// Interaction logic for Employees.xaml
     /// </summary>
-    public partial class Employees : UserControl
+    public partial class Employees : AnimatedUserControl
     {
-        public Employees()
+        public Employees(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
         }

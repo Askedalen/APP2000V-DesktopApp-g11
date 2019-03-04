@@ -1,4 +1,5 @@
-﻿using APP2000V_DesktopApp_g11.Models;
+﻿using APP2000V_DesktopApp_g11.Assets;
+using APP2000V_DesktopApp_g11.Models;
 using APP2000V_DesktopApp_g11.Models.Database;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,11 @@ namespace APP2000V_DesktopApp_g11.Views
     /// <summary>
     /// Interaction logic for ProjectPage.xaml
     /// </summary>
-    public partial class ProjectPage : UserControl
+    public partial class ProjectPage : AnimatedUserControl
     {
         Persistence Db = new Persistence();
         Project CurrentProject;
-        public ProjectPage(int projectID)
+        public ProjectPage(int projectID, DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
             Console.WriteLine("Project: " + projectID);

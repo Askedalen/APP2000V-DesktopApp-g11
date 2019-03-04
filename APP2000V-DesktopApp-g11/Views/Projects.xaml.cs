@@ -1,4 +1,5 @@
-﻿using APP2000V_DesktopApp_g11.Models;
+﻿using APP2000V_DesktopApp_g11.Assets;
+using APP2000V_DesktopApp_g11.Models;
 using APP2000V_DesktopApp_g11.Models.Database;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,14 @@ namespace APP2000V_DesktopApp_g11.Views
     /// <summary>
     /// Interaction logic for Projects.xaml
     /// </summary>
-    public partial class Projects : UserControl
+    public partial class Projects : AnimatedUserControl
     {
         private Persistence Db = new Persistence();
-        private ContentControl ContentArea;
         private DesktopGUI AppWindow;
-        public Projects(DesktopGUI gui)
+        public Projects(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
             AppWindow = gui;
-            ContentArea = gui.ContentArea;
             DisplayAllProjects();
         }
 
@@ -87,12 +86,12 @@ namespace APP2000V_DesktopApp_g11.Views
         private void ProjectButton_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            this.ContentArea.Content = new ProjectPage(btn.ProjectID);
+            SwitchContent(new ProjectPage(btn.ProjectID, AppWindow));
         }
 
         private void NewProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.ContentArea.Content = new CreateProject();
+            SwitchContent(new CreateProject(AppWindow));
         }
     }
 

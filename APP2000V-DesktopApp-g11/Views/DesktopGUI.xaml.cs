@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APP2000V_DesktopApp_g11.Assets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,16 +23,18 @@ namespace APP2000V_DesktopApp_g11.Views
         public DesktopGUI()
         {
             InitializeComponent();
-            NavBtn_Click(DashboardBtn, null);
+            ContentArea.Content = new Dashboard(this);
+            DashboardBtn.Background = Brushes.Gray;
         }
         private void NavBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             ClearBtnColor();
             btn.Background = Brushes.Gray;
-            if (sender.Equals(DashboardBtn)) ContentArea.Content = new Dashboard();
-            else if (sender.Equals(ProjectsBtn)) ContentArea.Content = new Projects(this);
-            else if (sender.Equals(EmployeesBtn)) ContentArea.Content = new Employees();
+            AnimatedUserControl currentContent = ContentArea.Content as AnimatedUserControl;
+            if (sender.Equals(DashboardBtn)) currentContent.SwitchContent(new Dashboard(this));
+            else if (sender.Equals(ProjectsBtn)) currentContent.SwitchContent(new Projects(this));
+            else if (sender.Equals(EmployeesBtn)) currentContent.SwitchContent(new Employees(this));
             //else if (sender.Equals(ArchiveBtn)) ContentArea.Content = new Archive();
             
         }
