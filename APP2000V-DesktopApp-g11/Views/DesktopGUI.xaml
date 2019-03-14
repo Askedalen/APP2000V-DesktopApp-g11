@@ -8,15 +8,20 @@
         Title="DesktopGUI" 
         Width="1920" Height="1080"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary 
                     Source="../Assets/StylesDictionary.xaml"/>
-                <ResourceDictionary 
-                    Source="../Assets/Animations.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -35,7 +40,7 @@
             BorderBrush="Black"
             />
 
-        <StackPanel Grid.Column="0" Grid.Row="1">
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF6B7893">
 
             <Image 
                 x:Name="logoImage"
@@ -44,42 +49,46 @@
                 Margin="50,50,50,10"
                 Source="/Assets/Logo.png"/>
             <TextBlock 
-                Grid.Row="0"
+                 Grid.Row="0"
                 Margin="0, 0, 0, 100"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
-                Text="Wørkflow"
+                Text="WørkFlow"
                 FontSize="24"
-                FontFamily="Verdana" Cursor="None" />
+                FontFamily="Segoe UI Black" Cursor="None" Foreground="#DDFFFFFF" />
 
             <Button 
                 x:Name="DashboardBtn"
                 Height="60" 
                 Content="Dashboard" 
                 FontSize="36"
-                Click="NavBtn_Click"
-                Background="LightGray"/>
+                Background="#FF434547"
+                BorderBrush="#FF474747"
+                Click="NavBtn_Click"/>
             <Button 
                 x:Name="ProjectsBtn"
                 Height="60" 
                 Content="Projects" 
                 FontSize="36"
                 Click="NavBtn_Click"
-                Background="LightGray"/>
+                Background="#FF66A8F7"
+                BorderBrush="#FF474747"/>
             <Button 
                 x:Name="EmployeesBtn" 
                 Height="60" 
                 Content="Employees" 
                 FontSize="36" 
                 Click="NavBtn_Click"
-                Background="LightGray"/>
+                Background="#FF66A8F7"
+                BorderBrush="#FF474747"/>
             <Button 
                 x:Name="ArchiveBtn"
                 Height="60" 
                 Content="Archive" 
                 FontSize="36"
                 Click="NavBtn_Click"
-                Background="LightGray"/>
+                Background="#FF66A8F7"
+                BorderBrush="#FF474747"/>
 
         </StackPanel>
         <Border 

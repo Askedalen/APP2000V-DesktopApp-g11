@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
         mc:Ignorable="d"
-        Title="Workflow Management System Login" Height="450" Width="800" >
+        Title="Workflow Management System Login" Height="450" Width="800" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="#FFFAFAFA"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
@@ -19,6 +26,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel
+            
             Grid.Column="1" Grid.Row="1">
             <TextBlock
                 x:Name="ErrorMessage" 
@@ -35,22 +43,27 @@
                 Height="20" 
                 Width="100" 
                 />
+
             <TextBlock 
+                 Margin="0,5,0,0"
                 Grid.Row="2"
                 Text="Password"
                 />
             <TextBox 
+                
                 x:Name="PasswordInput"
                 Background="#FF999999" 
                 Height="20" 
                 Width="100" 
                 />
             <Button
+                Margin="0,15,0,0"
                 x:Name="LoginBtn"
-                Grid.Column="1" Grid.Row="3"
-                Height="20"
-                Content="Login" Click="LoginBtn_Click"
+                Height="26"
+                Content="Login" 
+                Click="LoginBtn_Click" Background="#FF66A8F7"
                 />
         </StackPanel>
+
     </Grid>
 </Window>

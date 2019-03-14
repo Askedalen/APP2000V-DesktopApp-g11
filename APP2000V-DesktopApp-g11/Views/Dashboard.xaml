@@ -7,8 +7,15 @@
              xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
              xmlns:assets="clr-namespace:APP2000V_DesktopApp_g11.Assets" 
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1620">
-    <Grid Background="White">
+             d:DesignHeight="1080" d:DesignWidth="1620"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="#FFFAFAFA"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid Background="#FFE3E4E6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
@@ -23,7 +30,7 @@
             Grid.Column="0"
             Grid.Row="0"
             Grid.ColumnSpan="3"
-            BorderThickness="0, 0, 0, 1"
+            BorderThickness="0, 1, 0, 1"
             BorderBrush="Black"
             />
         <Border 
@@ -31,31 +38,30 @@
             Grid.Row="0"
             Grid.RowSpan="2"
             BorderThickness="0,0,1,0" 
-            BorderBrush="Black"
+            BorderBrush="Black" Background="#FFE3E4E6"
             />
         <Border 
             Grid.Column="1"
             Grid.Row="0" 
             Grid.RowSpan="2"
             BorderThickness="0,0,1,0" 
-            BorderBrush="Black"
+            BorderBrush="Black" Background="#FFE3E4E6"
             />
-
 
         <TextBlock 
             Grid.Column="0"
             Text="Top ongoing projects"
-            FontSize="30"
+            FontSize="30" Background="#FF434547" Foreground="#DDFFFFFF"
             />
         <TextBlock 
             Grid.Column="1"
             Text="Upcoming Deadlines"
-            FontSize="30"
+            FontSize="30" Background="#FF434547" Foreground="#DDFFFFFF"
             />
         <TextBlock 
             Grid.Column="2"
             Text="Other"
-            FontSize="30"
+            FontSize="30" Background="#FF434547" Foreground="#DDFFFFFF" Margin="0"
             />
     </Grid>
 

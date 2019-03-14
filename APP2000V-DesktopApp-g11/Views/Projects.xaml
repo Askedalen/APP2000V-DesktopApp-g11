@@ -7,38 +7,46 @@
              xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
              xmlns:assets="clr-namespace:APP2000V_DesktopApp_g11.Assets"
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1620">
+             d:DesignHeight="1080" d:DesignWidth="1620"
+                         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="#FFFAFAFA"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+ 
+    >
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Border 
             Grid.Column="0"
             Grid.Row="0"
-            BorderThickness="0,0,0,1" 
+            BorderThickness="0,1,0,1" 
             BorderBrush="Black"
             />
 
         <TextBlock
             Text="Projects"
-            FontSize="30"
+            FontSize="30" Background="#FF434547" Foreground="#DDF3F3F3"
             />
         <Button 
             x:Name="NewProjectBtn"
             Width="200"
-            Content="New project"
-            FontSize="28" Click="NewProjectBtn_Click"
+            
+            Content="New Project"
+            FontSize="28" Click="NewProjectBtn_Click" Height="Auto" Margin="689,10,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7"
             />
         <StackPanel
             Grid.Row="1"
             x:Name="ProjectsDisplay"
             Orientation="Horizontal"
-            Background="LightBlue">
-
-
+            Background="#FF7D8193">
         </StackPanel>
     </Grid>
 </assets:AnimatedUserControl>
