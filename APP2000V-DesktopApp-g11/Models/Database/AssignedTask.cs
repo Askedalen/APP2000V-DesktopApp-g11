@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace APP2000V_DesktopApp_g11.Models.Database
 {
-    [Table("AssignedTask")]
     class AssignedTask
     {
         [Key, Column(Order = 0)]

@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APP2000V_DesktopApp_g11.Models.Database
 {
-    [Table("Employee")]
     public class Employee
     {
         [Key]

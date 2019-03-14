@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace APP2000V_DesktopApp_g11.Models.Database
 {
-    [Table("ProjectParticipant")]
     class ProjectParticipant
     {
         [Key, Column(Order = 0)]
