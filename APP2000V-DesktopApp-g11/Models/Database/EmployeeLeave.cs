@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace APP2000V_DesktopApp_g11.Models.Database
 {
-    [Table("TaskList")]
-    class TaskList
+    [Table("EmployeeLeave")]
+    class EmployeeLeave
     {
         [Key]
-        public int TaskListID { get; set; }
-        [Required]
-        public int ProjectID { get; set; }
-        public string ListName { get; set; }
+        public int LeaveID { get; set; }
+        public int EmployeeID { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
     }
 }

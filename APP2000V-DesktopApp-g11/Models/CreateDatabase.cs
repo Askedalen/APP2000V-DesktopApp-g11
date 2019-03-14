@@ -93,6 +93,14 @@ namespace APP2000V_DesktopApp_g11.Models
                                       Password = "1234"
                                       });
 
+                        List<EmployeeLeave> employeeLeave = new List<EmployeeLeave>();
+                        employeeLeave.Add(new EmployeeLeave { 
+                                              LeaveID = 1,
+                                              EmployeeID = 1,
+                                              FromDate = new DateTime(2019, 05, 01),
+                                              ToDate = new DateTime(2019, 05, 07)
+                                              });
+
                         context.Employees.AddRange(employees);
                         context.Projects.AddRange(projects);
                         context.Tasks.AddRange(tasks);
@@ -100,6 +108,7 @@ namespace APP2000V_DesktopApp_g11.Models
                         context.Users.AddRange(users);
                         context.ProjectParticipation.AddRange(projectParticipants);
                         context.TaskAssignment.AddRange(assignedTasks);
+                        context.EmployeeLeave.AddRange(employeeLeave);
                         context.SaveChanges();
                     }
                     transaction.Commit();

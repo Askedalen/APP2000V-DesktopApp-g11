@@ -15,6 +15,7 @@ namespace APP2000V_DesktopApp_g11
         public DbSet<User> Users { get; set; }
         public DbSet<ProjectParticipant> ProjectParticipation { get; set; }
         public DbSet<AssignedTask> TaskAssignment { get; set; }
+        public DbSet<EmployeeLeave> EmployeeLeave { get; set; }
         
         public WMSDbContext() 
             : base()
@@ -31,7 +32,6 @@ namespace APP2000V_DesktopApp_g11
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Employee>().MapToStoredProcedures();
         }
 
     }
