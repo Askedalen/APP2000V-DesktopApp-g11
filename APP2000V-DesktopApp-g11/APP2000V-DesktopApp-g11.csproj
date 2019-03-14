@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Assets\AnimatedUserControl.cs" />
+    <Compile Include="Assets\Buttons.cs" />
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -87,7 +88,10 @@
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\CreateDatabase.cs" />
-    <Compile Include="Models\Database\Task.cs" />
+    <Compile Include="Models\Database\AssignedTask.cs" />
+    <Compile Include="Models\Database\ProjectParticipant.cs" />
+    <Compile Include="Models\Database\PTask.cs" />
+    <Compile Include="Models\Database\TaskList.cs" />
     <Compile Include="Models\Database\User.cs" />
     <Compile Include="Models\Persistence.cs" />
     <Compile Include="Views\CreateProject.xaml.cs">
@@ -111,6 +115,10 @@
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Page Include="Assets\Animations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Employees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -10,9 +10,12 @@ namespace APP2000V_DesktopApp_g11
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<PTask> Tasks { get; set; }
+        public DbSet<TaskList> TaskLists { get; set; }
         public DbSet<User> Users { get; set; }
-
+        public DbSet<ProjectParticipant> ProjectParticipation { get; set; }
+        public DbSet<AssignedTask> TaskAssignment { get; set; }
+        
         public WMSDbContext() 
             : base()
         {

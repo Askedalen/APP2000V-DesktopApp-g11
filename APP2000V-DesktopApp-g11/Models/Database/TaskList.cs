@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace APP2000V_DesktopApp_g11.Models.Database
 {
-    public class User
+    class TaskList
     {
         [Key]
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool IsAdmin { get; set; }
+        public int TaskListID { get; set; }
+        [Required]
+        public int ProjectID { get; set; }
+        public string ListName { get; set; }
     }
 }

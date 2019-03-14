@@ -1,10 +1,5 @@
 ﻿using APP2000V_DesktopApp_g11.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -31,8 +26,8 @@ namespace APP2000V_DesktopApp_g11.Assets
     {
         
         private ContentControl ContentArea; // Contains the User Control, used to switch content after FadeOutAnimation is finished
-        DoubleAnimation FadeOutAnimation; // Animation for fading out
-        DoubleAnimation FadeInAnimation; // Animation for fading in
+        private DoubleAnimation FadeOutAnimation; // Animation for fading out
+        private DoubleAnimation FadeInAnimation; // Animation for fading in
         private AnimatedUserControl NewContent; // NewContent is given a value when the content is being changed
 
         public AnimatedUserControl() : base()

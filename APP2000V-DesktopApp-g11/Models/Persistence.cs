@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace APP2000V_DesktopApp_g11.Models
 {
@@ -31,6 +30,98 @@ namespace APP2000V_DesktopApp_g11.Models
                 {
                     Console.WriteLine(exc.Message);
                     return 1;
+                }
+            }
+        }
+
+        public int CreateTask(PTask task)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        context.Database.Log = (string message) => { Console.WriteLine(message); };
+
+                        context.Tasks.Add(task);
+                        context.SaveChanges();
+                        Console.WriteLine("PTask created: " + task.TaskName);
+                    }
+                    return 0;
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                    return 1;
+                }
+            }
+        }
+
+        internal int CreateTaskList(TaskList list)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        context.Database.Log = (string message) => { Console.WriteLine(message); };
+
+                        context.TaskLists.Add(list);
+                        context.SaveChanges();
+                        Console.WriteLine("PTask created: " + list.ListName);
+                    }
+                    return 0;
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                    return 1;
+                }
+            }
+        }
+
+        internal List<PTask> GetBacklog(int pid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectID == pid).ToList<PTask>();
+                        return tasks;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        internal List<TaskList> GetLists(int pid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        List<TaskList> lists = context.TaskLists.Where(l => l.ProjectID == pid).ToList<TaskList>();
+                        return lists;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
                 }
             }
         }
@@ -67,6 +158,27 @@ namespace APP2000V_DesktopApp_g11.Models
                     {
                         List<Project> projects = context.Projects.ToList();
                         return projects;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        internal List<PTask> GetListTasks(TaskList l)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        List<PTask> tasks = context.Tasks.Where(t => t.TaskListID == l.TaskListID).ToList<PTask>();
+                        return tasks;
                     }
                 }
                 catch (Exception e)

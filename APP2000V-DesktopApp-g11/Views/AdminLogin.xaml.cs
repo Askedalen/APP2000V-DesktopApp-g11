@@ -44,7 +44,7 @@ namespace APP2000V_DesktopApp_g11
                 {
                     using (MySqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT * FROM users WHERE Username=@username AND Password=@password AND UserType=0";
+                        cmd.CommandText = "SELECT * FROM users WHERE Username=@username AND Password=@password AND IsAdmin=true";
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
                         using (MySqlDataReader reader = cmd.ExecuteReader())
