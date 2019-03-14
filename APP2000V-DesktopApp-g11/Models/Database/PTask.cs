@@ -8,6 +8,7 @@ namespace APP2000V_DesktopApp_g11.Models.Database
     {
         HIGH, MED, LOW
     }
+    [Table("PTask")]
     public class PTask
     {
         [Key]
