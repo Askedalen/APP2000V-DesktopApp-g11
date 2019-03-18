@@ -32,6 +32,8 @@ namespace APP2000V_DesktopApp_g11.Views
         private void NavBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
+            ClearBtnColor();
+            btn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF434547"));
             AnimatedUserControl currentContent = ContentArea.Content as AnimatedUserControl;
             if (sender.Equals(DashboardBtn)) currentContent.SwitchContent(new Dashboard(this));
             else if (sender.Equals(ProjectsBtn)) currentContent.SwitchContent(new Projects(this));
@@ -47,6 +49,15 @@ namespace APP2000V_DesktopApp_g11.Views
             }
             myEffect.Radius = 0;
             Effect = myEffect;
+        }
+
+        private void ClearBtnColor()
+        {
+            SolidColorBrush color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF66A8F7"));
+            DashboardBtn.Background = color;
+            ProjectsBtn.Background = color;
+            EmployeesBtn.Background = color;
+            ArchiveBtn.Background = color;
         }
 
         void Simulator()

@@ -53,8 +53,8 @@
                             Foreground="Gray"
                             Background="White"
                             FontSize="28"
-                            Padding="30, 20, 0, 25" 
-                            GotFocus="CreateListTb_GotFocus"
+                            Padding="10, 10, 0, 15" 
+                            GotFocus="CreateTaskTb_GotFocus"
                             />
                         <Button 
                             x:Name="CreateTaskBtn"
@@ -66,9 +66,9 @@
                     </StackPanel>
                     <StackPanel
                         x:Name="BacklogPanel">
-                       
+
                     </StackPanel>
-                    
+
 
                 </StackPanel>
             </ScrollViewer>
@@ -77,19 +77,115 @@
             Grid.Row="1"
             Grid.ColumnSpan="2"
             x:Name="TestPopup"
-            HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Width="300"
-            Height="300" 
+            HorizontalAlignment="Center"
+            Width="1000"
+            Height="600" 
             Placement="Center"
-            
             >
-            <StackPanel 
-                Background="Red">
-                <TextBlock
-                    Text="Test popup"
-                    FontSize="28"/>
-            </StackPanel>
+            <Border BorderBrush="Black" BorderThickness="1, 1, 1, 1" RenderTransformOrigin="0.5,0.5">
+                
+                <Grid 
+                    x:Name="TaskBindingGrid"
+                    Background="LightBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        BorderBrush="Black"
+                        BorderThickness="0, 0, 0, 1"/>
+                    <Border
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        BorderBrush="Black"
+                        BorderThickness="0, 0, 1, 0"/>
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Grid.ColumnSpan="2">
+                        <TextBox 
+                            x:Name="PopupTaskName"
+                            Text="{Binding TaskName}"
+                            Background="White"
+                            Width="700"
+                            Padding="5, 0, 0, 5"
+                            TextAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            FontSize="28"
+                            Margin="0, 0, 30, 0"/>
+                        <Button
+                            x:Name="PopupSaveTaskBtn"
+                            Content="Save Changes"
+                            FontSize="28" Height="Auto"
+                            Margin="0, 0, 7, 0"
+                            Click="PopupSaveTaskBtn_Click"
+                            />
+                        <Button
+                            x:Name="CloseTaskPopupBtn"
+                            Content="X"
+                            FontSize="28"
+                            Height="Auto" 
+                            Foreground="Gray"
+                            BorderBrush="{x:Null}"
+                            Background="{x:Null}"
+                            Click="CloseTaskPopupBtn_Click"
+                            />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="15, 0">
+                        <Label
+                            Content="_Description"
+                            Target="{Binding ElementName=TaskDescription}"
+                            FontSize="28"/>
+                        <TextBox
+                            x:Name="TaskDescription"
+                            Text="{Binding TaskDescription}"
+                            Background="White"
+                            Height="250"
+                            VerticalContentAlignment="Top"
+                            FontSize="28"
+                            TextWrapping="Wrap"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            />
+                        <Label 
+                            Content="D_eadline"
+                            Target="{Binding ElementName=TaskDeadline}"
+                            FontSize="28"
+                            />
+                        <TextBox
+                            x:Name="TaskDeadline"
+                            Background="White"
+                            FontSize="28"
+                            />
+                        <Label
+                            Content="_List"
+                            Target="{Binding ElementName=ChooseTaskList}"
+                            FontSize="28"/>
+                        <ComboBox
+                            x:Name="ChooseTaskList"
+                            Width="470"
+                            FontSize="28"
+                            Background="White"
+                            HorizontalAlignment="Left">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ListName}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </Border>
         </Popup>
 
         <ScrollViewer
@@ -104,44 +200,12 @@
                     HorizontalAlignment="Left"
                     Orientation="Horizontal"
                     >
-                    <StackPanel
-                        Width="350"
-                        Margin="30, 30, 0, 30"
-                        Background="AliceBlue">
-                        <Border BorderBrush="Gray"
-                                BorderThickness="0, 0, 0, 1">
-                            <TextBlock
-                                Text="Liste"
-                                FontSize="28"
-                                FontWeight="Bold"
-                                Margin="15"/>
-                        </Border>
-                        <ScrollViewer
-                            ScrollViewer.VerticalScrollBarVisibility="Auto">
-                            <StackPanel>
-                                <Button
-                        Content="This is a task"
-                        Background="White"
-                        FontSize="28"
-                        Padding="30, 20, 0, 25" 
-                            Margin="15, 15, 15, 0"
-                        />
-                                <Button
-                        Content="This is a task"
-                        Background="White"
-                        FontSize="28"
-                        Padding="30, 20, 0, 25" 
-                            Margin="15, 15, 15, 15"
-                        />
-                            </StackPanel>
-                        </ScrollViewer>
-                        
-                    </StackPanel>
+
                 </StackPanel>
                 <StackPanel
                     HorizontalAlignment="Left"
                     x:Name="CreateListPanel"
-                    Margin="30, 30, 0, 30"
+                    Margin="30"
                     Width="350"
                     >
                     <TextBox
@@ -149,13 +213,15 @@
                         Text="Create new list..."
                         Foreground="Gray"
                         Background="White"
+                        BorderBrush="Gray"
+                        BorderThickness="1"
                         FontSize="28"
-                        Padding="30, 20, 0, 25" 
+                        Padding="10, 10, 0, 15" 
                         GotFocus="CreateListTb_GotFocus"
                         />
                     <Button 
                         x:Name="CreateListBtn"
-                        Visibility="Visible"
+                        Visibility="Collapsed"
                         Height="50"
                         Content="Create List"
                         FontSize="28"
@@ -164,6 +230,6 @@
             </StackPanel>
         </ScrollViewer>
     </Grid>
-    
-    
+
+
 </assets:AnimatedUserControl>

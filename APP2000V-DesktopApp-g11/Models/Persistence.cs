@@ -105,6 +105,27 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal PTask GetSingleTask(int tid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        PTask task = context.Tasks.Where(t => t.TaskID == tid).FirstOrDefault<PTask>();
+                        return task;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
         internal List<TaskList> GetLists(int pid)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
@@ -122,6 +143,41 @@ namespace APP2000V_DesktopApp_g11.Models
                 {
                     Console.WriteLine(e.Message);
                     return null;
+                }
+            }
+        }
+
+        internal int UpdateTask(PTask taskUpdate)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        PTask oldTask = context.Tasks.Where(t => t.TaskID == taskUpdate.TaskID).FirstOrDefault<PTask>();
+                        if (oldTask != null)
+                        {
+                            oldTask.TaskName = taskUpdate.TaskName;
+                            oldTask.TaskDescription = taskUpdate.TaskDescription;
+                            oldTask.TaskDeadline = taskUpdate.TaskDeadline;
+                            oldTask.TaskListID = taskUpdate.TaskListID;
+
+                            context.SaveChanges();
+                            return 0;
+                        }
+                        else
+                        {
+                            return 2;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Task update failed: ");
+                    Console.WriteLine(e.Message);
+                    return 1;
                 }
             }
         }

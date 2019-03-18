@@ -13,7 +13,6 @@ namespace APP2000V_DesktopApp_g11.Models.Database
     {
         [Key]
         public int TaskID { get; set; }
-        [Required]
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
         public TaskPriority Priority { get; set; }

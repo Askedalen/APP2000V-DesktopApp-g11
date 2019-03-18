@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace APP2000V_DesktopApp_g11.Views
@@ -26,6 +27,22 @@ namespace APP2000V_DesktopApp_g11.Views
             PrintLists();
         }
 
+        // EVENTS
+
+        private void CreateTaskTb_GotFocus(object sender, RoutedEventArgs e)
+        {
+            CreateTaskBtn.Visibility = Visibility.Visible;
+            CreateTaskTb.Text = "";
+            CreateTaskTb.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        private void CreateListTb_GotFocus(object sender, RoutedEventArgs e)
+        {
+            CreateListBtn.Visibility = Visibility.Visible;
+            CreateListTb.Text = "";
+            CreateListTb.Foreground = new SolidColorBrush(Colors.Black);
+        }
+        
         private void CreateTaskBtn_Click(object sender, RoutedEventArgs e)
         {
             PTask newTask = new PTask
@@ -60,10 +77,10 @@ namespace APP2000V_DesktopApp_g11.Views
 
             if (Db.CreateTaskList(newTaskList) == 0)
             {
-                CreateTaskBtn.Visibility = Visibility.Collapsed;
-                CreateTaskTb.Text = "Create new task...";
-                CreateTaskTb.Foreground = new SolidColorBrush(Colors.Gray);
-                PrintBacklog();
+                CreateListBtn.Visibility = Visibility.Collapsed;
+                CreateListTb.Text = "Create new list...";
+                CreateListTb.Foreground = new SolidColorBrush(Colors.Gray);
+                PrintLists();
                 Console.WriteLine("TaskList is created");
             }
             else
@@ -72,6 +89,64 @@ namespace APP2000V_DesktopApp_g11.Views
             }
 
         }
+
+        private void TaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            TaskButton currentTask = sender as TaskButton;
+            PTask taskInfo = Db.GetSingleTask(currentTask.TaskID);
+            TaskBindingGrid.DataContext = taskInfo;
+            TaskDeadline.Text = taskInfo.TaskDeadline.ToString("yyyy-MM-dd");
+
+            List<TaskList> taskLists = Db.GetLists(CurrentProject.ProjectID);
+            if (ChooseTaskList.Items.IsEmpty)
+            {
+                ChooseTaskList.ItemsSource = taskLists;
+            }
+
+            ChooseTaskList.SelectedIndex = taskInfo.TaskListID - 1;
+
+            TestPopup.IsOpen = true;
+        }
+        private void CloseTaskPopupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TestPopup.IsOpen = false;
+        }
+
+        private void PopupSaveTaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PTask currentTask = PopupTaskName.DataContext as PTask;
+            PTask taskUpdate = new PTask();
+            taskUpdate.TaskID = currentTask.TaskID;
+            taskUpdate.TaskName = PopupTaskName.Text;
+            taskUpdate.TaskDescription = TaskDescription.Text;
+
+            string[] deadlineParts = TaskDeadline.Text.Split('-');
+            int dy = Int32.Parse(deadlineParts[0]);
+            int dm = Int32.Parse(deadlineParts[1]);
+            int dd = Int32.Parse(deadlineParts[2]);
+            taskUpdate.TaskDeadline = new DateTime(dy, dm, dd);
+
+            TaskList chosenList = ChooseTaskList.SelectedValue as TaskList;
+            if (chosenList != null)
+            {
+                taskUpdate.TaskListID = chosenList.TaskListID;
+            }
+
+            if (Db.UpdateTask(taskUpdate) == 0)
+            {
+                Console.WriteLine("Task updated successfully!");
+                TestPopup.IsOpen = false;
+                PrintBacklog();
+                PrintLists();
+            }
+            else
+            {
+                Console.WriteLine("Task update failed!");
+            }
+
+        }
+
+        // PRINT ELEMENTS
 
         private void PrintBacklog()
         {
@@ -113,6 +188,7 @@ namespace APP2000V_DesktopApp_g11.Views
                 nameBorder.Child = listName;
 
                 StackPanel panelInScroll = new StackPanel();
+                panelInScroll.AllowDrop = true;
                 List<TaskButton> taskList = CreateListTasks(l);
                 taskList.ForEach(t =>
                 {
@@ -146,7 +222,8 @@ namespace APP2000V_DesktopApp_g11.Views
                 taskBlock.Padding = new Thickness(30, 20, 0, 25);
                 TaskButton taskButton = new TaskButton(t);
                 taskButton.Content = taskBlock;
-                taskButton.Margin = new Thickness(0, 0, 0, 30);
+                taskButton.TaskID = t.TaskID;
+                taskButton.Margin = new Thickness(10, 30, 10, 0);
                 taskButton.Padding = new Thickness(0);
                 taskButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
                 taskButton.VerticalContentAlignment = VerticalAlignment.Stretch;
@@ -156,24 +233,6 @@ namespace APP2000V_DesktopApp_g11.Views
             return taskButtons;
         }
 
-        private void TaskButton_Click(object sender, RoutedEventArgs e)
-        {
-            TestPopup.IsOpen = true;
-        }
-
-        private void CreateTaskTb_GotFocus(object sender, RoutedEventArgs e)
-        {
-            CreateTaskBtn.Visibility = Visibility.Visible;
-            CreateTaskTb.Text = "";
-            CreateTaskTb.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void CreateListTb_GotFocus(object sender, RoutedEventArgs e)
-        {
-            CreateListBtn.Visibility = Visibility.Visible;
-            CreateListTb.Text = "";
-            CreateListTb.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
+        
     }
 }

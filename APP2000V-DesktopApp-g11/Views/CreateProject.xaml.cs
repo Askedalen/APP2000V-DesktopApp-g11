@@ -38,9 +38,9 @@ namespace APP2000V_DesktopApp_g11.Views
             int sm = Int32.Parse(startParts[1]);
             int sd = Int32.Parse(startParts[2]);
             string[] deadlineParts = ProjectStartInput.Text.Split('-');
-            int dy = Int32.Parse(startParts[0]);
-            int dm = Int32.Parse(startParts[1]);
-            int dd = Int32.Parse(startParts[2]);
+            int dy = Int32.Parse(deadlineParts[0]);
+            int dm = Int32.Parse(deadlineParts[1]);
+            int dd = Int32.Parse(deadlineParts[2]);
 
             // Uses Persistence object to insert the project into the database
             // Returns 0 if operation succeeds
