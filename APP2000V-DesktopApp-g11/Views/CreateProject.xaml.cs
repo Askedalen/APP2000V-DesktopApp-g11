@@ -1,6 +1,5 @@
 ﻿using APP2000V_DesktopApp_g11.Assets;
 using APP2000V_DesktopApp_g11.Models;
-using APP2000V_DesktopApp_g11.Models.Database;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -42,7 +41,7 @@ namespace APP2000V_DesktopApp_g11.Views
             int dm = Int32.Parse(deadlineParts[1]);
             int dd = Int32.Parse(deadlineParts[2]);
 
-            // Uses Persistence object to insert the project into the database
+            // Uses Persistence object to insert the Project into the database
             // Returns 0 if operation succeeds
             int result = Db.CreateProject(new Project
             {

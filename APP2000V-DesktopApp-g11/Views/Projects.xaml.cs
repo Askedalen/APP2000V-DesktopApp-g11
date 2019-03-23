@@ -1,6 +1,5 @@
 ﻿using APP2000V_DesktopApp_g11.Assets;
 using APP2000V_DesktopApp_g11.Models;
-using APP2000V_DesktopApp_g11.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -84,7 +83,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void ProjectButton_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            SwitchContent(new ProjectPage(btn.ProjectID, AppWindow));
+            SwitchContent(new ProjectPage(btn.ProjectId, AppWindow));
         }
 
         private void NewProjectBtn_Click(object sender, RoutedEventArgs e)

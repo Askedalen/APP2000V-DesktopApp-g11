@@ -1,5 +1,4 @@
-﻿using APP2000V_DesktopApp_g11.Models.Database;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
                         context.Database.Log = (string message) => { Console.WriteLine(message); };
 
@@ -41,7 +40,7 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
                         context.Database.Log = (string message) => { Console.WriteLine(message); };
 
@@ -66,7 +65,7 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
                         context.Database.Log = (string message) => { Console.WriteLine(message); };
 
@@ -91,9 +90,9 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
-                        List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectID == pid).ToList<PTask>();
+                        List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectId == pid).ToList();
                         return tasks;
                     }
                 }
@@ -112,9 +111,9 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
-                        PTask task = context.Tasks.Where(t => t.TaskID == tid).FirstOrDefault<PTask>();
+                        PTask task = context.Tasks.Where(t => t.TaskId == tid).FirstOrDefault();
                         return task;
                     }
                 }
@@ -133,9 +132,9 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
-                        List<TaskList> lists = context.TaskLists.Where(l => l.ProjectID == pid).ToList<TaskList>();
+                        List<TaskList> lists = context.TaskLists.Where(l => l.ProjectId == pid).ToList();
                         return lists;
                     }
                 }
@@ -154,15 +153,15 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
-                        PTask oldTask = context.Tasks.Where(t => t.TaskID == taskUpdate.TaskID).FirstOrDefault<PTask>();
+                        PTask oldTask = context.Tasks.Where(t => t.TaskId == taskUpdate.TaskId).FirstOrDefault();
                         if (oldTask != null)
                         {
                             oldTask.TaskName = taskUpdate.TaskName;
-                            oldTask.TaskDescription = taskUpdate.TaskDescription;
+                            oldTask.Description = taskUpdate.Description;
                             oldTask.TaskDeadline = taskUpdate.TaskDeadline;
-                            oldTask.TaskListID = taskUpdate.TaskListID;
+                            oldTask.TaskListId = taskUpdate.TaskListId;
 
                             context.SaveChanges();
                             return 0;
@@ -189,9 +188,9 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
-                        Project project = context.Projects.Where(p => p.ProjectID == pid).FirstOrDefault<Project>();
+                        Project project = context.Projects.Where(p => p.ProjectId == pid).FirstOrDefault();
                         return project;
                     }
                 }
@@ -210,7 +209,7 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
                         List<Project> projects = context.Projects.ToList();
                         return projects;
@@ -231,9 +230,9 @@ namespace APP2000V_DesktopApp_g11.Models
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
-                        List<PTask> tasks = context.Tasks.Where(t => t.TaskListID == l.TaskListID).ToList<PTask>();
+                        List<PTask> tasks = context.Tasks.Where(t => t.TaskListId == l.TaskListId).ToList();
                         return tasks;
                     }
                 }

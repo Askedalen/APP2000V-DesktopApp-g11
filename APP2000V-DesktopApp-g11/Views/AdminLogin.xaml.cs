@@ -1,4 +1,4 @@
-﻿using APP2000V_DesktopApp_g11.Models.Database;
+﻿using APP2000V_DesktopApp_g11.Models;
 using APP2000V_DesktopApp_g11.Views;
 using MySql.Data.MySqlClient;
 using System;

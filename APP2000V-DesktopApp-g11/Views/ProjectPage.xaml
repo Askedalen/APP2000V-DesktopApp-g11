@@ -144,11 +144,11 @@
                         Margin="15, 0">
                         <Label
                             Content="_Description"
-                            Target="{Binding ElementName=TaskDescription}"
+                            Target="{Binding ElementName=Description}"
                             FontSize="28"/>
                         <TextBox
                             x:Name="TaskDescription"
-                            Text="{Binding TaskDescription}"
+                            Text="{Binding Description}"
                             Background="White"
                             Height="250"
                             VerticalContentAlignment="Top"
@@ -162,8 +162,9 @@
                             Target="{Binding ElementName=TaskDeadline}"
                             FontSize="28"
                             />
-                        <TextBox
+                        <DatePicker
                             x:Name="TaskDeadline"
+                            Text="{Binding TaskDeadline}"
                             Background="White"
                             FontSize="28"
                             />

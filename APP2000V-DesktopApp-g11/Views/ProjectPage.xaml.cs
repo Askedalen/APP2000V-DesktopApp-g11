@@ -1,6 +1,5 @@
 ﻿using APP2000V_DesktopApp_g11.Assets;
 using APP2000V_DesktopApp_g11.Models;
-using APP2000V_DesktopApp_g11.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -48,7 +47,7 @@ namespace APP2000V_DesktopApp_g11.Views
             PTask newTask = new PTask
             {
                 TaskName = CreateTaskTb.Text,
-                TaskProjectID = CurrentProject.ProjectID,
+                TaskProjectId = CurrentProject.ProjectId,
                 TaskCreationDate = DateTime.Now
             };
 
@@ -72,7 +71,7 @@ namespace APP2000V_DesktopApp_g11.Views
             TaskList newTaskList = new TaskList
             {
                 ListName = CreateListTb.Text,
-                ProjectID = CurrentProject.ProjectID
+                ProjectId = CurrentProject.ProjectId
             };
 
             if (Db.CreateTaskList(newTaskList) == 0)
@@ -93,17 +92,16 @@ namespace APP2000V_DesktopApp_g11.Views
         private void TaskButton_Click(object sender, RoutedEventArgs e)
         {
             TaskButton currentTask = sender as TaskButton;
-            PTask taskInfo = Db.GetSingleTask(currentTask.TaskID);
+            PTask taskInfo = Db.GetSingleTask(currentTask.TaskId);
             TaskBindingGrid.DataContext = taskInfo;
-            TaskDeadline.Text = taskInfo.TaskDeadline.ToString("yyyy-MM-dd");
 
-            List<TaskList> taskLists = Db.GetLists(CurrentProject.ProjectID);
+            List<TaskList> taskLists = Db.GetLists(CurrentProject.ProjectId);
             if (ChooseTaskList.Items.IsEmpty)
             {
                 ChooseTaskList.ItemsSource = taskLists;
             }
 
-            ChooseTaskList.SelectedIndex = taskInfo.TaskListID - 1;
+            ChooseTaskList.SelectedIndex = taskInfo.TaskListId.HasValue ? taskInfo.TaskListId.Value - 1 : -1;
 
             TestPopup.IsOpen = true;
         }
@@ -116,20 +114,20 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             PTask currentTask = PopupTaskName.DataContext as PTask;
             PTask taskUpdate = new PTask();
-            taskUpdate.TaskID = currentTask.TaskID;
+            taskUpdate.TaskId = currentTask.TaskId;
             taskUpdate.TaskName = PopupTaskName.Text;
-            taskUpdate.TaskDescription = TaskDescription.Text;
+            taskUpdate.Description = TaskDescription.Text;
 
-            string[] deadlineParts = TaskDeadline.Text.Split('-');
-            int dy = Int32.Parse(deadlineParts[0]);
+            string[] deadlineParts = TaskDeadline.Text.Split('.');
+            int dy = Int32.Parse(deadlineParts[2]);
             int dm = Int32.Parse(deadlineParts[1]);
-            int dd = Int32.Parse(deadlineParts[2]);
+            int dd = Int32.Parse(deadlineParts[0]);
             taskUpdate.TaskDeadline = new DateTime(dy, dm, dd);
 
             TaskList chosenList = ChooseTaskList.SelectedValue as TaskList;
             if (chosenList != null)
             {
-                taskUpdate.TaskListID = chosenList.TaskListID;
+                taskUpdate.TaskListId = chosenList.TaskListId;
             }
 
             if (Db.UpdateTask(taskUpdate) == 0)
@@ -151,7 +149,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void PrintBacklog()
         {
             BacklogPanel.Children.Clear();
-            List<PTask> taskList = Db.GetBacklog(CurrentProject.ProjectID);
+            List<PTask> taskList = Db.GetBacklog(CurrentProject.ProjectId);
             taskList.ForEach(t =>
             {
                 TextBlock taskBlock = new TextBlock();
@@ -173,7 +171,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void PrintLists()
         {
             ListPanel.Children.Clear();
-            List<TaskList> lists = Db.GetLists(CurrentProject.ProjectID);
+            List<TaskList> lists = Db.GetLists(CurrentProject.ProjectId);
             lists.ForEach(l =>
             {
                 TextBlock listName = new TextBlock();
@@ -222,7 +220,7 @@ namespace APP2000V_DesktopApp_g11.Views
                 taskBlock.Padding = new Thickness(30, 20, 0, 25);
                 TaskButton taskButton = new TaskButton(t);
                 taskButton.Content = taskBlock;
-                taskButton.TaskID = t.TaskID;
+                taskButton.TaskId = t.TaskId;
                 taskButton.Margin = new Thickness(10, 30, 10, 0);
                 taskButton.Padding = new Thickness(0);
                 taskButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;

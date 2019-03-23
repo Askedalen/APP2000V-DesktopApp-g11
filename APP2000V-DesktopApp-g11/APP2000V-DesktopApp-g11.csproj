@@ -65,6 +65,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
@@ -92,15 +93,46 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-    <Compile Include="Models\Context.cs" />
-    <Compile Include="Models\CreateDatabase.cs" />
-    <Compile Include="Models\Database\AssignedTask.cs" />
-    <Compile Include="Models\Database\EmployeeLeave.cs" />
-    <Compile Include="Models\Database\ProjectParticipant.cs" />
-    <Compile Include="Models\Database\PTask.cs" />
-    <Compile Include="Models\Database\TaskList.cs" />
-    <Compile Include="Models\Database\User.cs" />
+    <Compile Include="Models\AssignedTask.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeLeave.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Persistence.cs" />
+    <Compile Include="Models\Project.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectParticipant.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PTask.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Report.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskList.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkflowDatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkflowDatabase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkflowDatabase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkflowDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkflowDatabase.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
@@ -179,8 +211,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Database\Employee.cs" />
-    <Compile Include="Models\Database\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -198,6 +228,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\WorkflowDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WorkflowDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\WorkflowDatabase.edmx.diagram">
+      <DependentUpon>WorkflowDatabase.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -214,6 +251,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\WorkMotion.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\WorkflowDatabase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WorkflowDatabase.edmx</DependentUpon>
+      <LastGenOutput>WorkflowDatabase.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WorkflowDatabase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WorkflowDatabase.edmx</DependentUpon>
+      <LastGenOutput>WorkflowDatabase.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
