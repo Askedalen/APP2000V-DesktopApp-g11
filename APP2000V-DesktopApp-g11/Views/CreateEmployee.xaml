@@ -1,0 +1,135 @@
+﻿<assets:AnimatedUserControl
+             x:Class="APP2000V_DesktopApp_g11.Views.CreateEmployee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
+             xmlns:assets="clr-namespace:APP2000V_DesktopApp_g11.Assets"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1620"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="#FFFAFAFA"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border 
+            Grid.Column="0"
+            Grid.Row="0"
+            BorderThickness="0,0,0,1" 
+            BorderBrush="Black"
+            />
+
+        <TextBlock
+            Text="Create User"
+            FontSize="30"
+            />
+
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Vertical"
+            Width="400"
+            HorizontalAlignment="Left"
+            Margin="30"
+            >
+            <Label
+                Content="Username"
+                Target="{Binding ElementName=EmployeeUsernameInput}"
+                FontSize="28" Margin="0,0,-24,0"/>
+            <TextBox
+                x:Name="EmployeeUsernameInput"
+                FontSize="28"
+                Margin="0, 0, 0, 0"/>
+            <Label
+                Content="User Role"
+                Target="{Binding ElementName=Admin}"
+                FontSize="28"
+                Margin="0, 0, 0, 0"/>
+            <ComboBox    Margin="0,0,0,0"         
+                >
+                <ComboBoxItem IsSelected="True" FontWeight="Bold">Employee</ComboBoxItem>
+                <ComboBoxItem   FontWeight="Bold">Project Manager</ComboBoxItem>
+                
+            </ComboBox>
+            <Label
+                Content="First Name"
+                Target="{Binding ElementName=EmployeeFNameInput}"
+                FontSize="28" Margin="0,0,0,0"/>
+            <TextBox
+                x:Name="EmployeeFNameInput"
+                FontSize="28"
+                Margin="0, 0, 0, 0"/>
+            <Label
+                Content="Lastname"
+                Target="{Binding ElementName=EmployeeLNameInput}"
+                FontSize="28"/>
+            <TextBox
+                x:Name="EmployeeLNameInput"
+                FontSize="28"
+                Margin="0, 0, 0, 0"/>
+            <Label
+                Content="Email"
+                Target="{Binding ElementName=EmployeeEmailInput}"
+                FontSize="28"/>
+            <TextBox
+                x:Name="EmployeeEmailInput"
+                FontSize="28"
+                Margin="0, 0, 0, 0"/>
+            <Label
+                Content="Phone"
+                Target="{Binding ElementName=EmployeePhoneInput}"
+                FontSize="28"/>
+            <TextBox
+                x:Name="EmployeePhoneInput"
+                FontSize="28"
+                Margin="0, 0, 0, 0"/>
+            <Label
+                Content="About"
+                Target="{Binding ElementName=EmployeeAboutInput}"
+                FontSize="28"/>
+            <TextBox
+                x:Name="EmployeeAboutInput"
+                FontSize="28"
+                Margin="0, 0, 0, 30"/>
+
+            <TextBlock
+                x:Name="ConfirmationBox"
+                FontSize="28"><InlineUIContainer>
+                    <Button
+                        x:Name="CreateUserBtn"
+                        Content="Create User" 
+                        FontSize="20"
+                        Padding="10"
+                        Margin="0, 30, 0, 30"
+                        Click="CreateUserBtn_Click" Height="40" Width="132" Background="#FF66A8F7" BorderBrush="#FF474747" />
+                </InlineUIContainer><InlineUIContainer>
+                    <Button
+                        x:Name="UpdateUserBtn"
+                        Content="Update" 
+                        FontSize="20"
+                        Padding="10"
+                        Margin="0, 30, 0, 30"
+                        Click="UpdateUserBtn_Click" Height="40" Width="132" Background="#FF66A8F7" BorderBrush="#FF474747" />
+                </InlineUIContainer><InlineUIContainer>
+                    <Button
+                        x:Name="DeleteUserBtn_Copy1"
+                        Content="Delete" 
+                        FontSize="20"
+                        Padding="10"
+                        Margin="0, 30, 0, 30"
+                        Click="DeleteUserBtn_Click" Height="40" Width="132" Background="#FF66A8F7" BorderBrush="#FF474747" />
+                </InlineUIContainer></TextBlock>
+
+        </StackPanel>
+        <DataGrid x:Name="EmployeeDataGrid" HorizontalAlignment="Left" Height="602" Margin="494,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1094" Background="#FFE0E0E0"/>
+    </Grid>
+</assets:AnimatedUserControl>

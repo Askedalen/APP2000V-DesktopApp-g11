@@ -72,7 +72,7 @@
                 FontSize="28"
                 Padding="10"
                 Margin="0, 30, 0, 30"
-                Click="RegisterProjectBtn_Click" >
+                Click="RegisterProjectBtn_Click" Height="69" >
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
                         <BeginStoryboard>
