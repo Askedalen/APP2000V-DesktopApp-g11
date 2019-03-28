@@ -8,6 +8,8 @@ namespace APP2000V_DesktopApp_g11
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     class WMSDbContext : DbContext
     {
+        internal object Employee;
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<PTask> Tasks { get; set; }
