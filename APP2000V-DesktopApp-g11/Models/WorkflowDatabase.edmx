@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="app2000vModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WorkflowModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AssignedTask">
           <Key>
             <PropertyRef Name="AssignedTaskId" />
@@ -211,7 +211,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="app2000vModelStoreContainer">
+        <EntityContainer Name="WorkflowModelStoreContainer">
           <EntitySet Name="AssignedTask" EntityType="Self.AssignedTask" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="EmployeeLeave" EntityType="Self.EmployeeLeave" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="app2000v" store:Type="Tables" />
@@ -265,7 +265,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="app2000vModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="WorkflowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AssignedTask">
           <Key>
             <PropertyRef Name="AssignedTaskId" />
@@ -492,7 +492,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="app2000vEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WorkflowContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AssignedTasks" EntityType="Self.AssignedTask" />
           <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeave" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
@@ -547,9 +547,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="app2000vModelStoreContainer" CdmEntityContainer="app2000vEntities">
+        <EntityContainerMapping StorageEntityContainer="WorkflowModelStoreContainer" CdmEntityContainer="WorkflowContext">
           <EntitySetMapping Name="AssignedTasks">
-            <EntityTypeMapping TypeName="app2000vModel.AssignedTask">
+            <EntityTypeMapping TypeName="WorkflowModel.AssignedTask">
               <MappingFragment StoreEntitySet="AssignedTask">
                 <ScalarProperty Name="AssignedTaskId" ColumnName="AssignedTaskId" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
@@ -559,7 +559,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmployeeLeaves">
-            <EntityTypeMapping TypeName="app2000vModel.EmployeeLeave">
+            <EntityTypeMapping TypeName="WorkflowModel.EmployeeLeave">
               <MappingFragment StoreEntitySet="EmployeeLeave">
                 <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -569,7 +569,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="app2000vModel.Project">
+            <EntityTypeMapping TypeName="WorkflowModel.Project">
               <MappingFragment StoreEntitySet="Project">
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
@@ -583,7 +583,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectParticipants">
-            <EntityTypeMapping TypeName="app2000vModel.ProjectParticipant">
+            <EntityTypeMapping TypeName="WorkflowModel.ProjectParticipant">
               <MappingFragment StoreEntitySet="ProjectParticipant">
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -591,7 +591,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PTasks">
-            <EntityTypeMapping TypeName="app2000vModel.PTask">
+            <EntityTypeMapping TypeName="WorkflowModel.PTask">
               <MappingFragment StoreEntitySet="PTask">
                 <ScalarProperty Name="TaskId" ColumnName="TaskId" />
                 <ScalarProperty Name="TaskName" ColumnName="TaskName" />
@@ -606,7 +606,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Reports">
-            <EntityTypeMapping TypeName="app2000vModel.Report">
+            <EntityTypeMapping TypeName="WorkflowModel.Report">
               <MappingFragment StoreEntitySet="Report">
                 <ScalarProperty Name="ReportId" ColumnName="ReportId" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
@@ -616,7 +616,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskLists">
-            <EntityTypeMapping TypeName="app2000vModel.TaskList">
+            <EntityTypeMapping TypeName="WorkflowModel.TaskList">
               <MappingFragment StoreEntitySet="TaskList">
                 <ScalarProperty Name="TaskListId" ColumnName="TaskListId" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
@@ -625,7 +625,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="app2000vModel.User">
+            <EntityTypeMapping TypeName="WorkflowModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

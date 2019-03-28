@@ -204,23 +204,20 @@ namespace APP2000V_DesktopApp_g11.Models
 
         public List<Project> GetAllProjects()
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        List<Project> projects = context.Projects.ToList();
-                        return projects;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return null;
+                    List<Project> projects = context.Projects.ToList();
+                    return projects;
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+          
         }
 
         internal List<PTask> GetListTasks(TaskList l)

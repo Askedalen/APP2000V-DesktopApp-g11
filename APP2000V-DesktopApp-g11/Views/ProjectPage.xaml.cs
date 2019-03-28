@@ -102,7 +102,7 @@ namespace APP2000V_DesktopApp_g11.Views
             }
 
             ChooseTaskList.SelectedIndex = taskInfo.TaskListId.HasValue ? taskInfo.TaskListId.Value - 1 : -1;
-
+            
             TestPopup.IsOpen = true;
         }
         private void CloseTaskPopupBtn_Click(object sender, RoutedEventArgs e)
