@@ -58,6 +58,11 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal int CreateUser(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
         internal int CreateTaskList(TaskList list)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))

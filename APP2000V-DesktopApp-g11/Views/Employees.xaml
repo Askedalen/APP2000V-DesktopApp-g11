@@ -39,11 +39,11 @@
             Width="200"
             
             Content="New User"
-            FontSize="28"  Height="Auto" Margin="689,10,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7"
+            FontSize="28"  Height="Auto" Margin="689,10,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7" Click="NewEmpBtn_Click"
             />
         <StackPanel
             Grid.Row="1"
-            x:Name="ProjectsDisplay"
+            x:Name="EmployeesDisplay"
             Orientation="Horizontal"
             Background="#FF7D8193">
         </StackPanel>

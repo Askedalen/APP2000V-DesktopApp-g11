@@ -1,4 +1,6 @@
 ﻿using APP2000V_DesktopApp_g11.Assets;
+using APP2000V_DesktopApp_g11.Models;
+using APP2000V_DesktopApp_g11.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,19 @@ namespace APP2000V_DesktopApp_g11.Views
     /// </summary>
     public partial class Employees : AnimatedUserControl
     {
+        private Persistence Db = new Persistence();
+        private DesktopGUI AppWindow;
         public Employees(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
+            InitializeComponent();
+            AppWindow = gui;
+           
+        }
+
+        private void NewEmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchContent(new CreateEmployee(AppWindow));
         }
     }
 }
