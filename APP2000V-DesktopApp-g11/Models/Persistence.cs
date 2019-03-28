@@ -33,6 +33,31 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+       
+        public int CreateUser(Employee employee)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    {
+                        context.Database.Log = (string message) => { Console.WriteLine(message); };
+
+                        context.Employees.Add(employee);
+                        context.SaveChanges();
+                    }
+                    return 0;
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                    return 1;
+                }
+            }
+        }
+
         public int CreateTask(PTask task)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
@@ -58,10 +83,7 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
-        internal int CreateUser(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
+
 
         internal int CreateTaskList(TaskList list)
         {

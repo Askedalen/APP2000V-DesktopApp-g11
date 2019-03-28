@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace APP2000V_DesktopApp_g11.Views
 {
@@ -27,9 +28,17 @@ namespace APP2000V_DesktopApp_g11.Views
         public CreateEmployee(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
+
+           // string connectionString = "server=localhost;port=3306;database=app2000v;uid=root;";
+
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+
+            //MySqlCommand cmd = new MySqlCommand("select * from app2000v", connection);
+
         }
 
-        private void RegisterUserBtn_Click(object sender, RoutedEventArgs e)
+
+        private void CreateUserBtn_Click(object sender, RoutedEventArgs e)
         {
             // Parsing year, month and day for dates
             // string[] startParts = ProjectStartInput.Text.Split('-');
@@ -55,7 +64,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
             if (result == 0)
             {
-                ConfirmationBox.Text = "Project is registered!";
+                ConfirmationBox.Text = "User is registered!";
             }
             else
             {
@@ -64,10 +73,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         }
 
-        private void CreateUserBtn_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void UpdateUserBtn_Click(object sender, RoutedEventArgs e)
         {
