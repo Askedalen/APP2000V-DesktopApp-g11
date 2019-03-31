@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 
@@ -33,19 +35,30 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
-       
-        public int CreateUser(Employee employee)
+        public List<User> GetAllProjectMembers(int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                return context.Users.Join(
+                        context.ProjectParticipants.Where(pm => pm.ProjectId == pid),
+                        user => user.UserId,
+                        pmember => pmember.UserId,
+                        (user, pmember) => user).ToList();
+            }
+        }
+
+        public int CreateUser(User employee)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
                         context.Database.Log = (string message) => { Console.WriteLine(message); };
 
-                        context.Employees.Add(employee);
+                        context.Users.Add(employee);
                         context.SaveChanges();
                     }
                     return 0;
@@ -152,6 +165,16 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal List<User> GetAllEmployeesNotInProject(int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                IQueryable<int> excludedIds = context.ProjectParticipants.Where(pm => pm.ProjectId == pid).Select(s => s.UserId);
+                List<User> emps = context.Users.Where(u => !excludedIds.Contains(u.UserId)).ToList();
+                return emps;
+            }
+        }
+
         internal List<TaskList> GetLists(int pid)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
@@ -205,6 +228,19 @@ namespace APP2000V_DesktopApp_g11.Models
                     Console.WriteLine(e.Message);
                     return 1;
                 }
+            }
+        }
+
+        internal void AddProjectParticipant(int uid, int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                context.ProjectParticipants.Add(new ProjectParticipant
+                {
+                    UserId = uid,
+                    ProjectId = pid
+                });
+                context.SaveChanges();
             }
         }
 
@@ -265,6 +301,16 @@ namespace APP2000V_DesktopApp_g11.Models
                     Console.WriteLine(e.Message);
                     return null;
                 }
+            }
+        }
+
+        internal void DropProjectParticipant(int uid, int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                ProjectParticipant removepm = context.ProjectParticipants.Where(pm => pm.UserId == uid && pm.ProjectId == pid).First();
+                context.ProjectParticipants.Remove(removepm);
+                context.SaveChanges();
             }
         }
     }

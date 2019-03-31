@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace APP2000V_DesktopApp_g11.Views
 {
@@ -16,6 +17,7 @@ namespace APP2000V_DesktopApp_g11.Views
     {
         Persistence Db = new Persistence();
         Project CurrentProject;
+
         public ProjectPage(int projectID, DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
@@ -24,6 +26,7 @@ namespace APP2000V_DesktopApp_g11.Views
             DisplayProjectName.Text = CurrentProject.ProjectName;
             PrintBacklog();
             PrintLists();
+            PrintParticipants();
         }
 
         // EVENTS
@@ -103,11 +106,11 @@ namespace APP2000V_DesktopApp_g11.Views
 
             ChooseTaskList.SelectedIndex = taskInfo.TaskListId.HasValue ? taskInfo.TaskListId.Value - 1 : -1;
             
-            TestPopup.IsOpen = true;
+            TaskPopup.IsOpen = true;
         }
         private void CloseTaskPopupBtn_Click(object sender, RoutedEventArgs e)
         {
-            TestPopup.IsOpen = false;
+            TaskPopup.IsOpen = false;
         }
 
         private void PopupSaveTaskBtn_Click(object sender, RoutedEventArgs e)
@@ -118,11 +121,14 @@ namespace APP2000V_DesktopApp_g11.Views
             taskUpdate.TaskName = PopupTaskName.Text;
             taskUpdate.Description = TaskDescription.Text;
 
-            string[] deadlineParts = TaskDeadline.Text.Split('.');
-            int dy = Int32.Parse(deadlineParts[2]);
-            int dm = Int32.Parse(deadlineParts[1]);
-            int dd = Int32.Parse(deadlineParts[0]);
-            taskUpdate.TaskDeadline = new DateTime(dy, dm, dd);
+            if (!TaskDeadline.Text.Equals(""))
+            {
+                string[] deadlineParts = TaskDeadline.Text.Split('.');
+                int dy = Int32.Parse(deadlineParts[2]);
+                int dm = Int32.Parse(deadlineParts[1]);
+                int dd = Int32.Parse(deadlineParts[0]);
+                taskUpdate.TaskDeadline = new DateTime(dy, dm, dd);
+            }
 
             TaskList chosenList = ChooseTaskList.SelectedValue as TaskList;
             if (chosenList != null)
@@ -133,7 +139,7 @@ namespace APP2000V_DesktopApp_g11.Views
             if (Db.UpdateTask(taskUpdate) == 0)
             {
                 Console.WriteLine("Task updated successfully!");
-                TestPopup.IsOpen = false;
+                TaskPopup.IsOpen = false;
                 PrintBacklog();
                 PrintLists();
             }
@@ -141,6 +147,80 @@ namespace APP2000V_DesktopApp_g11.Views
             {
                 Console.WriteLine("Task update failed!");
             }
+
+        }
+
+        private void OpenEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeePopup.IsOpen = true;
+            PrintAvaliableEmployees();
+        }
+
+        private void PrintAvaliableEmployees()
+        {
+            EmployeePopupList.Children.Clear();
+            List<User> avaliableEmps = Db.GetAllEmployeesNotInProject(CurrentProject.ProjectId);
+            avaliableEmps.ForEach(emp =>
+            {
+                Rectangle imagePlaceholder = new Rectangle
+                {
+                    Height = 100,
+                    Width = 100,
+                    Fill = new SolidColorBrush(Colors.Gray)
+                };
+                TextBlock empNameTb = new TextBlock
+                {
+                    Text = emp.FirstName + " " + emp.LastName,
+                    FontSize = 24,
+                    TextWrapping = TextWrapping.Wrap,
+                    TextAlignment = TextAlignment.Center,
+                    Foreground = new SolidColorBrush(Colors.Black)
+                };
+                StackPanel empInfoPanel = new StackPanel();
+                empInfoPanel.Children.Add(imagePlaceholder);
+                empInfoPanel.Children.Add(empNameTb);
+                UserButton empBtn = new UserButton(emp)
+                {
+                    Height = 200,
+                    Background = new SolidColorBrush(Colors.White),
+                    BorderBrush = new SolidColorBrush(Colors.White),
+                    Content = empInfoPanel
+                };
+                empBtn.Click += new RoutedEventHandler(EmpBtn_Click);
+                UserButton addEmpBtn = new UserButton(emp)
+                {
+                    Content = "Add",
+                    FontSize = 24,
+                    Height = 50
+                };
+                addEmpBtn.Click += new RoutedEventHandler(AddEmpBtn_Click);
+                StackPanel empPanel = new StackPanel
+                {
+                    Margin = new Thickness(15, 15, 15, 0),
+                    Width = 230,
+                    Background = new SolidColorBrush(Colors.White)
+                };
+                empPanel.Children.Add(empBtn);
+                empPanel.Children.Add(addEmpBtn);
+                EmployeePopupList.Children.Add(empPanel);
+            });
+        }
+
+        private void AddEmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserButton emp = sender as UserButton;
+            Db.AddProjectParticipant(emp.UserId, CurrentProject.ProjectId);
+            PrintAvaliableEmployees();
+            PrintParticipants();
+        }
+
+        private void CloseEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeePopup.IsOpen = false;
+        }
+
+        private void SearchEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
@@ -207,6 +287,59 @@ namespace APP2000V_DesktopApp_g11.Views
             });
         }
 
+        private void PrintParticipants()
+        {
+            ParticipantsPanel.Children.Clear();
+            List<User> employees = Db.GetAllProjectMembers(CurrentProject.ProjectId);
+            employees.ForEach(e =>
+            {
+                TextBlock empNameBlock = new TextBlock
+                {
+                    Text = e.FirstName + " " + e.LastName,
+                    FontSize = 24,
+                    Foreground = new SolidColorBrush(Colors.Black)
+                };
+                UserButton deleteBtn = new UserButton(e)
+                {
+                    Content = "X",
+                    FontSize = 30,
+                    Width = 50,
+                };
+                StackPanel empPanel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Height = 50
+                };
+                empPanel.Children.Add(empNameBlock);
+                empPanel.Children.Add(deleteBtn);
+                deleteBtn.Click += new RoutedEventHandler(DropParticipantBtn_Click);
+                UserButton empBtn = new UserButton(e)
+                {
+                    Height = 50,
+                    Margin = new Thickness(0, 0, 0, 10),
+                    Background = new SolidColorBrush(Colors.White),
+                    BorderBrush = new SolidColorBrush(Colors.White),
+                    HorizontalContentAlignment = HorizontalAlignment.Left,
+                    Content = empPanel,
+                };
+                empBtn.Click += new RoutedEventHandler(EmpBtn_Click);
+                ParticipantsPanel.Children.Add(empBtn);
+            });
+        }
+
+        private void DropParticipantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserButton emp = sender as UserButton;
+            Db.DropProjectParticipant(emp.UserId, CurrentProject.ProjectId);
+            PrintParticipants();
+        }
+
+        private void EmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserButton emp = sender as UserButton;
+            //SwitchContent(new EmployeePage(emp.UserId));
+        }
+
         private List<TaskButton> CreateListTasks(TaskList l)
         {
             List<TaskButton> taskButtons = new List<TaskButton>();
@@ -232,5 +365,6 @@ namespace APP2000V_DesktopApp_g11.Views
         }
 
         
+
     }
 }

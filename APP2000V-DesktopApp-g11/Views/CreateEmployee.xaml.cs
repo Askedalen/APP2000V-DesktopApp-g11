@@ -1,7 +1,6 @@
 ﻿using System;
 using APP2000V_DesktopApp_g11.Assets;
 using APP2000V_DesktopApp_g11.Models;
-using APP2000V_DesktopApp_g11.Models.Database;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,7 +51,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
             // Uses Persistence object to insert the project into the database
             // Returns 0 if operation succeeds
-            int result = Db.CreateUser(new Employee
+            int result = Db.CreateUser(new User
             {
                 Username = EmployeeUsernameInput.Text,
                 FirstName = EmployeeFNameInput.Text,
