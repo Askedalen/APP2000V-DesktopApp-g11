@@ -105,9 +105,100 @@ namespace APP2000V_DesktopApp_g11.Views
             }
 
             ChooseTaskList.SelectedIndex = taskInfo.TaskListId.HasValue ? taskInfo.TaskListId.Value - 1 : -1;
+
+            switch(taskInfo.Priority)
+            {
+                case "low":
+                    ChoosePriorityList.SelectedIndex = 0;
+                    break;
+                case "normal":
+                    ChoosePriorityList.SelectedIndex = 1;
+                    break;
+                case "high":
+                    ChoosePriorityList.SelectedIndex = 2;
+                    break;
+                default:
+                    ChoosePriorityList.SelectedIndex = -1;
+                    break;
+            }
+
+            PrintTaskAssignment(currentTask.TaskId);
+            PrintTaskNotAssigned(currentTask.TaskId);
             
             TaskPopup.IsOpen = true;
         }
+
+
+        private void AddTaskAssignmentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserTaskButton emp = sender as UserTaskButton;
+            Db.AddTaskAssignment(emp.UserId, CurrentProject.ProjectId, emp.TaskId);
+            PrintTaskAssignment(emp.TaskId);
+            PrintTaskNotAssigned(emp.TaskId);
+        }
+
+        private void RemoveTaskAssignmentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserTaskButton emp = sender as UserTaskButton;
+            Db.RemoveTaskAssignment(emp.UserId, emp.TaskId);
+            PrintTaskAssignment(emp.TaskId);
+            PrintTaskNotAssigned(emp.TaskId);
+        }
+
+        private void PrintTaskNotAssigned(int tid)
+        {
+            TaskNotAssignedView.Children.Clear();
+            List<User> emps = Db.GetTaskNotAssigned(tid, CurrentProject.ProjectId);
+            emps.ForEach(emp =>
+            {
+                TextBlock empNameText = new TextBlock
+                {
+                    Text = emp.FirstName + " " + emp.LastName,
+                    FontSize = 24
+                };
+                UserTaskButton removeBtn = new UserTaskButton(emp, new PTask { TaskId = tid })
+                {
+                    FontSize = 18,
+                    Content = "Add"
+                };
+                removeBtn.Click += new RoutedEventHandler(AddTaskAssignmentBtn_Click);
+                StackPanel empPanel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal
+                };
+                empPanel.Children.Add(empNameText);
+                empPanel.Children.Add(removeBtn);
+                TaskNotAssignedView.Children.Add(empPanel);
+            });
+        }
+
+        private void PrintTaskAssignment(int tid)
+        {
+            TaskAssignmentView.Children.Clear();
+            List<User> emps = Db.GetTaskAssignment(tid);
+            emps.ForEach(emp =>
+            {
+                TextBlock empNameText = new TextBlock
+                {
+                    Text = emp.FirstName + " " + emp.LastName,
+                    FontSize = 24
+                };
+                UserTaskButton removeBtn = new UserTaskButton(emp, new PTask { TaskId = tid })
+                {
+                    FontSize = 18,
+                    Content = "X"
+                };
+                removeBtn.Click += new RoutedEventHandler(RemoveTaskAssignmentBtn_Click);
+                StackPanel empPanel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal
+                };
+                empPanel.Children.Add(empNameText);
+                empPanel.Children.Add(removeBtn);
+                TaskAssignmentView.Children.Add(empPanel);
+            });
+        }
+
         private void CloseTaskPopupBtn_Click(object sender, RoutedEventArgs e)
         {
             TaskPopup.IsOpen = false;
@@ -121,19 +212,30 @@ namespace APP2000V_DesktopApp_g11.Views
             taskUpdate.TaskName = PopupTaskName.Text;
             taskUpdate.Description = TaskDescription.Text;
 
-            if (!TaskDeadline.Text.Equals(""))
+            if (TaskDeadlinePicker.SelectedDate != null)
             {
-                string[] deadlineParts = TaskDeadline.Text.Split('.');
-                int dy = Int32.Parse(deadlineParts[2]);
-                int dm = Int32.Parse(deadlineParts[1]);
-                int dd = Int32.Parse(deadlineParts[0]);
-                taskUpdate.TaskDeadline = new DateTime(dy, dm, dd);
+                taskUpdate.TaskDeadline = TaskDeadlinePicker.SelectedDate;
             }
 
             TaskList chosenList = ChooseTaskList.SelectedValue as TaskList;
             if (chosenList != null)
             {
                 taskUpdate.TaskListId = chosenList.TaskListId;
+            }
+
+            int priority = ChoosePriorityList.SelectedIndex;
+            switch(priority)
+            {
+                case 0:
+                    taskUpdate.Priority = "low";
+                    break;
+                case 1: taskUpdate.Priority = "normal";
+                    break;
+                case 2:
+                    taskUpdate.Priority = "high";
+                    break;
+                default:
+                    break;
             }
 
             if (Db.UpdateTask(taskUpdate) == 0)

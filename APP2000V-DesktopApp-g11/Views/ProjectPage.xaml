@@ -103,7 +103,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Width="1000"
-            Height="600" 
+            Height="700" 
             Placement="Center"
             >
             <Border 
@@ -189,7 +189,7 @@
                             FontSize="28"
                             />
                         <DatePicker
-                            x:Name="TaskDeadline"
+                            x:Name="TaskDeadlinePicker"
                             Text="{Binding TaskDeadline}"
                             Background="White"
                             FontSize="28"
@@ -210,6 +210,69 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <Label
+                            Content="_Priority"
+                            Target="{Binding ElementName=Priority}"
+                            FontSize="28"/>
+                        <ComboBox
+                            x:Name="ChoosePriorityList"
+                            Width="470"
+                            FontSize="28"
+                            Background="White"
+                            HorizontalAlignment="Left">
+                            <ComboBoxItem Content="Low"/>
+                            <ComboBoxItem Content="Medium"/>
+                            <ComboBoxItem Content="High"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="15, 0">
+                        <Label
+                            Content="Assignments"
+                            FontSize="28"/>
+                        <ScrollViewer
+                            VerticalScrollBarVisibility="Auto"
+                            Height="250"
+                            Background="White">
+                            <StackPanel
+                                x:Name="TaskAssignmentView"
+                                Margin="15, 0">
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="24"
+                                        Text="Benjamin Kløw Askedalen"/>
+                                    <Button
+                                        FontSize="18"
+                                        Content="X"
+                                        />
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Label
+                            Content="Add assignments"
+                            FontSize="28"/>
+                        <ScrollViewer
+                            VerticalScrollBarVisibility="Auto"
+                            Background="White"
+                            Height="250">
+                            <StackPanel
+                                x:Name="TaskNotAssignedView"
+                                Margin="15, 0">
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="24"
+                                        Text="Benjamin Kløw Askedalen"/>
+                                    <Button
+                                        FontSize="18"
+                                        Content="Add"
+                                        />
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
                     </StackPanel>
                 </Grid>
             </Border>

@@ -123,6 +123,49 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal List<User> GetTaskNotAssigned(int tid, int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                IQueryable<int> notInTask = context.AssignedTasks.Where(at => at.TaskId == tid).Select(s => s.UserId);
+                List<User> emps = context.Users.Join(
+                        context.ProjectParticipants.Where(pm => pm.ProjectId == pid),
+                        user => user.UserId,
+                        pmember => pmember.UserId,
+                        (user, pmember) => user).Where(
+                                    u => !notInTask.Contains(u.UserId)).ToList();
+                
+                return emps;
+            }
+        }
+
+        internal List<User> GetTaskAssignment(int tid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                List<User> emps = context.Users.Join(
+                                context.AssignedTasks.Where(at => at.TaskId == tid),
+                                user => user.UserId,
+                                at => at.UserId,
+                                (user, at) => user).ToList();
+                return emps;
+            }
+        }
+
+        internal void AddTaskAssignment(int uid, int pid, int tid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                context.AssignedTasks.Add(new AssignedTask
+                {
+                    UserId = uid,
+                    ProjectId = pid,
+                    TaskId = tid
+                });
+                context.SaveChanges();
+            }
+        }
+
         internal List<PTask> GetBacklog(int pid)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
@@ -141,6 +184,16 @@ namespace APP2000V_DesktopApp_g11.Models
                     Console.WriteLine(e.Message);
                     return null;
                 }
+            }
+        }
+
+        internal void RemoveTaskAssignment(int uid, int tid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                AssignedTask removeat = context.AssignedTasks.Where(at => at.UserId == uid && at.TaskId == tid).First();
+                context.AssignedTasks.Remove(removeat);
+                context.SaveChanges();
             }
         }
 
@@ -212,6 +265,7 @@ namespace APP2000V_DesktopApp_g11.Models
                             oldTask.Description = taskUpdate.Description;
                             oldTask.TaskDeadline = taskUpdate.TaskDeadline;
                             oldTask.TaskListId = taskUpdate.TaskListId;
+                            oldTask.Priority = taskUpdate.Priority;
 
                             context.SaveChanges();
                             return 0;

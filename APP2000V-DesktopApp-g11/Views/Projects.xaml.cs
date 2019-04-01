@@ -56,8 +56,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
             StackPanel tasksPanel = new StackPanel();
 
-            List<PTask> taskList = new List<PTask>();
-            for (int i = 0; i < 10; i++) taskList.Add(new PTask() { TaskName = "Dette er test nummer"+(i+1) }); // Midlertidig liste over tasks
+            List<PTask> taskList = Db.GetBacklog(obj.ProjectId);
             taskList.ForEach(t =>
             {
                 TextBlock taskInScroll = new TextBlock();
