@@ -12,6 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -33,7 +34,6 @@
             Grid.Column="0"
             Grid.Row="1"
             Background="AliceBlue">
-
             <TextBlock
                 Text="Backlog"
                 FontSize="30"
@@ -43,7 +43,6 @@
                 Margin="15, 0, 15, 0"
                 Height="950">
                 <StackPanel>
-
                     <StackPanel
                         x:Name="CreateTaskPanel"
                         Margin="0, 0, 0, 30">
@@ -68,22 +67,49 @@
                         x:Name="BacklogPanel">
 
                     </StackPanel>
-
-
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+        <StackPanel
+            Grid.Column="2"
+            Grid.Row="1"
+            Background="AliceBlue">
+            <TextBlock
+                Text="Employees"
+                FontSize="30"
+                Margin="15, 0, 0, 30"/>
+            <ScrollViewer
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                Margin="15, 0, 15, 0"
+                Height="950">
+                <StackPanel>
+                    <Button
+                        x:Name="OpenEmployeePopupBtn"
+                        Content="Add employees"
+                        Height="50"
+                        Margin="0, 0, 0, 30"
+                        FontSize="28"
+                        Click="OpenEmployeePopupBtn_Click"/>
+                    <StackPanel
+                        x:Name="ParticipantsPanel">
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>
         <Popup 
             Grid.Row="1"
-            Grid.ColumnSpan="2"
-            x:Name="TestPopup"
+            Grid.ColumnSpan="3"
+            x:Name="TaskPopup"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Width="1000"
-            Height="600" 
+            Height="700" 
             Placement="Center"
             >
-            <Border BorderBrush="Black" BorderThickness="1, 1, 1, 1" RenderTransformOrigin="0.5,0.5">
+            <Border 
+                BorderBrush="Black" 
+                BorderThickness="1, 1, 1, 1" 
+                RenderTransformOrigin="0.5,0.5">
                 
                 <Grid 
                     x:Name="TaskBindingGrid"
@@ -163,7 +189,7 @@
                             FontSize="28"
                             />
                         <DatePicker
-                            x:Name="TaskDeadline"
+                            x:Name="TaskDeadlinePicker"
                             Text="{Binding TaskDeadline}"
                             Background="White"
                             FontSize="28"
@@ -184,11 +210,143 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <Label
+                            Content="_Priority"
+                            Target="{Binding ElementName=Priority}"
+                            FontSize="28"/>
+                        <ComboBox
+                            x:Name="ChoosePriorityList"
+                            Width="470"
+                            FontSize="28"
+                            Background="White"
+                            HorizontalAlignment="Left">
+                            <ComboBoxItem Content="Low"/>
+                            <ComboBoxItem Content="Medium"/>
+                            <ComboBoxItem Content="High"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="15, 0">
+                        <Label
+                            Content="Assignments"
+                            FontSize="28"/>
+                        <ScrollViewer
+                            VerticalScrollBarVisibility="Auto"
+                            Height="250"
+                            Background="White">
+                            <StackPanel
+                                x:Name="TaskAssignmentView"
+                                Margin="15, 0">
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="24"
+                                        Text="Benjamin Kløw Askedalen"/>
+                                    <Button
+                                        FontSize="18"
+                                        Content="X"
+                                        />
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Label
+                            Content="Add assignments"
+                            FontSize="28"/>
+                        <ScrollViewer
+                            VerticalScrollBarVisibility="Auto"
+                            Background="White"
+                            Height="250">
+                            <StackPanel
+                                x:Name="TaskNotAssignedView"
+                                Margin="15, 0">
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="24"
+                                        Text="Benjamin Kløw Askedalen"/>
+                                    <Button
+                                        FontSize="18"
+                                        Content="Add"
+                                        />
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
                     </StackPanel>
                 </Grid>
             </Border>
         </Popup>
-
+        <Popup
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            x:Name="EmployeePopup"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Width="1000"
+            Height="600" 
+            Placement="Center">
+            <Border 
+                BorderBrush="Black" 
+                BorderThickness="1, 1, 1, 1" 
+                RenderTransformOrigin="0.5,0.5">
+                <Grid 
+                    x:Name="EmployeePopupGrid"
+                    Background="LightBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        BorderBrush="Black"
+                        BorderThickness="0, 0, 0, 1"/>
+                    <TextBlock
+                        Text="Employees"
+                        FontSize="30"
+                        Margin="10, 0, 0, 0"/>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                        <TextBox
+                            Background="White"
+                            Text="Type to search..."
+                            Foreground="Gray"
+                            FontSize="28"
+                            Padding="5, 0, 0, 0"
+                            Margin="0, 0, 10, 0"
+                            Width="400"
+                            HorizontalAlignment="Left"/>
+                        <Button 
+                            x:Name="SearchEmployeeBtn"
+                            Content="Search"
+                            FontSize="28" 
+                            Height="Auto"
+                            Click="SearchEmployeeBtn_Click"
+                            />
+                        <Button
+                            x:Name="CloseEmployeePopupBtn"
+                            Content="X"
+                            FontSize="28"
+                            Height="Auto" 
+                            Foreground="Gray"
+                            BorderBrush="{x:Null}"
+                            Background="{x:Null}"
+                            Click="CloseEmployeePopupBtn_Click"
+                            />
+                    </StackPanel>
+                    <ScrollViewer
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        Height="550"
+                        Grid.Row="1">
+                        <WrapPanel
+                            x:Name="EmployeePopupList">
+                            
+                        </WrapPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Popup>
         <ScrollViewer
             ScrollViewer.VerticalScrollBarVisibility="Disabled"
             ScrollViewer.HorizontalScrollBarVisibility="Auto"

@@ -1,7 +1,6 @@
-﻿using APP2000V_DesktopApp_g11.Assets;
+﻿using System;
+using APP2000V_DesktopApp_g11.Assets;
 using APP2000V_DesktopApp_g11.Models;
-using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,16 +14,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace APP2000V_DesktopApp_g11.Views
 {
     /// <summary>
-    /// Interaction logic for CreateUser.xaml
+    /// Interaction logic for CreateEmployee.xaml
     /// </summary>
-    public partial class CreateUser : AnimatedUserControl
+    public partial class CreateEmployee : AnimatedUserControl
     {
         Persistence Db = new Persistence();
-        public CreateUser(DesktopGUI gui) : base(gui)
+        public CreateEmployee(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
 
@@ -53,11 +53,11 @@ namespace APP2000V_DesktopApp_g11.Views
             // Returns 0 if operation succeeds
             int result = Db.CreateUser(new User
             {
-                Username = UserUsernameInput.Text,
-                FirstName = UserFNameInput.Text,
-                LastName = UserLNameInput.Text,
-                PhoneNumber = UserPhoneInput.Text,
-                Email = UserEmailInput.Text,
+                Username = EmployeeUsernameInput.Text,
+                FirstName = EmployeeFNameInput.Text,
+                LastName = EmployeeLNameInput.Text,
+                PhoneNumber = EmployeePhoneInput.Text,
+                Email = EmployeeEmailInput.Text,
 
             });
 

@@ -24,4 +24,24 @@ namespace APP2000V_DesktopApp_g11.Assets
             TaskId = t.TaskId;
         }
     }
+
+    public class UserButton : Button
+    {
+        public int UserId { get; set; }
+        public UserButton(User u) : base()
+        {
+            UserId = u.UserId;
+        }
+    }
+
+    public class UserTaskButton : Button
+    {
+        public int UserId { get; set; }
+        public int TaskId { get; set; }
+        public UserTaskButton(User u, PTask t) : base()
+        {
+            UserId = u.UserId;
+            TaskId = t.TaskId;
+        }
+    }
 }
