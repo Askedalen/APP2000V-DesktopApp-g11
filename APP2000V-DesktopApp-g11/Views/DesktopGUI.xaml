@@ -26,21 +26,54 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="White">
+    <Grid 
+        x:Name="DesktopGrid"
+        Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="Sidebar" Width="auto"/>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="459*" />
+            <ColumnDefinition Width="347*"/>
         </Grid.ColumnDefinitions>
+
+        <Popup
+            x:Name="ErrorPopup"
+            Grid.ColumnSpan="2"
+            Width="400"
+            Height="200"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right" 
+            Placement="Absolute" 
+            PopupAnimation="Slide" 
+            AllowsTransparency="True"
+            HorizontalOffset="1520"
+            VerticalOffset="23"
+            >
+            <StackPanel 
+                Opacity="50"
+                Background="DarkRed"
+                >
+                <TextBlock
+                    Text="Something went wrong!"
+                    FontSize="28"
+                    Foreground="White"
+                    Margin="15"/>
+                <TextBlock 
+                    x:Name="ErrorMessage"
+                    FontSize="24"
+                    TextWrapping="Wrap"
+                    Margin="15, 0"
+                    Foreground="White"/>
+            </StackPanel>
+        </Popup>
 
         <Border 
             Grid.Column="0"
             Grid.Row="0"
-            Grid.RowSpan="2"
             BorderThickness="0,1,1,0" 
             BorderBrush="Black"
             />
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF6B7893">
+        <StackPanel Grid.Column="0" Background="#FF6B7893">
 
             <Image 
                 x:Name="logoImage"
@@ -94,7 +127,7 @@
         <Border 
             Grid.Column="1"
             BorderThickness="0, 1, 0, 0"
-            BorderBrush="Black">
+            BorderBrush="Black" Grid.ColumnSpan="2">
             <DockPanel>
                 <ContentControl x:Name="ContentArea" />
             </DockPanel>

@@ -7,7 +7,7 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     class CreateDatabase : DropCreateDatabaseIfModelChanges<WorkflowContext>
     {
-
+        /*
         protected override void Seed(WorkflowContext context)
         {
             List<User> users = new List<User>
@@ -225,14 +225,16 @@ namespace APP2000V_DesktopApp_g11.Models
             context.AssignedTasks.AddRange(assignedTasks);
             context.EmployeeLeaves.AddRange(employeeLeave);
             context.SaveChanges();
-        }
+        }*/
 
-        /*
+        
         public CreateDatabase()
         {
             using (WorkflowContext context = new WorkflowContext())
             {
-                context.Database.CreateIfNotExists();
+                context.Database.Delete();
+                context.Database.Create();
+
                 using (DbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     try
@@ -464,6 +466,6 @@ namespace APP2000V_DesktopApp_g11.Models
 
             }
         }
-        */
+        
     }
 }

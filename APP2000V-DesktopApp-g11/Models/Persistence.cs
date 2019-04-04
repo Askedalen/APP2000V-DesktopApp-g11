@@ -1,321 +1,357 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Text;
 
 namespace APP2000V_DesktopApp_g11.Models
 {
     class Persistence
     {
-        string ConnectionString = "server=localhost;port=3306;database=app2000v;uid=root;";
         public int CreateProject(Project project)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        context.Database.Log = (string message) => { Console.WriteLine(message); };
-
-                        context.Projects.Add(project);
-                        context.SaveChanges();
-                    }
-                    return 0;
+                    context.Projects.Add(project);
+                    context.SaveChanges();
                 }
-                catch (Exception exc)
-                {
-                    Console.WriteLine(exc.Message);
-                    return 1;
-                }
+                return 0;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                return 1;
             }
         }
 
         public List<User> GetAllProjectMembers(int pid)
         {
+            try
+            {
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    return context.Users.Join(
+                            context.ProjectParticipants.Where(pm => pm.ProjectId == pid),
+                            user => user.UserId,
+                            pmember => pmember.UserId,
+                            (user, pmember) => user).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
+        internal int GetLastListNumber(int pid)
+        {
             using (WorkflowContext context = new WorkflowContext())
             {
-                return context.Users.Join(
-                        context.ProjectParticipants.Where(pm => pm.ProjectId == pid),
-                        user => user.UserId,
-                        pmember => pmember.UserId,
-                        (user, pmember) => user).ToList();
+                try
+                {
+                    return context.TaskLists.Where(tl => tl.ProjectId == pid).Max(tl1 => tl1.TaskListId);
+                }
+                catch (Exception e)
+                {
+                    if (e.HResult == -2146233079)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
             }
         }
 
         public int CreateUser(User employee)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        context.Database.Log = (string message) => { Console.WriteLine(message); };
+                    context.Database.Log = (string message) => { Console.WriteLine(message); };
 
-                        context.Users.Add(employee);
-                        context.SaveChanges();
-                    }
-                    return 0;
+                    context.Users.Add(employee);
+                    context.SaveChanges();
                 }
-                catch (Exception exc)
-                {
-                    Console.WriteLine(exc.Message);
-                    return 1;
-                }
+                return 0;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                return 1;
             }
         }
 
         public int CreateTask(PTask task)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        context.Database.Log = (string message) => { Console.WriteLine(message); };
+                    context.Database.Log = (string message) => { Console.WriteLine(message); };
 
-                        context.Tasks.Add(task);
-                        context.SaveChanges();
-                        Console.WriteLine("PTask created: " + task.TaskName);
-                    }
-                    return 0;
+                    context.Tasks.Add(task);
+                    context.SaveChanges();
+                    Console.WriteLine("PTask created: " + task.TaskName);
                 }
-                catch (Exception exc)
-                {
-                    Console.WriteLine(exc.Message);
-                    return 1;
-                }
+                return 0;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                return 1;
             }
         }
 
-
-
         internal int CreateTaskList(TaskList list)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        context.Database.Log = (string message) => { Console.WriteLine(message); };
+                    context.Database.Log = (string message) => { Console.WriteLine(message); };
 
-                        context.TaskLists.Add(list);
-                        context.SaveChanges();
-                        Console.WriteLine("PTask created: " + list.ListName);
-                    }
-                    return 0;
+                    context.TaskLists.Add(list);
+                    context.SaveChanges();
+                    Console.WriteLine("PTask created: " + list.ListName);
                 }
-                catch (Exception exc)
-                {
-                    Console.WriteLine(exc.Message);
-                    return 1;
-                }
+                return 0;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                return 1;
             }
         }
 
         internal List<User> GetTaskNotAssigned(int tid, int pid)
         {
-            using (WorkflowContext context = new WorkflowContext())
+            try
             {
-                IQueryable<int> notInTask = context.AssignedTasks.Where(at => at.TaskId == tid).Select(s => s.UserId);
-                List<User> emps = context.Users.Join(
-                        context.ProjectParticipants.Where(pm => pm.ProjectId == pid),
-                        user => user.UserId,
-                        pmember => pmember.UserId,
-                        (user, pmember) => user).Where(
-                                    u => !notInTask.Contains(u.UserId)).ToList();
-                
-                return emps;
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    IQueryable<int> notInTask = context.AssignedTasks.Where(at => at.TaskId == tid).Select(s => s.UserId);
+                    List<User> emps = context.Users.Join(
+                            context.ProjectParticipants.Where(pm => pm.ProjectId == pid),
+                            user => user.UserId,
+                            pmember => pmember.UserId,
+                            (user, pmember) => user).Where(
+                                        u => !notInTask.Contains(u.UserId)).ToList();
+                    return emps;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
 
         internal List<User> GetTaskAssignment(int tid)
         {
-            using (WorkflowContext context = new WorkflowContext())
+            try
             {
-                List<User> emps = context.Users.Join(
-                                context.AssignedTasks.Where(at => at.TaskId == tid),
-                                user => user.UserId,
-                                at => at.UserId,
-                                (user, at) => user).ToList();
-                return emps;
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    List<User> emps = context.Users.Join(
+                                    context.AssignedTasks.Where(at => at.TaskId == tid),
+                                    user => user.UserId,
+                                    at => at.UserId,
+                                    (user, at) => user).ToList();
+                    return emps;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
 
-        internal void AddTaskAssignment(int uid, int pid, int tid)
+        internal int AddTaskAssignment(int uid, int pid, int tid)
         {
-            using (WorkflowContext context = new WorkflowContext())
+            try
             {
-                context.AssignedTasks.Add(new AssignedTask
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    UserId = uid,
-                    ProjectId = pid,
-                    TaskId = tid
-                });
-                context.SaveChanges();
+                    context.AssignedTasks.Add(new AssignedTask
+                    {
+                        UserId = uid,
+                        ProjectId = pid,
+                        TaskId = tid
+                    });
+                    context.SaveChanges();
+                }
+                return 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 1;
             }
         }
 
         internal List<PTask> GetBacklog(int pid)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectId == pid).ToList();
-                        return tasks;
-                    }
+                    List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectId == pid).ToList();
+                    return tasks;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return null;
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
 
-        internal void RemoveTaskAssignment(int uid, int tid)
+        internal int RemoveTaskAssignment(int uid, int tid)
         {
-            using (WorkflowContext context = new WorkflowContext())
+            try
             {
-                AssignedTask removeat = context.AssignedTasks.Where(at => at.UserId == uid && at.TaskId == tid).First();
-                context.AssignedTasks.Remove(removeat);
-                context.SaveChanges();
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    AssignedTask removeat = context.AssignedTasks.Where(at => at.UserId == uid && at.TaskId == tid).First();
+                    context.AssignedTasks.Remove(removeat);
+                    context.SaveChanges();
+                }
+                return 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 1;
             }
         }
 
         internal PTask GetSingleTask(int tid)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        PTask task = context.Tasks.Where(t => t.TaskId == tid).FirstOrDefault();
-                        return task;
-                    }
+                    PTask task = context.Tasks.Where(t => t.TaskId == tid).FirstOrDefault();
+                    return task;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return null;
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 
         internal List<User> GetAllEmployeesNotInProject(int pid)
         {
-            using (WorkflowContext context = new WorkflowContext())
+            try
             {
-                IQueryable<int> excludedIds = context.ProjectParticipants.Where(pm => pm.ProjectId == pid).Select(s => s.UserId);
-                List<User> emps = context.Users.Where(u => !excludedIds.Contains(u.UserId)).ToList();
-                return emps;
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    IQueryable<int> excludedIds = context.ProjectParticipants.Where(pm => pm.ProjectId == pid).Select(s => s.UserId);
+                    List<User> emps = context.Users.Where(u => !excludedIds.Contains(u.UserId)).ToList();
+                    return emps;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
 
         internal List<TaskList> GetLists(int pid)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        List<TaskList> lists = context.TaskLists.Where(l => l.ProjectId == pid).ToList();
-                        return lists;
-                    }
+                    List<TaskList> lists = context.TaskLists.Where(l => l.ProjectId == pid).ToList();
+                    return lists;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return null;
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 
         internal int UpdateTask(PTask taskUpdate)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
+                    PTask oldTask = context.Tasks.Where(t => t.TaskId == taskUpdate.TaskId).FirstOrDefault();
+                    if (oldTask != null)
                     {
-                        PTask oldTask = context.Tasks.Where(t => t.TaskId == taskUpdate.TaskId).FirstOrDefault();
-                        if (oldTask != null)
-                        {
-                            oldTask.TaskName = taskUpdate.TaskName;
-                            oldTask.Description = taskUpdate.Description;
-                            oldTask.TaskDeadline = taskUpdate.TaskDeadline;
-                            oldTask.TaskListId = taskUpdate.TaskListId;
-                            oldTask.Priority = taskUpdate.Priority;
+                        oldTask.TaskName = taskUpdate.TaskName;
+                        oldTask.Description = taskUpdate.Description;
+                        oldTask.TaskDeadline = taskUpdate.TaskDeadline;
+                        oldTask.TaskListId = taskUpdate.TaskListId;
+                        oldTask.Priority = taskUpdate.Priority;
 
-                            context.SaveChanges();
-                            return 0;
-                        }
-                        else
-                        {
-                            return 2;
-                        }
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Task update failed: ");
-                    Console.WriteLine(e.Message);
-                    return 1;
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Task update failed: ");
+                Console.WriteLine(e.Message);
+                return 1;
             }
         }
 
-        internal void AddProjectParticipant(int uid, int pid)
+        internal int AddProjectParticipant(int uid, int pid)
         {
-            using (WorkflowContext context = new WorkflowContext())
+            try
             {
-                context.ProjectParticipants.Add(new ProjectParticipant
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    UserId = uid,
-                    ProjectId = pid
-                });
-                context.SaveChanges();
+                    context.ProjectParticipants.Add(new ProjectParticipant
+                    {
+                        UserId = uid,
+                        ProjectId = pid
+                    });
+                    context.SaveChanges();
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 1;
             }
         }
 
         public Project GetSingleProject(int pid)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        Project project = context.Projects.Where(p => p.ProjectId == pid).FirstOrDefault();
-                        return project;
-                    }
+                    Project project = context.Projects.Where(p => p.ProjectId == pid).FirstOrDefault();
+                    return project;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return null;
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 
@@ -339,32 +375,37 @@ namespace APP2000V_DesktopApp_g11.Models
 
         internal List<PTask> GetListTasks(TaskList l)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                try
+                using (WorkflowContext context = new WorkflowContext())
                 {
-                    using (WorkflowContext context = new WorkflowContext())
-                    {
-                        List<PTask> tasks = context.Tasks.Where(t => t.TaskListId == l.TaskListId).ToList();
-                        return tasks;
-                    }
+                    List<PTask> tasks = context.Tasks.Where(t => t.TaskListId == l.TaskListId && t.TaskProjectId == l.ProjectId).ToList();
+                    return tasks;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return null;
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 
-        internal void DropProjectParticipant(int uid, int pid)
+        internal int DropProjectParticipant(int uid, int pid)
         {
-            using (WorkflowContext context = new WorkflowContext())
+            try
             {
-                ProjectParticipant removepm = context.ProjectParticipants.Where(pm => pm.UserId == uid && pm.ProjectId == pid).First();
-                context.ProjectParticipants.Remove(removepm);
-                context.SaveChanges();
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    ProjectParticipant removepm = context.ProjectParticipants.Where(pm => pm.UserId == uid && pm.ProjectId == pid).First();
+                    context.ProjectParticipants.Remove(removepm);
+                    context.SaveChanges();
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 1;
             }
         }
     }

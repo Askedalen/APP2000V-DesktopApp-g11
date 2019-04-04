@@ -11,10 +11,14 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class EmployeeLeave
     {
+        [Key, Column(Order = 0)]
         public int LeaveId { get; set; }
+        [Key, Column(Order = 1)]
         public int UserId { get; set; }
         public Nullable<System.DateTime> FromDate { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }

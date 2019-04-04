@@ -1,10 +1,10 @@
 ﻿using APP2000V_DesktopApp_g11.Assets;
+using APP2000V_DesktopApp_g11.Controllers;
 using APP2000V_DesktopApp_g11.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -16,6 +16,7 @@ namespace APP2000V_DesktopApp_g11.Views
     public partial class ProjectPage : AnimatedUserControl
     {
         Persistence Db = new Persistence();
+        ProjectController Pc = new ProjectController();
         Project CurrentProject;
 
         public ProjectPage(int projectID, DesktopGUI gui) : base(gui)
@@ -44,69 +45,197 @@ namespace APP2000V_DesktopApp_g11.Views
             CreateListTb.Text = "";
             CreateListTb.Foreground = new SolidColorBrush(Colors.Black);
         }
-        
+
         private void CreateTaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            PTask newTask = new PTask
-            {
-                TaskName = CreateTaskTb.Text,
-                TaskProjectId = CurrentProject.ProjectId,
-                TaskCreationDate = DateTime.Now
-            };
-
-            if (Db.CreateTask(newTask) == 0)
-            {
-                CreateTaskBtn.Visibility = Visibility.Collapsed;
-                CreateTaskTb.Text = "Create new task...";
-                CreateTaskTb.Foreground = new SolidColorBrush(Colors.Gray);
-                PrintBacklog();
-                Console.WriteLine("PTask is created");
-            }
-            else
-            {
-                Console.WriteLine("PTask was not created");
-            }
-
+            CreateTask();
         }
 
         private void CreateListBtn_Click(object sender, RoutedEventArgs e)
         {
-            TaskList newTaskList = new TaskList
-            {
-                ListName = CreateListTb.Text,
-                ProjectId = CurrentProject.ProjectId
-            };
-
-            if (Db.CreateTaskList(newTaskList) == 0)
-            {
-                CreateListBtn.Visibility = Visibility.Collapsed;
-                CreateListTb.Text = "Create new list...";
-                CreateListTb.Foreground = new SolidColorBrush(Colors.Gray);
-                PrintLists();
-                Console.WriteLine("TaskList is created");
-            }
-            else
-            {
-                Console.WriteLine("TaskList was not created");
-            }
-
+            CreateList();
         }
 
         private void TaskButton_Click(object sender, RoutedEventArgs e)
         {
             TaskButton currentTask = sender as TaskButton;
+            PrintTaskInfo(currentTask);
+        }
+
+        private void CloseTaskPopupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TaskPopup.IsOpen = false;
+        }
+
+        private void AddTaskAssignmentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserTaskButton emp = sender as UserTaskButton;
+            CreateTaskAssignment(emp);
+        }
+
+        private void RemoveTaskAssignmentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserTaskButton emp = sender as UserTaskButton;
+            DeleteTaskAssignment(emp);
+        }
+
+        private void PopupSaveTaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PTask currentTask = PopupTaskName.DataContext as PTask;
+            UpdateTask(currentTask);
+        }
+
+
+
+        private void OpenEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeePopup.IsOpen = true;
+            PrintAvaliableEmployees();
+        }
+
+        private void CloseEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeePopup.IsOpen = false;
+        }
+
+        private void AddEmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserButton emp = sender as UserButton;
+            AddProjectMember(emp);
+        }
+
+        private void SearchEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DropParticipantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserButton emp = sender as UserButton;
+            DropProjectMember(emp);
+        }
+
+
+
+        private void EmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserButton emp = sender as UserButton;
+            //SwitchContent(new EmployeePage(emp.UserId));
+        }
+
+        // PRINT ELEMENTS
+        private void PrintBacklog()
+        {
+            BacklogPanel.Children.Clear();
+            List<PTask> taskList = Db.GetBacklog(CurrentProject.ProjectId);
+            taskList.ForEach(t =>
+            {
+                TextBlock taskBlock = new TextBlock();
+                taskBlock.Text = t.TaskName;
+                taskBlock.Background = new SolidColorBrush(Colors.White);
+                taskBlock.FontSize = 28;
+                taskBlock.Padding = new Thickness(30, 20, 0, 25);
+                TaskButton taskButton = new TaskButton(t);
+                taskButton.Content = taskBlock;
+                taskButton.Margin = new Thickness(0, 0, 0, 30);
+                taskButton.Padding = new Thickness(0);
+                taskButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+                taskButton.VerticalContentAlignment = VerticalAlignment.Stretch;
+                taskButton.Click += new RoutedEventHandler(TaskButton_Click);
+                BacklogPanel.Children.Add(taskButton);
+            });
+        }
+
+        private void PrintParticipants()
+        {
+            ParticipantsPanel.Children.Clear();
+            List<User> employees = Db.GetAllProjectMembers(CurrentProject.ProjectId);
+            employees.ForEach(e =>
+            {
+                TextBlock empNameBlock = new TextBlock
+                {
+                    Text = e.FirstName + " " + e.LastName,
+                    FontSize = 24,
+                    Foreground = new SolidColorBrush(Colors.Black)
+                };
+                UserButton deleteBtn = new UserButton(e)
+                {
+                    Content = "X",
+                    FontSize = 30,
+                    Width = 50,
+                };
+                StackPanel empPanel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Height = 50
+                };
+                empPanel.Children.Add(empNameBlock);
+                empPanel.Children.Add(deleteBtn);
+                deleteBtn.Click += new RoutedEventHandler(DropParticipantBtn_Click);
+                UserButton empBtn = new UserButton(e)
+                {
+                    Height = 50,
+                    Margin = new Thickness(0, 0, 0, 10),
+                    Background = new SolidColorBrush(Colors.White),
+                    BorderBrush = new SolidColorBrush(Colors.White),
+                    HorizontalContentAlignment = HorizontalAlignment.Left,
+                    Content = empPanel,
+                };
+                empBtn.Click += new RoutedEventHandler(EmpBtn_Click);
+                ParticipantsPanel.Children.Add(empBtn);
+            });
+        }
+
+        private void PrintLists()
+        {
+            ListPanel.Children.Clear();
+            List<TaskList> lists = Db.GetLists(CurrentProject.ProjectId);
+            lists.ForEach(l =>
+            {
+                TextBlock listName = new TextBlock();
+                listName.Text = l.ListName;
+                listName.FontSize = 28;
+                listName.FontWeight = FontWeights.Bold;
+                listName.Margin = new Thickness(15);
+
+                Border nameBorder = new Border();
+                nameBorder.BorderBrush = new SolidColorBrush(Colors.Gray);
+                nameBorder.BorderThickness = new Thickness(0, 0, 0, 1);
+                nameBorder.Child = listName;
+
+                StackPanel panelInScroll = new StackPanel();
+                panelInScroll.AllowDrop = true;
+                List<TaskButton> taskList = CreateListTasks(l);
+                taskList.ForEach(t =>
+                {
+                    panelInScroll.Children.Add(t);
+                });
+
+                ScrollViewer taskScroll = new ScrollViewer();
+                taskScroll.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                taskScroll.Content = panelInScroll;
+
+                StackPanel currentList = new StackPanel();
+                currentList.Width = 350;
+                currentList.Margin = new Thickness(30, 30, 0, 30);
+                currentList.Background = new SolidColorBrush(Colors.AliceBlue);
+                currentList.Children.Add(nameBorder);
+                currentList.Children.Add(taskScroll);
+                ListPanel.Children.Add(currentList);
+            });
+        }
+
+        private void PrintTaskInfo(TaskButton currentTask)
+        {
             PTask taskInfo = Db.GetSingleTask(currentTask.TaskId);
             TaskBindingGrid.DataContext = taskInfo;
 
             List<TaskList> taskLists = Db.GetLists(CurrentProject.ProjectId);
-            if (ChooseTaskList.Items.IsEmpty)
-            {
-                ChooseTaskList.ItemsSource = taskLists;
-            }
+            ChooseTaskList.ItemsSource = taskLists;
 
             ChooseTaskList.SelectedIndex = taskInfo.TaskListId.HasValue ? taskInfo.TaskListId.Value - 1 : -1;
 
-            switch(taskInfo.Priority)
+            switch (taskInfo.Priority)
             {
                 case "low":
                     ChoosePriorityList.SelectedIndex = 0;
@@ -124,25 +253,8 @@ namespace APP2000V_DesktopApp_g11.Views
 
             PrintTaskAssignment(currentTask.TaskId);
             PrintTaskNotAssigned(currentTask.TaskId);
-            
+
             TaskPopup.IsOpen = true;
-        }
-
-
-        private void AddTaskAssignmentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            UserTaskButton emp = sender as UserTaskButton;
-            Db.AddTaskAssignment(emp.UserId, CurrentProject.ProjectId, emp.TaskId);
-            PrintTaskAssignment(emp.TaskId);
-            PrintTaskNotAssigned(emp.TaskId);
-        }
-
-        private void RemoveTaskAssignmentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            UserTaskButton emp = sender as UserTaskButton;
-            Db.RemoveTaskAssignment(emp.UserId, emp.TaskId);
-            PrintTaskAssignment(emp.TaskId);
-            PrintTaskNotAssigned(emp.TaskId);
         }
 
         private void PrintTaskNotAssigned(int tid)
@@ -199,65 +311,6 @@ namespace APP2000V_DesktopApp_g11.Views
             });
         }
 
-        private void CloseTaskPopupBtn_Click(object sender, RoutedEventArgs e)
-        {
-            TaskPopup.IsOpen = false;
-        }
-
-        private void PopupSaveTaskBtn_Click(object sender, RoutedEventArgs e)
-        {
-            PTask currentTask = PopupTaskName.DataContext as PTask;
-            PTask taskUpdate = new PTask();
-            taskUpdate.TaskId = currentTask.TaskId;
-            taskUpdate.TaskName = PopupTaskName.Text;
-            taskUpdate.Description = TaskDescription.Text;
-
-            if (TaskDeadlinePicker.SelectedDate != null)
-            {
-                taskUpdate.TaskDeadline = TaskDeadlinePicker.SelectedDate;
-            }
-
-            TaskList chosenList = ChooseTaskList.SelectedValue as TaskList;
-            if (chosenList != null)
-            {
-                taskUpdate.TaskListId = chosenList.TaskListId;
-            }
-
-            int priority = ChoosePriorityList.SelectedIndex;
-            switch(priority)
-            {
-                case 0:
-                    taskUpdate.Priority = "low";
-                    break;
-                case 1: taskUpdate.Priority = "normal";
-                    break;
-                case 2:
-                    taskUpdate.Priority = "high";
-                    break;
-                default:
-                    break;
-            }
-
-            if (Db.UpdateTask(taskUpdate) == 0)
-            {
-                Console.WriteLine("Task updated successfully!");
-                TaskPopup.IsOpen = false;
-                PrintBacklog();
-                PrintLists();
-            }
-            else
-            {
-                Console.WriteLine("Task update failed!");
-            }
-
-        }
-
-        private void OpenEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeePopup.IsOpen = true;
-            PrintAvaliableEmployees();
-        }
-
         private void PrintAvaliableEmployees()
         {
             EmployeePopupList.Children.Clear();
@@ -308,140 +361,6 @@ namespace APP2000V_DesktopApp_g11.Views
             });
         }
 
-        private void AddEmpBtn_Click(object sender, RoutedEventArgs e)
-        {
-            UserButton emp = sender as UserButton;
-            Db.AddProjectParticipant(emp.UserId, CurrentProject.ProjectId);
-            PrintAvaliableEmployees();
-            PrintParticipants();
-        }
-
-        private void CloseEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeePopup.IsOpen = false;
-        }
-
-        private void SearchEmployeeBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        // PRINT ELEMENTS
-
-        private void PrintBacklog()
-        {
-            BacklogPanel.Children.Clear();
-            List<PTask> taskList = Db.GetBacklog(CurrentProject.ProjectId);
-            taskList.ForEach(t =>
-            {
-                TextBlock taskBlock = new TextBlock();
-                taskBlock.Text = t.TaskName;
-                taskBlock.Background = new SolidColorBrush(Colors.White);
-                taskBlock.FontSize = 28;
-                taskBlock.Padding = new Thickness(30, 20, 0, 25);
-                TaskButton taskButton = new TaskButton(t);
-                taskButton.Content = taskBlock;
-                taskButton.Margin = new Thickness(0, 0, 0, 30);
-                taskButton.Padding = new Thickness(0);
-                taskButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-                taskButton.VerticalContentAlignment = VerticalAlignment.Stretch;
-                taskButton.Click += new RoutedEventHandler(TaskButton_Click);
-                BacklogPanel.Children.Add(taskButton);
-            });
-        }
-
-        private void PrintLists()
-        {
-            ListPanel.Children.Clear();
-            List<TaskList> lists = Db.GetLists(CurrentProject.ProjectId);
-            lists.ForEach(l =>
-            {
-                TextBlock listName = new TextBlock();
-                listName.Text = l.ListName;
-                listName.FontSize = 28;
-                listName.FontWeight = FontWeights.Bold;
-                listName.Margin = new Thickness(15);
-
-                Border nameBorder = new Border();
-                nameBorder.BorderBrush = new SolidColorBrush(Colors.Gray);
-                nameBorder.BorderThickness = new Thickness(0, 0, 0, 1);
-                nameBorder.Child = listName;
-
-                StackPanel panelInScroll = new StackPanel();
-                panelInScroll.AllowDrop = true;
-                List<TaskButton> taskList = CreateListTasks(l);
-                taskList.ForEach(t =>
-                {
-                    panelInScroll.Children.Add(t);
-                });
-
-                ScrollViewer taskScroll = new ScrollViewer();
-                taskScroll.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                taskScroll.Content = panelInScroll;
-
-                StackPanel currentList = new StackPanel();
-                currentList.Width = 350;
-                currentList.Margin = new Thickness(30, 30, 0, 30);
-                currentList.Background = new SolidColorBrush(Colors.AliceBlue);
-                currentList.Children.Add(nameBorder);
-                currentList.Children.Add(taskScroll);
-                ListPanel.Children.Add(currentList);
-            });
-        }
-
-        private void PrintParticipants()
-        {
-            ParticipantsPanel.Children.Clear();
-            List<User> employees = Db.GetAllProjectMembers(CurrentProject.ProjectId);
-            employees.ForEach(e =>
-            {
-                TextBlock empNameBlock = new TextBlock
-                {
-                    Text = e.FirstName + " " + e.LastName,
-                    FontSize = 24,
-                    Foreground = new SolidColorBrush(Colors.Black)
-                };
-                UserButton deleteBtn = new UserButton(e)
-                {
-                    Content = "X",
-                    FontSize = 30,
-                    Width = 50,
-                };
-                StackPanel empPanel = new StackPanel
-                {
-                    Orientation = Orientation.Horizontal,
-                    Height = 50
-                };
-                empPanel.Children.Add(empNameBlock);
-                empPanel.Children.Add(deleteBtn);
-                deleteBtn.Click += new RoutedEventHandler(DropParticipantBtn_Click);
-                UserButton empBtn = new UserButton(e)
-                {
-                    Height = 50,
-                    Margin = new Thickness(0, 0, 0, 10),
-                    Background = new SolidColorBrush(Colors.White),
-                    BorderBrush = new SolidColorBrush(Colors.White),
-                    HorizontalContentAlignment = HorizontalAlignment.Left,
-                    Content = empPanel,
-                };
-                empBtn.Click += new RoutedEventHandler(EmpBtn_Click);
-                ParticipantsPanel.Children.Add(empBtn);
-            });
-        }
-
-        private void DropParticipantBtn_Click(object sender, RoutedEventArgs e)
-        {
-            UserButton emp = sender as UserButton;
-            Db.DropProjectParticipant(emp.UserId, CurrentProject.ProjectId);
-            PrintParticipants();
-        }
-
-        private void EmpBtn_Click(object sender, RoutedEventArgs e)
-        {
-            UserButton emp = sender as UserButton;
-            //SwitchContent(new EmployeePage(emp.UserId));
-        }
-
         private List<TaskButton> CreateListTasks(TaskList l)
         {
             List<TaskButton> taskButtons = new List<TaskButton>();
@@ -466,7 +385,120 @@ namespace APP2000V_DesktopApp_g11.Views
             return taskButtons;
         }
 
-        
+        // UPDATE/CREATE DB-ENTRIES
 
+        private void CreateTask()
+        {
+            PTask newTask = new PTask
+            {
+                TaskName = CreateTaskTb.Text,
+                TaskProjectId = CurrentProject.ProjectId,
+                TaskCreationDate = DateTime.Now
+            };
+
+            if (Pc.CreateTask(newTask) == 0)
+            {
+                CreateTaskBtn.Visibility = Visibility.Collapsed;
+                CreateTaskTb.Text = "Create new task...";
+                CreateTaskTb.Foreground = new SolidColorBrush(Colors.Gray);
+                PrintBacklog();
+            }
+        }
+
+        private void CreateList()
+        {
+            TaskList newTaskList = new TaskList
+            {
+                ListName = CreateListTb.Text,
+                ProjectId = CurrentProject.ProjectId
+            };
+
+            if (Pc.CreateTaskList(newTaskList) == 0)
+            {
+                CreateListBtn.Visibility = Visibility.Collapsed;
+                CreateListTb.Text = "Create new list...";
+                CreateListTb.Foreground = new SolidColorBrush(Colors.Gray);
+                PrintLists();
+            }
+        }
+
+        private void UpdateTask(PTask currentTask)
+        {
+            PTask taskUpdate = new PTask
+            {
+                TaskId = currentTask.TaskId,
+                TaskName = PopupTaskName.Text,
+                Description = TaskDescription.Text
+            };
+
+            if (TaskDeadlinePicker.SelectedDate != null)
+            {
+                taskUpdate.TaskDeadline = TaskDeadlinePicker.SelectedDate;
+            }
+
+            if (ChooseTaskList.SelectedValue != null)
+            {
+                TaskList chosenList = ChooseTaskList.SelectedValue as TaskList;
+                taskUpdate.TaskListId = chosenList.TaskListId;
+            }
+
+            int priority = ChoosePriorityList.SelectedIndex;
+            switch (priority)
+            {
+                case 0:
+                    taskUpdate.Priority = "low";
+                    break;
+                case 1:
+                    taskUpdate.Priority = "normal";
+                    break;
+                case 2:
+                    taskUpdate.Priority = "high";
+                    break;
+                default:
+                    break;
+            }
+
+            if (Pc.UpdateTask(taskUpdate) == 0)
+            {
+                TaskPopup.IsOpen = false;
+                PrintBacklog();
+                PrintLists();
+            }
+        }
+
+        private void CreateTaskAssignment(UserTaskButton emp)
+        {
+            if (Pc.AddTaskAssignment(emp.UserId, CurrentProject.ProjectId, emp.TaskId) == 0)
+            {
+                PrintTaskAssignment(emp.TaskId);
+                PrintTaskNotAssigned(emp.TaskId);
+            }
+        }
+
+        private void DeleteTaskAssignment(UserTaskButton emp)
+        {
+            if (Pc.RemoveTaskAssignment(emp.UserId, emp.TaskId) == 0)
+            {
+                PrintTaskAssignment(emp.TaskId);
+                PrintTaskNotAssigned(emp.TaskId);
+            }
+        }
+
+        private void AddProjectMember(UserButton emp)
+        {
+            if (Pc.AddProjectParticipant(emp.UserId, CurrentProject.ProjectId) == 0)
+            {
+                PrintAvaliableEmployees();
+                PrintParticipants();
+            }
+        }
+
+        private void DropProjectMember(UserButton emp)
+        {
+            if (Pc.DropProjectParticipant(emp.UserId, CurrentProject.ProjectId) == 0)
+            {
+                PrintParticipants();
+            }
+        }
     }
 }

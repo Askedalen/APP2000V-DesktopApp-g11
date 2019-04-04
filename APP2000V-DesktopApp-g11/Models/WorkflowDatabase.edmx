@@ -409,7 +409,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ProjectParticipantProjectFK">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="1" />
           <End Role="ProjectParticipant" Type="Self.ProjectParticipant" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -422,7 +422,7 @@
         </Association>
         <Association Name="ProjectUserFK">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -433,7 +433,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PTaskProjectFK">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="0..1" />
           <End Role="PTask" Type="Self.PTask" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -445,7 +445,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ReportProjectFK">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -457,7 +457,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TaskListFK">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="1" />
           <End Role="TaskList" Type="Self.TaskList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -495,7 +495,7 @@
         <EntityContainer Name="WorkflowContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AssignedTasks" EntityType="Self.AssignedTask" />
           <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeave" />
-          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Projects" EntityType="WorkflowModel.Project" />
           <EntitySet Name="ProjectParticipants" EntityType="Self.ProjectParticipant" />
           <EntitySet Name="PTasks" EntityType="Self.PTask" />
           <EntitySet Name="Reports" EntityType="Self.Report" />

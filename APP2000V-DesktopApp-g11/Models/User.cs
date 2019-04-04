@@ -11,7 +11,8 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,7 @@ namespace APP2000V_DesktopApp_g11.Models
             this.ProjectParticipants = new HashSet<ProjectParticipant>();
         }
     
+        [Key]
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

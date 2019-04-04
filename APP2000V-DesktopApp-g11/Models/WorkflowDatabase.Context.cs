@@ -22,7 +22,7 @@ namespace APP2000V_DesktopApp_g11.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            modelBuilder.Types().Configure(entity => entity.ToTable(entity.ClrType.Name.ToLower()));
         }
     
         public virtual DbSet<AssignedTask> AssignedTasks { get; set; }

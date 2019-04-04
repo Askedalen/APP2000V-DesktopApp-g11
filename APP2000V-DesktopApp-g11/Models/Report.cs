@@ -11,9 +11,11 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Report
     {
+        [Key]
         public int ReportId { get; set; }
         public Nullable<int> ProjectId { get; set; }
         public Nullable<System.DateTime> CompletionDate { get; set; }

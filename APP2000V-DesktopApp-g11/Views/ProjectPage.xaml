@@ -388,7 +388,9 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        
     </Grid>
+    
 
 
 </assets:AnimatedUserControl>

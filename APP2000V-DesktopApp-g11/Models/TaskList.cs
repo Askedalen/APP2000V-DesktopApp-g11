@@ -11,7 +11,9 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class TaskList
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +22,9 @@ namespace APP2000V_DesktopApp_g11.Models
             this.PTasks = new HashSet<PTask>();
         }
     
+        [Key, Column(Order = 0)]
         public int TaskListId { get; set; }
+        [Key, Column(Order = 1)]
         public int ProjectId { get; set; }
         public string ListName { get; set; }
     

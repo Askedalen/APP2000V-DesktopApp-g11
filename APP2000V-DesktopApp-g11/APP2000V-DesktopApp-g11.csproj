@@ -105,8 +105,10 @@
     <Compile Include="Assets\Buttons.cs" />
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\Log.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Models\AssignedTask.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
@@ -149,10 +151,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkflowDatabase.edmx</DependentUpon>
     </Compile>
-	<Compile Include="Views\CreateEmployee.xaml.cs">
+    <Compile Include="Views\CreateEmployee.xaml.cs">
       <DependentUpon>CreateEmployee.xaml</DependentUpon>
     </Compile>
-	<Compile Include="Views\CreateProject.xaml.cs">
+    <Compile Include="Views\CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dashboard.xaml.cs">

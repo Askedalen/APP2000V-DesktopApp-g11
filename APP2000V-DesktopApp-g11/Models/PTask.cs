@@ -11,7 +11,8 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PTask
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,6 +21,7 @@ namespace APP2000V_DesktopApp_g11.Models
             this.AssignedTasks = new HashSet<AssignedTask>();
         }
     
+        [Key]
         public int TaskId { get; set; }
         public string TaskName { get; set; }
         public string Description { get; set; }

@@ -1,4 +1,5 @@
 ﻿using APP2000V_DesktopApp_g11.Assets;
+using APP2000V_DesktopApp_g11.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -26,7 +28,8 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             InitializeComponent();
             ContentArea.Content = new Dashboard(this);
-         
+            Log.Gui = this;
+            Log.Error("Dette er en test!");
         }
         BlurEffect myEffect = new BlurEffect();
         private void NavBtn_Click(object sender, RoutedEventArgs e)
