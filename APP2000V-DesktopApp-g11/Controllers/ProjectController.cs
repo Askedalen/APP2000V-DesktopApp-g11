@@ -79,6 +79,26 @@ namespace APP2000V_DesktopApp_g11.Controllers
             }
         }
 
+        internal int CreateProject(Project projectUpdate)
+        {
+            if (projectUpdate.ProjectName == null || projectUpdate.ProjectName == "")
+            {
+                Log.Error("Please provide a name for the project");
+                return -1;
+            }
+
+            int result = Db.CreateProject(projectUpdate);
+            if (result != -1)
+            {
+                return result;
+            }
+            else
+            {
+                Log.Error("Unknown error!");
+                return -1;
+            }
+        }
+
         public int RemoveTaskAssignment(int userId, int taskId)
         {
             int result = Db.RemoveTaskAssignment(userId, taskId);

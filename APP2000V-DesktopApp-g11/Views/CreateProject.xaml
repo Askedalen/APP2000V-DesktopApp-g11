@@ -54,16 +54,16 @@
                 Content="Project _Start (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectStartInput}"
                 FontSize="28"/>
-            <TextBox
-                x:Name="ProjectStartInput"
+            <DatePicker
+                x:Name="ProjectStartPicker"
                 FontSize="28"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project D_eadline (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectDeadlineInput}"
                 FontSize="28"/>
-            <TextBox
-                x:Name="ProjectDeadlineInput"
+            <DatePicker
+                x:Name="ProjectDeadlinePicker"
                 FontSize="28"
                 Margin="0, 0, 0, 30"/>
             <Button
@@ -73,10 +73,25 @@
                 Padding="10"
                 Margin="0, 30, 0, 30"
                 Click="RegisterProjectBtn_Click" Height="69" >
+                
+            </Button>
+            <TextBlock
+                x:Name="ConfirmationBox"
+                FontSize="28"/>
+            <Button
+                x:Name="GoToProjectBtn"
+                Content="Go to project" 
+                Visibility="Collapsed"
+                Height="80"
+                FontSize="28"
+                Padding="10"
+                Margin="0, 30, 0, 30"
+                Click="GoToProjectBtn_Click">
                 <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
+                    <EventTrigger RoutedEvent="Button.GotFocus">
                         <BeginStoryboard>
-                            <Storyboard>
+                            <Storyboard
+                                x:Name="AnimationStoryboard">
                                 <DoubleAnimationUsingKeyFrames
                                 Storyboard.TargetName="MainTranslate"
                                 Storyboard.TargetProperty="Y"
@@ -121,24 +136,20 @@
                                 Storyboard.TargetName="RightGearRotate"
                                 Storyboard.TargetProperty="Angle"
                                 From="0"
-                                To="360"
-                                Duration="0:0:3"
-                                RepeatBehavior="Forever"/>
+                                To="1080"
+                                Duration="0:0:9"/>
                                 <DoubleAnimation
                                 Storyboard.TargetName="LeftGearRotate"
                                 Storyboard.TargetProperty="Angle"
-                                From="360"
+                                From="1080"
                                 To="0"
-                                Duration="0:0:3"
-                                RepeatBehavior="Forever"/>
+                                Duration="0:0:9"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
                 </Button.Triggers>
             </Button>
-            <TextBlock
-                x:Name="ConfirmationBox"
-                FontSize="28"/>
+            
 
         </StackPanel>
         <Canvas 

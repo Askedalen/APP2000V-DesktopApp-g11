@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,13 +14,14 @@ namespace APP2000V_DesktopApp_g11.Models
                 {
                     context.Projects.Add(project);
                     context.SaveChanges();
+                    int pid = project.ProjectId;
+                    return pid;
                 }
-                return 0;
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message);
-                return 1;
+                return -1;
             }
         }
 

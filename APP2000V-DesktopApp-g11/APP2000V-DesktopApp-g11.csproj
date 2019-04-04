@@ -151,9 +151,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkflowDatabase.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreateEmployee.xaml.cs">
-      <DependentUpon>CreateEmployee.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
