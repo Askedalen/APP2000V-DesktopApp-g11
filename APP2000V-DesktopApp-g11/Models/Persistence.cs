@@ -34,18 +34,18 @@ namespace APP2000V_DesktopApp_g11.Models
         }
 
        
-        public int CreateUser(Employee employee)
+        public int CreateUser(User user)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
                 try
                 {
-                    using (WMSDbContext context = new WMSDbContext(connection, false))
+                    using (WorkflowContext context = new WorkflowContext())
                     {
                         context.Database.Log = (string message) => { Console.WriteLine(message); };
 
-                        context.Employees.Add(employee);
+                        context.Users.Add(user);
                         context.SaveChanges();
                     }
                     return 0;

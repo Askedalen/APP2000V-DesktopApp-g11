@@ -1,7 +1,7 @@
-﻿using System;
-using APP2000V_DesktopApp_g11.Assets;
+﻿using APP2000V_DesktopApp_g11.Assets;
 using APP2000V_DesktopApp_g11.Models;
-using APP2000V_DesktopApp_g11.Models.Database;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,17 +15,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
 
 namespace APP2000V_DesktopApp_g11.Views
 {
     /// <summary>
-    /// Interaction logic for CreateEmployee.xaml
+    /// Interaction logic for CreateUser.xaml
     /// </summary>
-    public partial class CreateEmployee : AnimatedUserControl
+    public partial class CreateUser : AnimatedUserControl
     {
         Persistence Db = new Persistence();
-        public CreateEmployee(DesktopGUI gui) : base(gui)
+        public CreateUser(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
 
@@ -52,13 +51,13 @@ namespace APP2000V_DesktopApp_g11.Views
 
             // Uses Persistence object to insert the project into the database
             // Returns 0 if operation succeeds
-            int result = Db.CreateUser(new Employee
+            int result = Db.CreateUser(new User
             {
-                Username = EmployeeUsernameInput.Text,
-                FirstName = EmployeeFNameInput.Text,
-                LastName = EmployeeLNameInput.Text,
-                PhoneNumber = EmployeePhoneInput.Text,
-                Email = EmployeeEmailInput.Text,
+                Username = UserUsernameInput.Text,
+                FirstName = UserFNameInput.Text,
+                LastName = UserLNameInput.Text,
+                PhoneNumber = UserPhoneInput.Text,
+                Email = UserEmailInput.Text,
 
             });
 
