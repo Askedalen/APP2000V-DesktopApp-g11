@@ -58,7 +58,7 @@
                 >
                 <ComboBoxItem IsSelected="True" FontWeight="Bold">User</ComboBoxItem>
                 <ComboBoxItem   FontWeight="Bold">Project Manager</ComboBoxItem>
-                
+
             </ComboBox>
             <Label
                 Content="First Name"

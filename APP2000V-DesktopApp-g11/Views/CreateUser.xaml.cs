@@ -19,16 +19,16 @@ using MySql.Data.MySqlClient;
 namespace APP2000V_DesktopApp_g11.Views
 {
     /// <summary>
-    /// Interaction logic for CreateEmployee.xaml
+    /// Interaction logic for CreateUser.xaml
     /// </summary>
-    public partial class CreateEmployee : AnimatedUserControl
+    public partial class CreateUser : AnimatedUserControl
     {
         Persistence Db = new Persistence();
-        public CreateEmployee(DesktopGUI gui) : base(gui)
+        public CreateUser(DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
 
-           // string connectionString = "server=localhost;port=3306;database=app2000v;uid=root;";
+            // string connectionString = "server=localhost;port=3306;database=app2000v;uid=root;";
 
             //MySqlConnection connection = new MySqlConnection(connectionString);
 
@@ -53,11 +53,11 @@ namespace APP2000V_DesktopApp_g11.Views
             // Returns 0 if operation succeeds
             int result = Db.CreateUser(new User
             {
-                Username = EmployeeUsernameInput.Text,
-                FirstName = EmployeeFNameInput.Text,
-                LastName = EmployeeLNameInput.Text,
-                PhoneNumber = EmployeePhoneInput.Text,
-                Email = EmployeeEmailInput.Text,
+                Username = UserUsernameInput.Text,
+                FirstName = UserFNameInput.Text,
+                LastName = UserLNameInput.Text,
+                PhoneNumber = UserPhoneInput.Text,
+                Email = UserEmailInput.Text,
 
             });
 
