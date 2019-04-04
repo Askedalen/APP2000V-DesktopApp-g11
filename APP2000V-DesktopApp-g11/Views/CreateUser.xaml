@@ -1,5 +1,5 @@
 ﻿<assets:AnimatedUserControl
-             x:Class="APP2000V_DesktopApp_g11.Views.CreateEmployee"
+             x:Class="APP2000V_DesktopApp_g11.Views.CreateUser"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -43,10 +43,10 @@
             >
             <Label
                 Content="Username"
-                Target="{Binding ElementName=EmployeeUsernameInput}"
+                Target="{Binding ElementName=UserUsernameInput}"
                 FontSize="28" Margin="0,0,-24,0"/>
             <TextBox
-                x:Name="EmployeeUsernameInput"
+                x:Name="UserUsernameInput"
                 FontSize="28"
                 Margin="0, 0, 0, 0"/>
             <Label
@@ -56,48 +56,48 @@
                 Margin="0, 0, 0, 0"/>
             <ComboBox    Margin="0,0,0,0"         
                 >
-                <ComboBoxItem IsSelected="True" FontWeight="Bold">Employee</ComboBoxItem>
+                <ComboBoxItem IsSelected="True" FontWeight="Bold">User</ComboBoxItem>
                 <ComboBoxItem   FontWeight="Bold">Project Manager</ComboBoxItem>
-                
+
             </ComboBox>
             <Label
                 Content="First Name"
-                Target="{Binding ElementName=EmployeeFNameInput}"
+                Target="{Binding ElementName=UserFNameInput}"
                 FontSize="28" Margin="0,0,0,0"/>
             <TextBox
-                x:Name="EmployeeFNameInput"
+                x:Name="UserFNameInput"
                 FontSize="28"
                 Margin="0, 0, 0, 0"/>
             <Label
                 Content="Lastname"
-                Target="{Binding ElementName=EmployeeLNameInput}"
+                Target="{Binding ElementName=UserLNameInput}"
                 FontSize="28"/>
             <TextBox
-                x:Name="EmployeeLNameInput"
+                x:Name="UserLNameInput"
                 FontSize="28"
                 Margin="0, 0, 0, 0"/>
             <Label
                 Content="Email"
-                Target="{Binding ElementName=EmployeeEmailInput}"
+                Target="{Binding ElementName=UserEmailInput}"
                 FontSize="28"/>
             <TextBox
-                x:Name="EmployeeEmailInput"
+                x:Name="UserEmailInput"
                 FontSize="28"
                 Margin="0, 0, 0, 0"/>
             <Label
                 Content="Phone"
-                Target="{Binding ElementName=EmployeePhoneInput}"
+                Target="{Binding ElementName=UserPhoneInput}"
                 FontSize="28"/>
             <TextBox
-                x:Name="EmployeePhoneInput"
+                x:Name="UserPhoneInput"
                 FontSize="28"
                 Margin="0, 0, 0, 0"/>
             <Label
                 Content="About"
-                Target="{Binding ElementName=EmployeeAboutInput}"
+                Target="{Binding ElementName=UserAboutInput}"
                 FontSize="28"/>
             <TextBox
-                x:Name="EmployeeAboutInput"
+                x:Name="UserAboutInput"
                 FontSize="28"
                 Margin="0, 0, 0, 30"/>
 
@@ -130,6 +130,6 @@
                 </InlineUIContainer></TextBlock>
 
         </StackPanel>
-        <DataGrid x:Name="EmployeeDataGrid" HorizontalAlignment="Left" Height="602" Margin="494,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1094" Background="#FFE0E0E0"/>
+        <DataGrid x:Name="UserDataGrid" HorizontalAlignment="Left" Height="602" Margin="494,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1094" Background="#FFE0E0E0"/>
     </Grid>
 </assets:AnimatedUserControl>
