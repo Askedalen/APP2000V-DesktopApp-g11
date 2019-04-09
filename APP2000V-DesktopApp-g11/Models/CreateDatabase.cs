@@ -12,8 +12,8 @@ namespace APP2000V_DesktopApp_g11.Models
         {
             using (WorkflowContext context = new WorkflowContext())
             {
-                context.Database.Delete();
-                context.Database.Create();
+                //context.Database.Delete();
+                //context.Database.Create();
 
                 using (DbContextTransaction transaction = context.Database.BeginTransaction())
                 {

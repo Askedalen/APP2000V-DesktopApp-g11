@@ -11,20 +11,19 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Project()
         {
+            this.Events = new HashSet<Event>();
             this.ProjectParticipants = new HashSet<ProjectParticipant>();
             this.PTasks = new HashSet<PTask>();
             this.Reports = new HashSet<Report>();
             this.TaskLists = new HashSet<TaskList>();
         }
-
-        [Key]
+    
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
         public string ProjectDescription { get; set; }
@@ -34,6 +33,8 @@ namespace APP2000V_DesktopApp_g11.Models
         public Nullable<int> ProjectManager { get; set; }
         public Nullable<bool> MarkedAsFinished { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Event> Events { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectParticipant> ProjectParticipants { get; set; }
         public virtual User User { get; set; }

@@ -117,6 +117,12 @@
     <Compile Include="Models\EmployeeLeave.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Persistence.cs" />
     <Compile Include="Models\Project.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
@@ -163,6 +169,9 @@
     <Compile Include="Views\DesktopGUI.xaml.cs">
       <DependentUpon>DesktopGUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProjectSettings.xaml.cs">
+      <DependentUpon>ProjectSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
@@ -183,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

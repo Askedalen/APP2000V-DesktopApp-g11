@@ -22,11 +22,13 @@ namespace APP2000V_DesktopApp_g11.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Types().Configure(entity => entity.ToTable(entity.ClrType.Name.ToLower()));
+            throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<AssignedTask> AssignedTasks { get; set; }
         public virtual DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectParticipant> ProjectParticipants { get; set; }
         public virtual DbSet<PTask> Tasks { get; set; }

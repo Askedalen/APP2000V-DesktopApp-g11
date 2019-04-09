@@ -12,13 +12,14 @@ namespace APP2000V_DesktopApp_g11.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Report
+    public partial class Notification
     {
-        public int ReportId { get; set; }
-        public Nullable<int> ProjectId { get; set; }
-        public Nullable<System.DateTime> CompletionDate { get; set; }
-        public string Comment { get; set; }
+        public int NId { get; set; }
+        public int EventId { get; set; }
+        public Nullable<bool> Viewed { get; set; }
+        public Nullable<bool> Email { get; set; }
+        public Nullable<bool> InApp { get; set; }
     
-        public virtual Project Project { get; set; }
+        public virtual Event Event { get; set; }
     }
 }

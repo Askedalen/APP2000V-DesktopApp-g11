@@ -12,20 +12,28 @@ namespace APP2000V_DesktopApp_g11.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskList
+    public partial class Event
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TaskList()
+        public Event()
         {
-            this.PTasks = new HashSet<PTask>();
+            this.Notifications = new HashSet<Notification>();
         }
     
-        public int TaskListId { get; set; }
+        public int EventId { get; set; }
+        public Nullable<System.DateTime> EventDate { get; set; }
         public int ProjectId { get; set; }
-        public string ListName { get; set; }
+        public int CreatorId { get; set; }
+        public string Type { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> TaskId { get; set; }
+        public Nullable<int> TaskListId { get; set; }
     
         public virtual Project Project { get; set; }
+        public virtual PTask PTask { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PTask> PTasks { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
     }
 }

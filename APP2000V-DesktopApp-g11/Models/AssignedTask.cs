@@ -11,17 +11,14 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class AssignedTask
     {
-        [Key]
         public int AssignedTaskId { get; set; }
         public int ProjectId { get; set; }
         public int UserId { get; set; }
         public int TaskId { get; set; }
     
-        public virtual ProjectParticipant ProjectParticipant { get; set; }
         public virtual PTask PTask { get; set; }
     }
 }

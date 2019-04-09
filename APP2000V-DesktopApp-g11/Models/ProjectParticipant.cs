@@ -11,24 +11,13 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class ProjectParticipant
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProjectParticipant()
-        {
-            this.AssignedTasks = new HashSet<AssignedTask>();
-        }
-
-        [Key, Column(Order = 0)]
         public int ProjectId { get; set; }
-        [Key, Column(Order = 1)]
         public int UserId { get; set; }
+        public Nullable<bool> test { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AssignedTask> AssignedTasks { get; set; }
         public virtual Project Project { get; set; }
         public virtual User User { get; set; }
     }

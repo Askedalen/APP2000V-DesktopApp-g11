@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace APP2000V_DesktopApp_g11.Views
@@ -121,6 +122,22 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             UserButton emp = sender as UserButton;
             //SwitchContent(new EmployeePage(emp.UserId));
+        }
+
+        private void ProjectSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchContent(new ProjectSettings());
+
+        }
+
+        private void ToggleBacklogColBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateColWidth(sender as Button);
+        }
+
+        private void ToggleEmployeeColBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateColWidth(sender as Button);
         }
 
         // PRINT ELEMENTS
@@ -500,5 +517,56 @@ namespace APP2000V_DesktopApp_g11.Views
                 PrintParticipants();
             }
         }
+
+        // COLUMN ANIMATION
+
+        private void AnimateColWidth(Button button)
+        {
+            if (button.Equals(ToggleBacklogColBtn))
+            {
+                Storyboard toggleBacklogStory = new Storyboard();
+                DoubleAnimation toggleBacklogAnim = new DoubleAnimation();
+                toggleBacklogAnim.EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut };
+                toggleBacklogAnim.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+                toggleBacklogStory.Children.Add(toggleBacklogAnim);
+                if (BacklogCol.MaxWidth == 400)
+                {
+                    toggleBacklogAnim.From = 400;
+                    toggleBacklogAnim.To = 0;
+                }
+                else
+                {
+                    toggleBacklogAnim.From = 0;
+                    toggleBacklogAnim.To = 400;
+                }
+                Storyboard.SetTarget(toggleBacklogAnim, BacklogCol);
+                Storyboard.SetTargetProperty(toggleBacklogAnim, new PropertyPath("(ColumnDefinition.MaxWidth)"));
+
+                toggleBacklogStory.Begin();
+            }
+            else if (button.Equals(ToggleEmployeeColBtn))
+            {
+                Storyboard toggleEmpStory = new Storyboard();
+                DoubleAnimation toggleEmpAnim = new DoubleAnimation();
+                toggleEmpAnim.EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut };
+                toggleEmpAnim.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+                toggleEmpStory.Children.Add(toggleEmpAnim);
+                if (EmployeesCol.MaxWidth == 400)
+                {
+                    toggleEmpAnim.From = 400;
+                    toggleEmpAnim.To = 0;
+                }
+                else
+                {
+                    toggleEmpAnim.From = 0;
+                    toggleEmpAnim.To = 400;
+                }
+                Storyboard.SetTarget(toggleEmpAnim, EmployeesCol);
+                Storyboard.SetTargetProperty(toggleEmpAnim, new PropertyPath("(ColumnDefinition.MaxWidth)"));
+
+                toggleEmpStory.Begin();
+            }
+        }
+
     }
 }

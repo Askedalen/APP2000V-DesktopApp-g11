@@ -11,17 +11,16 @@ namespace APP2000V_DesktopApp_g11.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PTask
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PTask()
         {
             this.AssignedTasks = new HashSet<AssignedTask>();
+            this.Events = new HashSet<Event>();
         }
     
-        [Key]
         public int TaskId { get; set; }
         public string TaskName { get; set; }
         public string Description { get; set; }
@@ -34,6 +33,8 @@ namespace APP2000V_DesktopApp_g11.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssignedTask> AssignedTasks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Event> Events { get; set; }
         public virtual Project Project { get; set; }
         public virtual TaskList TaskList { get; set; }
     }

@@ -23,6 +23,29 @@
           <Property Name="FromDate" Type="date" />
           <Property Name="ToDate" Type="date" />
         </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="TaskListId" Type="int" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Viewed" Type="bool" />
+          <Property Name="Email" Type="bool" />
+          <Property Name="InApp" Type="bool" />
+        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="ProjectId" />
@@ -43,6 +66,7 @@
           </Key>
           <Property Name="ProjectId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="test" Type="bool" />
         </EntityType>
         <EntityType Name="PTask">
           <Key>
@@ -89,20 +113,6 @@
           <Property Name="Role" Type="int" />
           <Property Name="About" Type="text" />
         </EntityType>
-        <Association Name="assignedtask_ibfk_1">
-          <End Role="ProjectParticipant" Type="Self.ProjectParticipant" Multiplicity="1" />
-          <End Role="AssignedTask" Type="Self.AssignedTask" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProjectParticipant">
-              <PropertyRef Name="ProjectId" />
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="AssignedTask">
-              <PropertyRef Name="ProjectId" />
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AssignedTaskPTaskFK">
           <End Role="PTask" Type="Self.PTask" Multiplicity="1" />
           <End Role="AssignedTask" Type="Self.AssignedTask" Multiplicity="*" />
@@ -124,6 +134,66 @@
             </Principal>
             <Dependent Role="EmployeeLeave">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventProjectFK">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventPTaskFK">
+          <End Role="PTask" Type="Self.PTask" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PTask">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventUserFK">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventUserIIFK">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NotificationEventFK">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="EventId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -214,16 +284,14 @@
         <EntityContainer Name="WorkflowModelStoreContainer">
           <EntitySet Name="AssignedTask" EntityType="Self.AssignedTask" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="EmployeeLeave" EntityType="Self.EmployeeLeave" Schema="app2000v" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="app2000v" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="ProjectParticipant" EntityType="Self.ProjectParticipant" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="PTask" EntityType="Self.PTask" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="TaskList" EntityType="Self.TaskList" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="app2000v" store:Type="Tables" />
-          <AssociationSet Name="assignedtask_ibfk_1" Association="Self.assignedtask_ibfk_1">
-            <End Role="ProjectParticipant" EntitySet="ProjectParticipant" />
-            <End Role="AssignedTask" EntitySet="AssignedTask" />
-          </AssociationSet>
           <AssociationSet Name="AssignedTaskPTaskFK" Association="Self.AssignedTaskPTaskFK">
             <End Role="PTask" EntitySet="PTask" />
             <End Role="AssignedTask" EntitySet="AssignedTask" />
@@ -231,6 +299,26 @@
           <AssociationSet Name="EmployeeLeaveUserFK" Association="Self.EmployeeLeaveUserFK">
             <End Role="User" EntitySet="User" />
             <End Role="EmployeeLeave" EntitySet="EmployeeLeave" />
+          </AssociationSet>
+          <AssociationSet Name="EventProjectFK" Association="Self.EventProjectFK">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="EventPTaskFK" Association="Self.EventPTaskFK">
+            <End Role="PTask" EntitySet="PTask" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="EventUserFK" Association="Self.EventUserFK">
+            <End Role="User" EntitySet="User" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="EventUserIIFK" Association="Self.EventUserIIFK">
+            <End Role="User" EntitySet="User" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="NotificationEventFK" Association="Self.NotificationEventFK">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
           <AssociationSet Name="ProjectParticipantProjectFK" Association="Self.ProjectParticipantProjectFK">
             <End Role="Project" EntitySet="Project" />
@@ -274,7 +362,6 @@
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="TaskId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ProjectParticipant" Relationship="Self.assignedtask_ibfk_1" FromRole="AssignedTask" ToRole="ProjectParticipant" />
           <NavigationProperty Name="PTask" Relationship="Self.AssignedTaskPTaskFK" FromRole="AssignedTask" ToRole="PTask" />
         </EntityType>
         <EntityType Name="EmployeeLeave">
@@ -286,6 +373,35 @@
           <Property Name="FromDate" Type="DateTime" />
           <Property Name="ToDate" Type="DateTime" />
           <NavigationProperty Name="User" Relationship="Self.EmployeeLeaveUserFK" FromRole="EmployeeLeave" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventDate" Type="DateTime" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="TaskListId" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="Self.EventProjectFK" FromRole="Event" ToRole="Project" />
+          <NavigationProperty Name="PTask" Relationship="Self.EventPTaskFK" FromRole="Event" ToRole="PTask" />
+          <NavigationProperty Name="User" Relationship="Self.EventUserFK" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.EventUserIIFK" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="Notifications" Relationship="Self.NotificationEventFK" FromRole="Event" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="Viewed" Type="Boolean" />
+          <Property Name="Email" Type="Boolean" />
+          <Property Name="InApp" Type="Boolean" />
+          <NavigationProperty Name="Event" Relationship="Self.NotificationEventFK" FromRole="Notification" ToRole="Event" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -299,6 +415,7 @@
           <Property Name="CompletionDate" Type="DateTime" />
           <Property Name="ProjectManager" Type="Int32" />
           <Property Name="MarkedAsFinished" Type="Boolean" />
+          <NavigationProperty Name="Events" Relationship="Self.EventProjectFK" FromRole="Project" ToRole="Event" />
           <NavigationProperty Name="ProjectParticipants" Relationship="Self.ProjectParticipantProjectFK" FromRole="Project" ToRole="ProjectParticipant" />
           <NavigationProperty Name="User" Relationship="Self.ProjectUserFK" FromRole="Project" ToRole="User" />
           <NavigationProperty Name="PTasks" Relationship="Self.PTaskProjectFK" FromRole="Project" ToRole="PTask" />
@@ -312,7 +429,7 @@
           </Key>
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AssignedTasks" Relationship="Self.assignedtask_ibfk_1" FromRole="ProjectParticipant" ToRole="AssignedTask" />
+          <Property Name="test" Type="Boolean" />
           <NavigationProperty Name="Project" Relationship="Self.ProjectParticipantProjectFK" FromRole="ProjectParticipant" ToRole="Project" />
           <NavigationProperty Name="User" Relationship="Self.ProjectParticipantUserFK" FromRole="ProjectParticipant" ToRole="User" />
         </EntityType>
@@ -330,6 +447,7 @@
           <Property Name="TaskProjectId" Type="Int32" />
           <Property Name="TaskListId" Type="Int32" />
           <NavigationProperty Name="AssignedTasks" Relationship="Self.AssignedTaskPTaskFK" FromRole="PTask" ToRole="AssignedTask" />
+          <NavigationProperty Name="Events" Relationship="Self.EventPTaskFK" FromRole="PTask" ToRole="Event" />
           <NavigationProperty Name="Project" Relationship="Self.PTaskProjectFK" FromRole="PTask" ToRole="Project" />
           <NavigationProperty Name="TaskList" Relationship="Self.PTaskTaskListFK" FromRole="PTask" ToRole="TaskList" />
         </EntityType>
@@ -367,23 +485,11 @@
           <Property Name="Role" Type="Int32" />
           <Property Name="About" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EmployeeLeaves" Relationship="Self.EmployeeLeaveUserFK" FromRole="User" ToRole="EmployeeLeave" />
+          <NavigationProperty Name="Events" Relationship="Self.EventUserFK" FromRole="User" ToRole="Event" />
+          <NavigationProperty Name="Events1" Relationship="Self.EventUserIIFK" FromRole="User" ToRole="Event" />
           <NavigationProperty Name="Projects" Relationship="Self.ProjectUserFK" FromRole="User" ToRole="Project" />
           <NavigationProperty Name="ProjectParticipants" Relationship="Self.ProjectParticipantUserFK" FromRole="User" ToRole="ProjectParticipant" />
         </EntityType>
-        <Association Name="assignedtask_ibfk_1">
-          <End Role="ProjectParticipant" Type="Self.ProjectParticipant" Multiplicity="1" />
-          <End Role="AssignedTask" Type="Self.AssignedTask" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProjectParticipant">
-              <PropertyRef Name="ProjectId" />
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="AssignedTask">
-              <PropertyRef Name="ProjectId" />
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AssignedTaskPTaskFK">
           <End Role="PTask" Type="Self.PTask" Multiplicity="1" />
           <End Role="AssignedTask" Type="Self.AssignedTask" Multiplicity="*" />
@@ -408,8 +514,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="EventProjectFK">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventPTaskFK">
+          <End Role="PTask" Type="Self.PTask" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PTask">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventUserFK">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventUserIIFK">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NotificationEventFK">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ProjectParticipantProjectFK">
-          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="ProjectParticipant" Type="Self.ProjectParticipant" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -422,7 +588,7 @@
         </Association>
         <Association Name="ProjectUserFK">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="*" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -433,7 +599,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PTaskProjectFK">
-          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="PTask" Type="Self.PTask" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -445,7 +611,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ReportProjectFK">
-          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -457,7 +623,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TaskListFK">
-          <End Role="Project" Type="WorkflowModel.Project" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="TaskList" Type="Self.TaskList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -495,16 +661,14 @@
         <EntityContainer Name="WorkflowContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AssignedTasks" EntityType="Self.AssignedTask" />
           <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeave" />
-          <EntitySet Name="Projects" EntityType="WorkflowModel.Project" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="ProjectParticipants" EntityType="Self.ProjectParticipant" />
           <EntitySet Name="PTasks" EntityType="Self.PTask" />
           <EntitySet Name="Reports" EntityType="Self.Report" />
           <EntitySet Name="TaskLists" EntityType="Self.TaskList" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="assignedtask_ibfk_1" Association="Self.assignedtask_ibfk_1">
-            <End Role="ProjectParticipant" EntitySet="ProjectParticipants" />
-            <End Role="AssignedTask" EntitySet="AssignedTasks" />
-          </AssociationSet>
           <AssociationSet Name="AssignedTaskPTaskFK" Association="Self.AssignedTaskPTaskFK">
             <End Role="PTask" EntitySet="PTasks" />
             <End Role="AssignedTask" EntitySet="AssignedTasks" />
@@ -512,6 +676,26 @@
           <AssociationSet Name="EmployeeLeaveUserFK" Association="Self.EmployeeLeaveUserFK">
             <End Role="User" EntitySet="Users" />
             <End Role="EmployeeLeave" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="EventProjectFK" Association="Self.EventProjectFK">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="EventPTaskFK" Association="Self.EventPTaskFK">
+            <End Role="PTask" EntitySet="PTasks" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="EventUserFK" Association="Self.EventUserFK">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="EventUserIIFK" Association="Self.EventUserIIFK">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="NotificationEventFK" Association="Self.NotificationEventFK">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="ProjectParticipantProjectFK" Association="Self.ProjectParticipantProjectFK">
             <End Role="Project" EntitySet="Projects" />
@@ -568,6 +752,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="WorkflowModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="TaskListId" ColumnName="TaskListId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="WorkflowModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="NId" ColumnName="NId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Viewed" ColumnName="Viewed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="InApp" ColumnName="InApp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="WorkflowModel.Project">
               <MappingFragment StoreEntitySet="Project">
@@ -587,6 +796,7 @@
               <MappingFragment StoreEntitySet="ProjectParticipant">
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="test" ColumnName="test" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

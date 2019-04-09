@@ -10,9 +10,15 @@
              d:DesignHeight="1080" d:DesignWidth="1620">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition 
+                x:Name="BacklogCol"
+                MaxWidth="400"
+                Width="*" />
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition 
+                x:Name="EmployeesCol"
+                MaxWidth="400"
+                Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -20,7 +26,7 @@
         </Grid.RowDefinitions>
         <Border 
             Grid.Row="0"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             BorderThickness="0,0,0,1" 
             BorderBrush="Black"
             />
@@ -29,6 +35,16 @@
             Grid.ColumnSpan="2"
             FontSize="30"
             />
+        <Button 
+            x:Name="ProjectSettingsBtn"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Width="400"
+            HorizontalAlignment="Right"
+            Content="Project Settings"
+            FontSize="28"
+            Height="50"
+            Click="ProjectSettingsBtn_Click"/>
 
         <StackPanel 
             Grid.Column="0"
@@ -70,6 +86,40 @@
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>
+        <Button 
+            x:Name="ToggleBacklogColBtn"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Height="100" 
+            RenderTransformOrigin="0.5,0.5" 
+            Panel.ZIndex="99"
+            Click="ToggleBacklogColBtn_Click"
+            >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="-100"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button 
+            x:Name="ToggleEmployeeColBtn"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Height="100" 
+            RenderTransformOrigin="0.5,0.5" 
+            Panel.ZIndex="99"
+            Click="ToggleEmployeeColBtn_Click"
+            >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="-100"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
         <StackPanel
             Grid.Column="2"
             Grid.Row="1"
@@ -110,7 +160,7 @@
                 BorderBrush="Black" 
                 BorderThickness="1, 1, 1, 1" 
                 RenderTransformOrigin="0.5,0.5">
-                
+
                 <Grid 
                     x:Name="TaskBindingGrid"
                     Background="LightBlue">
@@ -341,7 +391,7 @@
                         Grid.Row="1">
                         <WrapPanel
                             x:Name="EmployeePopupList">
-                            
+
                         </WrapPanel>
                     </ScrollViewer>
                 </Grid>
@@ -388,9 +438,9 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        
+
     </Grid>
-    
+
 
 
 </assets:AnimatedUserControl>
