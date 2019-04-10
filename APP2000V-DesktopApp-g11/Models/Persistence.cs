@@ -45,6 +45,22 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal List<User> GetAllEmployees()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    return context.Users.Where(u => u.Role != 0).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
         internal int GetLastListNumber(int pid)
         {
             using (WorkflowContext context = new WorkflowContext())

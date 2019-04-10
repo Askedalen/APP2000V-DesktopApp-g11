@@ -39,19 +39,25 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             StackPanel projectPanel = new StackPanel();
 
-            TextBlock headline = new TextBlock();
-            headline.Text = obj.ProjectName;
-            headline.Style = AppWindow.FindResource("ProjectHeadline") as Style;
+            TextBlock headline = new TextBlock
+            {
+                Text = obj.ProjectName,
+                Style = AppWindow.FindResource("ProjectHeadline") as Style
+            };
             projectPanel.Children.Add(headline);
 
-            TextBlock participantCount = new TextBlock();
-            participantCount.Text = "5" + " participants"; // Midlertidig antall deltakere
-            participantCount.Style = AppWindow.FindResource("ProjectParticipantsCount") as Style;
+            TextBlock participantCount = new TextBlock
+            {
+                Text = "5" + " participants", // Midlertidig antall deltakere
+                Style = AppWindow.FindResource("ProjectParticipantsCount") as Style
+            };
             projectPanel.Children.Add(participantCount);
 
-            TextBlock description = new TextBlock();
-            description.Text = obj.ProjectDescription;
-            description.Style = AppWindow.FindResource("ProjectShortDescription") as Style;
+            TextBlock description = new TextBlock
+            {
+                Text = obj.ProjectDescription,
+                Style = AppWindow.FindResource("ProjectShortDescription") as Style
+            };
             projectPanel.Children.Add(description);
 
             StackPanel tasksPanel = new StackPanel();
@@ -65,16 +71,20 @@ namespace APP2000V_DesktopApp_g11.Views
                 tasksPanel.Children.Add(taskInScroll);
             });
 
-            ScrollViewer tasksScroll = new ScrollViewer();
-            tasksScroll.Content = tasksPanel;
-            tasksScroll.Style = AppWindow.FindResource("TasksScrollViewer") as Style;
+            ScrollViewer tasksScroll = new ScrollViewer
+            {
+                Content = tasksPanel,
+                Style = AppWindow.FindResource("TasksScrollViewer") as Style
+            };
 
             projectPanel.Children.Add(tasksScroll);
             projectPanel.Style = AppWindow.FindResource("ProjectPanel") as Style;
 
-            ProjectButton projectButton = new ProjectButton(obj);
-            projectButton.Style = AppWindow.FindResource("ProjectButton") as Style;
-            projectButton.Content = projectPanel;
+            ProjectButton projectButton = new ProjectButton(obj)
+            {
+                Style = AppWindow.FindResource("ProjectButton") as Style,
+                Content = projectPanel
+            };
             projectButton.Click += new RoutedEventHandler(ProjectButton_Click);
             ProjectsDisplay.Children.Add(projectButton);
         }

@@ -41,12 +41,21 @@
             Content="New User"
             FontSize="28"  Height="Auto" Margin="689,10,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7" Click="NewEmpBtn_Click"
             />
-        <StackPanel
+        <WrapPanel
             Grid.Row="1"
             x:Name="EmployeesDisplay"
             Orientation="Horizontal"
             Background="#FF7D8193">
-        </StackPanel>
+            <StackPanel
+                Background="White"
+                Width="300"
+                Height="300"
+                Margin="30, 30, 30, 0">
+                <TextBlock
+                    Text="Benjamin Kløw"
+                    FontSize="28" />
+            </StackPanel>
+        </WrapPanel>
     </Grid>
     </assets:AnimatedUserControl>
 
