@@ -43,4 +43,15 @@
         <Setter Property="Margin" Value="0, 0, 0, 30" />
         <Setter Property="Padding" Value="30, 20, 0, 25" />
     </Style>
+    <Style x:Key="NormalTaskText" TargetType="TextBlock">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Padding" Value="30, 20, 30, 25" />
+    </Style>
+    <Style x:Key="NormalTaskButton" TargetType="Button">
+        <Setter Property="Margin" Value="0, 0, 0, 30" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
 </ResourceDictionary>

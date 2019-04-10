@@ -19,10 +19,12 @@ namespace APP2000V_DesktopApp_g11.Views
         Persistence Db = new Persistence();
         ProjectController Pc = new ProjectController();
         Project CurrentProject;
+        DesktopGUI AppWindow;
 
         public ProjectPage(int projectID, DesktopGUI gui) : base(gui)
         {
             InitializeComponent();
+            AppWindow = gui;
             Console.WriteLine("Project: " + projectID);
             CurrentProject = Db.GetSingleProject(projectID);
             DisplayProjectName.Text = CurrentProject.ProjectName;
@@ -126,8 +128,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void ProjectSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectSettings());
-
+            SwitchContent(new ProjectSettings(CurrentProject, AppWindow));
         }
 
         private void ToggleBacklogColBtn_Click(object sender, RoutedEventArgs e)
@@ -147,17 +148,16 @@ namespace APP2000V_DesktopApp_g11.Views
             List<PTask> taskList = Db.GetBacklog(CurrentProject.ProjectId);
             taskList.ForEach(t =>
             {
-                TextBlock taskBlock = new TextBlock();
-                taskBlock.Text = t.TaskName;
-                taskBlock.Background = new SolidColorBrush(Colors.White);
-                taskBlock.FontSize = 28;
-                taskBlock.Padding = new Thickness(30, 20, 0, 25);
-                TaskButton taskButton = new TaskButton(t);
-                taskButton.Content = taskBlock;
-                taskButton.Margin = new Thickness(0, 0, 0, 30);
-                taskButton.Padding = new Thickness(0);
-                taskButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-                taskButton.VerticalContentAlignment = VerticalAlignment.Stretch;
+                TextBlock taskBlock = new TextBlock
+                {
+                    Text = t.TaskName,
+                    Style = AppWindow.FindResource("NormalTaskText") as Style
+                };
+                TaskButton taskButton = new TaskButton(t)
+                {
+                    Content = taskBlock,
+                    Style = AppWindow.FindResource("NormalTaskButton") as Style
+                };
                 taskButton.Click += new RoutedEventHandler(TaskButton_Click);
                 BacklogPanel.Children.Add(taskButton);
             });
@@ -187,7 +187,10 @@ namespace APP2000V_DesktopApp_g11.Views
                     Height = 50
                 };
                 empPanel.Children.Add(empNameBlock);
-                empPanel.Children.Add(deleteBtn);
+                if (e.UserId != CurrentProject.ProjectManager)
+                {
+                    empPanel.Children.Add(deleteBtn);
+                }
                 deleteBtn.Click += new RoutedEventHandler(DropParticipantBtn_Click);
                 UserButton empBtn = new UserButton(e)
                 {
@@ -384,18 +387,16 @@ namespace APP2000V_DesktopApp_g11.Views
             List<PTask> listTasks = Db.GetListTasks(l);
             listTasks.ForEach(t =>
             {
-                TextBlock taskBlock = new TextBlock();
-                taskBlock.Text = t.TaskName;
-                taskBlock.Background = new SolidColorBrush(Colors.White);
-                taskBlock.FontSize = 28;
-                taskBlock.Padding = new Thickness(30, 20, 0, 25);
-                TaskButton taskButton = new TaskButton(t);
-                taskButton.Content = taskBlock;
-                taskButton.TaskId = t.TaskId;
-                taskButton.Margin = new Thickness(10, 30, 10, 0);
-                taskButton.Padding = new Thickness(0);
-                taskButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-                taskButton.VerticalContentAlignment = VerticalAlignment.Stretch;
+                TextBlock taskBlock = new TextBlock
+                {
+                    Text = t.TaskName,
+                    Style = AppWindow.FindResource("NormalTaskText") as Style
+                };
+                TaskButton taskButton = new TaskButton(t)
+                {
+                    Content = taskBlock,
+                    Style = AppWindow.FindResource("NormalTaskButton") as Style
+                };
                 taskButton.Click += new RoutedEventHandler(TaskButton_Click);
                 taskButtons.Add(taskButton);
             });

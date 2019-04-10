@@ -108,6 +108,38 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal int UpdateProject(Project projectUpdate, int pid)
+        {
+            try
+            {
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    Project oldProject = context.Projects.Where(p => p.ProjectId == pid).FirstOrDefault();
+                    if (oldProject != null)
+                    {
+                        oldProject.ProjectName = projectUpdate.ProjectName;
+                        oldProject.ProjectDescription = projectUpdate.ProjectDescription;
+                        oldProject.ProjectStart = projectUpdate.ProjectStart;
+                        oldProject.ProjectDeadline = projectUpdate.ProjectDeadline;
+                        oldProject.ProjectManager = projectUpdate.ProjectManager;
+
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Project update failed: ");
+                Console.WriteLine(e.Message);
+                return 1;
+            }
+        }
+
         internal int CreateTaskList(TaskList list)
         {
             try
@@ -126,6 +158,22 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 Console.WriteLine(exc.Message);
                 return 1;
+            }
+        }
+
+        internal List<AssignedTask> GetMemberAssignments(int userId, int projectId)
+        {
+            try
+            {
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    return context.AssignedTasks.Where(at => at.UserId == userId && at.ProjectId == projectId).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
 

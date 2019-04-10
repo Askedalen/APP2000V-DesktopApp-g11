@@ -66,7 +66,6 @@
           </Key>
           <Property Name="ProjectId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="test" Type="bool" />
         </EntityType>
         <EntityType Name="PTask">
           <Key>
@@ -429,7 +428,6 @@
           </Key>
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="test" Type="Boolean" />
           <NavigationProperty Name="Project" Relationship="Self.ProjectParticipantProjectFK" FromRole="ProjectParticipant" ToRole="Project" />
           <NavigationProperty Name="User" Relationship="Self.ProjectParticipantUserFK" FromRole="ProjectParticipant" ToRole="User" />
         </EntityType>
@@ -796,7 +794,6 @@
               <MappingFragment StoreEntitySet="ProjectParticipant">
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="test" ColumnName="test" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

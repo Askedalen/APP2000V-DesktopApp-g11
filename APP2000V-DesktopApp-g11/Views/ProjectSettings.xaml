@@ -8,7 +8,109 @@
              xmlns:assets="clr-namespace:APP2000V_DesktopApp_g11.Assets"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1620">
-    <Grid Background="White">
-            
+    <Grid 
+        x:Name="ProjectSettingsGrid"
+        Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border 
+            Grid.Column="0"
+            Grid.Row="0"
+            BorderThickness="0,0,0,1" 
+            BorderBrush="Black"
+            />
+
+        <TextBlock
+            Text="Project Settings"
+            FontSize="30"/>
+
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Vertical"
+            Width="400"
+            HorizontalAlignment="Left"
+            Margin="30"
+            >
+            <Button 
+                x:Name="BackBtn"
+                Width="250"
+                Height="50"
+                Content="Back to project"
+                FontSize="28"
+                HorizontalAlignment="Left"
+                Margin="0, 0, 0, 30"
+                Click="BackBtn_Click"
+                />
+            <Label
+                Content="Project _Name"
+                Target="{Binding ElementName=ProjectNameInput}"
+                FontSize="28"/>
+            <TextBox
+                x:Name="ProjectNameInput"
+                Text="{Binding ProjectName}"
+                FontSize="28"
+                Margin="0, 0, 0, 30"/>
+            <Label
+                Content="Project _Description"
+                Target="{Binding ElementName=ProjectDescInput}"
+                FontSize="28"/>
+            <TextBox
+                x:Name="ProjectDescInput"
+                Text="{Binding ProjectDescription}"
+                FontSize="28"
+                Margin="0, 0, 0, 30"/>
+            <Label
+                Content="Project _Start (yyyy-mm-dd)"
+                Target="{Binding ElementName=ProjectStartInput}"
+                FontSize="28"/>
+            <DatePicker
+                x:Name="ProjectStartPicker"
+                SelectedDate="{Binding ProjectStart}"
+                FontSize="28"
+                Margin="0, 0, 0, 30"/>
+            <Label
+                Content="Project D_eadline (yyyy-mm-dd)"
+                Target="{Binding ElementName=ProjectDeadlineInput}"
+                FontSize="28"/>
+            <DatePicker
+                x:Name="ProjectDeadlinePicker"
+                SelectedDate="{Binding ProjectDeadline}"
+                FontSize="28"
+                Margin="0, 0, 0, 30"/>
+            <Label
+                Content="Project _Manager"
+                Target="{Binding ElementName=ChooseTaskList}"
+                FontSize="28"/>
+            <ComboBox
+                    x:Name="ChooseProjectManager"
+                    Width="400"
+                    FontSize="28"
+                    Background="White"
+                    HorizontalAlignment="Left">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding FirstName}"/>
+                            <Run Text="{Binding LastName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button
+                x:Name="RegisterProjectBtn"
+                Content="Register project" 
+                FontSize="28"
+                Padding="10"
+                Margin="0, 30, 0, 30"
+                Height="69"
+                Click="RegisterProjectBtn_Click"/>
+            <TextBlock
+                x:Name="ConfirmationBox"
+                FontSize="28"/>
+        </StackPanel>
     </Grid>
 </assets:AnimatedUserControl>

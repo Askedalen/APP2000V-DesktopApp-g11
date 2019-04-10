@@ -99,6 +99,25 @@ namespace APP2000V_DesktopApp_g11.Controllers
             }
         }
 
+        internal int UpdateProject(Project projectUpdate, int pid)
+        {
+            int result = Db.UpdateProject(projectUpdate, pid);
+            if (result == 0)
+            {
+                return 0;
+            }
+            else if (result == 1)
+            {
+                Log.Error("Project not found!");
+                return 1;
+            }
+            else
+            {
+                Log.Error("Unknown error!");
+                return 2;
+            }
+        }
+
         public int RemoveTaskAssignment(int userId, int taskId)
         {
             int result = Db.RemoveTaskAssignment(userId, taskId);
@@ -163,6 +182,12 @@ namespace APP2000V_DesktopApp_g11.Controllers
 
         internal int DropProjectParticipant(int userId, int projectId)
         {
+            List<AssignedTask> assignedTasks = Db.GetMemberAssignments(userId, projectId);
+            if (assignedTasks.Count > 0)
+            {
+                Log.Error("Please remove task assignments before removing project member!");
+                return 3;
+            }
             int result = Db.DropProjectParticipant(userId, projectId);
             if (result == 0)
             {
