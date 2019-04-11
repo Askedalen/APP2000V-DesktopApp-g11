@@ -54,7 +54,7 @@ namespace APP2000V_DesktopApp_g11.Views
             int result = Db.CreateUser(new User
             {
                 Username = UserUsernameInput.Text,
-                Password = UserPasswordInput.Text,
+                Password = UserPasswordInput.Password,
                 FirstName = UserFNameInput.Text,
                 LastName = UserLNameInput.Text,
                 PhoneNumber = UserPhoneInput.Text,

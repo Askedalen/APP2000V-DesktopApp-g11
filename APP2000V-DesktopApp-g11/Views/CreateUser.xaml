@@ -53,7 +53,7 @@
                 Content="Password"
                 Target="{Binding ElementName=UserPasswordInput}"
                 FontSize="28" Margin="0,0,-24,0"/>
-            <TextBox
+            <PasswordBox
                 x:Name="UserPasswordInput"
                 FontSize="28"
                 Margin="0, 0, 0, 0"/>
@@ -136,7 +136,6 @@
                         Margin="0, 30, 0, 30"
                         Click="DeleteUserBtn_Click" Height="40" Width="132" Background="#FF66A8F7" BorderBrush="#FF474747" />
                 </InlineUIContainer></TextBlock>
-
         </StackPanel>
         <DataGrid x:Name="UserDataGrid" HorizontalAlignment="Left" Height="602" Margin="494,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1094" Background="#FFE0E0E0"/>
     </Grid>
