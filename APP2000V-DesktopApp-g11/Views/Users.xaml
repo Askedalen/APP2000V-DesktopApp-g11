@@ -52,7 +52,7 @@
                 Height="300"
                 Margin="30, 30, 30, 0">
                 <TextBlock
-                    Text="Benjamin Kløw"
+                    Text="Placeholder"
                     FontSize="28" />
             </StackPanel>
         </WrapPanel>
