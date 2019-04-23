@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace APP2000V_DesktopApp_g11.Models
@@ -100,6 +101,40 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 Console.WriteLine(exc.Message);
                 return 1;
+            }
+        }
+
+        internal int AddNotification(Event e)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                using (DbContextTransaction transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Notification notification = new Notification
+                        {
+                            EventId = e.EventId,
+                            Viewed = false,
+                            Email = true,
+                            InApp = true,
+                            UserId = e.UserId
+                        };
+
+                        context.Events.Add(e);
+                        context.Notifications.Add(notification);
+
+                        context.SaveChanges();
+                        transaction.Commit();
+                        return 0;
+                    }
+                    catch (Exception exc)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine(exc.Message);
+                        return 1;
+                    }
+                }
             }
         }
 

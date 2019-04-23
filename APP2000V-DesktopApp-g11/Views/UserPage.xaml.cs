@@ -39,14 +39,14 @@ namespace APP2000V_DesktopApp_g11.Views
 
             double columnWidth = (finalSize.Width - WIDTH_COLUMN_SEPERATOR) / 2;
 
-            for (int i = 0; i < InternalChildren.Count; i++)
-            {
-                UIElement child = InternalChildren[i];
-                if (child.Visibility != Visibility.Collapsed)
-                {
-                    visibleItems.Add(child);
-                }
-            }
+            //for (int i = 0; i < InternalChildren.Count; i++)
+            //{
+            //    UIElement child = InternalChildren[i];
+            //    if (child.Visibility != Visibility.Collapsed)
+            //    {
+            //        visibleItems.Add(child);
+            //    }
+            //}
 
             for (int i = 0; i < visibleItems.Count; i++)
             {

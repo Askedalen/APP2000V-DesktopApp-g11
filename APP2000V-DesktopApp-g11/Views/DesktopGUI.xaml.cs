@@ -19,11 +19,13 @@ using System.Windows.Shapes;
 
 namespace APP2000V_DesktopApp_g11.Views
 {
-    /// <summary>
-    /// Interaction logic for DesktopGUI.xaml
-    /// </summary>
     public partial class DesktopGUI : Window
     {
+        AnimatedUserControl Dashboard;
+        AnimatedUserControl Projects;
+        AnimatedUserControl Employees;
+        //AnimatedUserControl Archive;
+
         public DesktopGUI()
         {
             InitializeComponent();
@@ -35,12 +37,52 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             Button btn = sender as Button;
             ClearBtnColor();
-            btn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF434547"));
+            btn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#41474c"));
             AnimatedUserControl currentContent = ContentArea.Content as AnimatedUserControl;
-            if (sender.Equals(DashboardBtn)) currentContent.SwitchContent(new Dashboard(this));
-            else if (sender.Equals(ProjectsBtn)) currentContent.SwitchContent(new Projects(this));
-            else if (sender.Equals(EmployeesBtn)) currentContent.SwitchContent(new Employees(this));
-            //else if (sender.Equals(ArchiveBtn)) ContentArea.Content = new Archive();
+            if (sender.Equals(DashboardBtn))
+            {
+                if (Dashboard is null)
+                {
+                    currentContent.SwitchContent(Dashboard = new Dashboard(this));
+                }
+                else
+                {
+                    currentContent.SwitchContent(Dashboard);
+                }
+            }
+            else if (sender.Equals(ProjectsBtn))
+            {
+                if (Dashboard is null)
+                {
+                    currentContent.SwitchContent(Projects = new Projects(this));
+                }
+                else
+                {
+                    currentContent.SwitchContent(Projects);
+                }
+            }
+            else if (sender.Equals(EmployeesBtn))
+            {
+                if (Dashboard is null)
+                {
+                    currentContent.SwitchContent(Employees = new Employees(this));
+                }
+                else
+                {
+                    currentContent.SwitchContent(Employees);
+                }
+            }
+            else if (sender.Equals(ArchiveBtn))
+            {
+                if (Dashboard is null)
+                {
+                    //currentContent.SwitchContent(Archive = new Archive(this));
+                }
+                else
+                {
+                    //currentContent.SwitchContent(Archive);
+                }
+            }
             myEffect.Radius = 10;
             Effect = myEffect;
             using (LoadingWindow lw = new LoadingWindow(Simulator))
@@ -55,7 +97,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void ClearBtnColor()
         {
-            SolidColorBrush color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF66A8F7"));
+            SolidColorBrush color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#68737c"));
             DashboardBtn.Background = color;
             ProjectsBtn.Background = color;
             EmployeesBtn.Background = color;
@@ -67,10 +109,6 @@ namespace APP2000V_DesktopApp_g11.Views
             for (int i = 0; i < 100; i++)
                 Thread.Sleep(5);
         }
-
-
     }
-
-
-    }
+}
 

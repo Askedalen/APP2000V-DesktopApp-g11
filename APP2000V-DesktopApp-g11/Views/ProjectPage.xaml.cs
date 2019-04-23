@@ -172,19 +172,15 @@ namespace APP2000V_DesktopApp_g11.Views
                 TextBlock empNameBlock = new TextBlock
                 {
                     Text = e.FirstName + " " + e.LastName,
-                    FontSize = 24,
-                    Foreground = new SolidColorBrush(Colors.Black)
+                    Style = AppWindow.FindResource("PmemberText") as Style
                 };
                 UserButton deleteBtn = new UserButton(e)
                 {
-                    Content = "X",
-                    FontSize = 30,
-                    Width = 50,
+                    Style = AppWindow.FindResource("PmemberDropBtn") as Style
                 };
                 StackPanel empPanel = new StackPanel
                 {
-                    Orientation = Orientation.Horizontal,
-                    Height = 50
+                    Style = AppWindow.FindResource("PmemberPanel") as Style
                 };
                 empPanel.Children.Add(empNameBlock);
                 if (e.UserId != CurrentProject.ProjectManager)
@@ -194,11 +190,7 @@ namespace APP2000V_DesktopApp_g11.Views
                 deleteBtn.Click += new RoutedEventHandler(DropParticipantBtn_Click);
                 UserButton empBtn = new UserButton(e)
                 {
-                    Height = 50,
-                    Margin = new Thickness(0, 0, 0, 10),
-                    Background = new SolidColorBrush(Colors.White),
-                    BorderBrush = new SolidColorBrush(Colors.White),
-                    HorizontalContentAlignment = HorizontalAlignment.Left,
+                    Style = AppWindow.FindResource("PmemberBtn") as Style,
                     Content = empPanel,
                 };
                 empBtn.Click += new RoutedEventHandler(EmpBtn_Click);
@@ -212,33 +204,35 @@ namespace APP2000V_DesktopApp_g11.Views
             List<TaskList> lists = Db.GetLists(CurrentProject.ProjectId);
             lists.ForEach(l =>
             {
-                TextBlock listName = new TextBlock();
-                listName.Text = l.ListName;
-                listName.FontSize = 28;
-                listName.FontWeight = FontWeights.Bold;
-                listName.Margin = new Thickness(15);
+                TextBlock listName = new TextBlock
+                {
+                    Text = l.ListName,
+                    Style = AppWindow.FindResource("ListNameText") as Style
+                };
 
-                Border nameBorder = new Border();
-                nameBorder.BorderBrush = new SolidColorBrush(Colors.Gray);
-                nameBorder.BorderThickness = new Thickness(0, 0, 0, 1);
-                nameBorder.Child = listName;
+                Border nameBorder = new Border
+                {
+                    Style = AppWindow.FindResource("ListNameBorder") as Style,
+                    Child = listName
+                };
 
                 StackPanel panelInScroll = new StackPanel();
-                panelInScroll.AllowDrop = true;
                 List<TaskButton> taskList = CreateListTasks(l);
                 taskList.ForEach(t =>
                 {
                     panelInScroll.Children.Add(t);
                 });
 
-                ScrollViewer taskScroll = new ScrollViewer();
-                taskScroll.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                taskScroll.Content = panelInScroll;
+                ScrollViewer taskScroll = new ScrollViewer
+                {
+                    Style = AppWindow.FindResource("ListTaskScrollbar") as Style,
+                    Content = panelInScroll
+                };
 
-                StackPanel currentList = new StackPanel();
-                currentList.Width = 350;
-                currentList.Margin = new Thickness(30, 30, 0, 30);
-                currentList.Background = new SolidColorBrush(Colors.AliceBlue);
+                StackPanel currentList = new StackPanel
+                {
+                    Style = AppWindow.FindResource("ListPanel") as Style
+                };
                 currentList.Children.Add(nameBorder);
                 currentList.Children.Add(taskScroll);
                 ListPanel.Children.Add(currentList);

@@ -4,24 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="871e514941c44ab9bd29ba1012a971c2" Name="Diagram1">
-        <EntityTypeShape EntityType="WorkflowModel.AssignedTask" Width="1.5" PointX="9.75" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.EmployeeLeave" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.Event" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.Notification" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.Project" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.ProjectParticipant" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.PTask" Width="1.5" PointX="7.5" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.Report" Width="1.5" PointX="5.25" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.TaskList" Width="1.5" PointX="5.25" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WorkflowModel.User" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+      <Diagram DiagramId="616de7e6de244297959e50cbd437facf" Name="Diagram1">
+        <EntityTypeShape EntityType="WorkflowModel.AssignedTask" Width="1.5" PointX="9.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.EmployeeLeave" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.Event" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.Notification" Width="1.5" PointX="9.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.Project" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.ProjectParticipant" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.PTask" Width="1.5" PointX="7.5" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.Report" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.TaskList" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkflowModel.User" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
         <AssociationConnector Association="WorkflowModel.AssignedTaskPTaskFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.EmployeeLeaveUserFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.EventProjectFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.EventPTaskFK" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkflowModel.EventTaskListFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.EventUserFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.EventUserIIFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.NotificationEventFK" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkflowModel.NotificationUserFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.ProjectParticipantProjectFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.ProjectUserFK" ManuallyRouted="false" />
         <AssociationConnector Association="WorkflowModel.PTaskProjectFK" ManuallyRouted="false" />

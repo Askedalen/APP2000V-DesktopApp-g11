@@ -30,6 +30,7 @@ namespace APP2000V_DesktopApp_g11.Models
         public Nullable<System.DateTime> CompletionDate { get; set; }
         public Nullable<int> TaskProjectId { get; set; }
         public Nullable<int> TaskListId { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssignedTask> AssignedTasks { get; set; }

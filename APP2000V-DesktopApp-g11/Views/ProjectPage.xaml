@@ -8,7 +8,7 @@
              xmlns:assets="clr-namespace:APP2000V_DesktopApp_g11.Assets"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1620">
-    <Grid Background="White">
+    <Grid Background="#eee">
         <Grid.ColumnDefinitions>
             <ColumnDefinition 
                 x:Name="BacklogCol"
@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition 
                 x:Name="EmployeesCol"
-                MaxWidth="400"
+                MaxWidth="0"
                 Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -33,7 +33,9 @@
         <TextBlock
             x:Name="DisplayProjectName"
             Grid.ColumnSpan="2"
-            FontSize="30"
+            FontSize="24"
+            FontWeight="Bold"
+            Margin="10, 7"
             />
         <Button 
             x:Name="ProjectSettingsBtn"
@@ -42,18 +44,19 @@
             Width="400"
             HorizontalAlignment="Right"
             Content="Project Settings"
-            FontSize="28"
+            FontSize="22"
             Height="50"
             Click="ProjectSettingsBtn_Click"/>
 
         <StackPanel 
             Grid.Column="0"
             Grid.Row="1"
-            Background="AliceBlue">
+            Background="#212529">
             <TextBlock
                 Text="Backlog"
-                FontSize="30"
-                Margin="15, 0, 0, 30"/>
+                FontSize="24"
+                Foreground="White"
+                Margin="15, 15, 0, 30"/>
             <ScrollViewer
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Margin="15, 0, 15, 0"
@@ -67,7 +70,7 @@
                             Text="Create new task..."
                             Foreground="Gray"
                             Background="White"
-                            FontSize="28"
+                            FontSize="20"
                             Padding="10, 10, 0, 15" 
                             GotFocus="CreateTaskTb_GotFocus"
                             />
@@ -76,7 +79,7 @@
                             Visibility="Collapsed"
                             Height="50" 
                             Content="Create Task"
-                            FontSize="28"
+                            FontSize="20"
                             Click="CreateTaskBtn_Click" />
                     </StackPanel>
                     <StackPanel
@@ -92,16 +95,18 @@
             Grid.Column="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Height="100" 
             RenderTransformOrigin="0.5,0.5" 
             Panel.ZIndex="99"
             Click="ToggleBacklogColBtn_Click"
             >
             <Button.RenderTransform>
                 <TransformGroup>
-                    <TranslateTransform Y="-100"/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform Y="-100" X="-25"/>
                 </TransformGroup>
             </Button.RenderTransform>
+            <TextBlock
+                Text="Backlog"/>
         </Button>
         <Button 
             x:Name="ToggleEmployeeColBtn"
@@ -109,25 +114,30 @@
             Grid.Column="1"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Height="100" 
+            HorizontalContentAlignment="Left"
             RenderTransformOrigin="0.5,0.5" 
             Panel.ZIndex="99"
-            Click="ToggleEmployeeColBtn_Click"
-            >
+            Click="ToggleEmployeeColBtn_Click">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <TranslateTransform Y="-100"/>
+                    <RotateTransform Angle="270"/>
+                    <TranslateTransform Y="-100" X="35"/>
                 </TransformGroup>
             </Button.RenderTransform>
+            <TextBlock
+                Text="Employees" 
+                >
+            </TextBlock>
         </Button>
         <StackPanel
             Grid.Column="2"
             Grid.Row="1"
-            Background="AliceBlue">
+            Background="#212529">
             <TextBlock
                 Text="Employees"
-                FontSize="30"
-                Margin="15, 0, 0, 30"/>
+                FontSize="22"
+                Foreground="White"
+                Margin="15, 15, 0, 30"/>
             <ScrollViewer
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Margin="15, 0, 15, 0"
@@ -138,7 +148,7 @@
                         Content="Add employees"
                         Height="50"
                         Margin="0, 0, 0, 30"
-                        FontSize="28"
+                        FontSize="20"
                         Click="OpenEmployeePopupBtn_Click"/>
                     <StackPanel
                         x:Name="ParticipantsPanel">
@@ -194,19 +204,20 @@
                             TextAlignment="Left"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            FontSize="28"
+                            FontSize="20"
                             Margin="0, 0, 30, 0"/>
                         <Button
                             x:Name="PopupSaveTaskBtn"
                             Content="Save Changes"
-                            FontSize="28" Height="Auto"
+                            FontSize="20" 
+                            Height="Auto"
                             Margin="0, 0, 7, 0"
                             Click="PopupSaveTaskBtn_Click"
                             />
                         <Button
                             x:Name="CloseTaskPopupBtn"
                             Content="X"
-                            FontSize="28"
+                            FontSize="20"
                             Height="Auto" 
                             Foreground="Gray"
                             BorderBrush="{x:Null}"
@@ -221,14 +232,14 @@
                         <Label
                             Content="_Description"
                             Target="{Binding ElementName=Description}"
-                            FontSize="28"/>
+                            FontSize="20"/>
                         <TextBox
                             x:Name="TaskDescription"
                             Text="{Binding Description}"
                             Background="White"
                             Height="250"
                             VerticalContentAlignment="Top"
-                            FontSize="28"
+                            FontSize="20"
                             TextWrapping="Wrap"
                             AcceptsReturn="True"
                             VerticalScrollBarVisibility="Auto"
@@ -236,22 +247,22 @@
                         <Label 
                             Content="D_eadline"
                             Target="{Binding ElementName=TaskDeadline}"
-                            FontSize="28"
+                            FontSize="20"
                             />
                         <DatePicker
                             x:Name="TaskDeadlinePicker"
                             Text="{Binding TaskDeadline}"
                             Background="White"
-                            FontSize="28"
+                            FontSize="20"
                             />
                         <Label
                             Content="_List"
                             Target="{Binding ElementName=ChooseTaskList}"
-                            FontSize="28"/>
+                            FontSize="20"/>
                         <ComboBox
                             x:Name="ChooseTaskList"
                             Width="470"
-                            FontSize="28"
+                            FontSize="20"
                             Background="White"
                             HorizontalAlignment="Left">
                             <ComboBox.ItemTemplate>
@@ -263,11 +274,11 @@
                         <Label
                             Content="_Priority"
                             Target="{Binding ElementName=Priority}"
-                            FontSize="28"/>
+                            FontSize="20"/>
                         <ComboBox
                             x:Name="ChoosePriorityList"
                             Width="470"
-                            FontSize="28"
+                            FontSize="20"
                             Background="White"
                             HorizontalAlignment="Left">
                             <ComboBoxItem Content="Low"/>
@@ -281,7 +292,7 @@
                         Margin="15, 0">
                         <Label
                             Content="Assignments"
-                            FontSize="28"/>
+                            FontSize="20"/>
                         <ScrollViewer
                             VerticalScrollBarVisibility="Auto"
                             Height="250"
@@ -292,7 +303,7 @@
                                 <StackPanel
                                     Orientation="Horizontal">
                                     <TextBlock
-                                        FontSize="24"
+                                        FontSize="20"
                                         Text="Benjamin Kløw Askedalen"/>
                                     <Button
                                         FontSize="18"
@@ -303,7 +314,7 @@
                         </ScrollViewer>
                         <Label
                             Content="Add assignments"
-                            FontSize="28"/>
+                            FontSize="20"/>
                         <ScrollViewer
                             VerticalScrollBarVisibility="Auto"
                             Background="White"
@@ -314,7 +325,7 @@
                                 <StackPanel
                                     Orientation="Horizontal">
                                     <TextBlock
-                                        FontSize="24"
+                                        FontSize="20"
                                         Text="Benjamin Kløw Askedalen"/>
                                     <Button
                                         FontSize="18"
@@ -353,7 +364,7 @@
                         BorderThickness="0, 0, 0, 1"/>
                     <TextBlock
                         Text="Employees"
-                        FontSize="30"
+                        FontSize="22"
                         Margin="10, 0, 0, 0"/>
                     <StackPanel 
                         Orientation="Horizontal"
@@ -362,7 +373,7 @@
                             Background="White"
                             Text="Type to search..."
                             Foreground="Gray"
-                            FontSize="28"
+                            FontSize="20"
                             Padding="5, 0, 0, 0"
                             Margin="0, 0, 10, 0"
                             Width="400"
@@ -370,14 +381,14 @@
                         <Button 
                             x:Name="SearchEmployeeBtn"
                             Content="Search"
-                            FontSize="28" 
+                            FontSize="20" 
                             Height="Auto"
                             Click="SearchEmployeeBtn_Click"
                             />
                         <Button
                             x:Name="CloseEmployeePopupBtn"
                             Content="X"
-                            FontSize="28"
+                            FontSize="20"
                             Height="Auto" 
                             Foreground="Gray"
                             BorderBrush="{x:Null}"
@@ -424,7 +435,7 @@
                         Background="White"
                         BorderBrush="Gray"
                         BorderThickness="1"
-                        FontSize="28"
+                        FontSize="20"
                         Padding="10, 10, 0, 15" 
                         GotFocus="CreateListTb_GotFocus"
                         />
@@ -433,7 +444,7 @@
                         Visibility="Collapsed"
                         Height="50"
                         Content="Create List"
-                        FontSize="28"
+                        FontSize="20"
                         Click="CreateListBtn_Click"/>
                 </StackPanel>
             </StackPanel>

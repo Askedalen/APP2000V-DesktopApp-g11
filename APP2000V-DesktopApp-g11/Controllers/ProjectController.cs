@@ -79,17 +79,40 @@ namespace APP2000V_DesktopApp_g11.Controllers
             }
         }
 
-        internal int CreateProject(Project projectUpdate)
+        internal int CreateProject(Project newProject)
         {
-            if (projectUpdate.ProjectName == null || projectUpdate.ProjectName == "")
+            
+            if (newProject.ProjectName == null || newProject.ProjectName == "")
             {
                 Log.Error("Please provide a name for the project");
                 return -1;
             }
 
-            int result = Db.CreateProject(projectUpdate);
+            int result = Db.CreateProject(newProject);
             if (result != -1)
             {
+                if (newProject.ProjectManager.HasValue)
+                {
+                    if (AddProjectParticipant(newProject.ProjectManager.Value, result) == 0)
+                    {
+                        Event managerEvent = new Event
+                        {
+                            EventDate = DateTime.Now,
+                            ProjectId = newProject.ProjectId,
+                            CreatorId = 1,
+                            Type = "assigned project manager",
+                            UserId = newProject.ProjectManager,
+                        };
+                        if (Db.AddNotification(managerEvent) != 0)
+                        {
+                            return -1;
+                        }
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
                 return result;
             }
             else

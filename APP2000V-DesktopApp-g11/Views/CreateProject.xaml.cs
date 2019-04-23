@@ -2,6 +2,7 @@
 using APP2000V_DesktopApp_g11.Controllers;
 using APP2000V_DesktopApp_g11.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,11 +21,14 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             AppWindow = gui;
             InitializeComponent();
+
+            List<User> users = Db.GetAllEmployees();
+            ChooseProjectManager.ItemsSource = users;
         }
 
         private void RegisterProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            Project projectUpdate = new Project
+            Project newProject = new Project
             {
                 ProjectName = ProjectNameInput.Text,
                 ProjectDescription = ProjectDescInput.Text,
@@ -32,14 +36,19 @@ namespace APP2000V_DesktopApp_g11.Views
 
             if (ProjectStartPicker.SelectedDate != null)
             {
-                projectUpdate.ProjectStart = ProjectStartPicker.SelectedDate;
+                newProject.ProjectStart = ProjectStartPicker.SelectedDate;
             }
             if (ProjectDeadlinePicker.SelectedDate != null)
             {
-                projectUpdate.ProjectDeadline = ProjectDeadlinePicker.SelectedDate;
+                newProject.ProjectDeadline = ProjectDeadlinePicker.SelectedDate;
+            }
+            if (ChooseProjectManager.SelectedItem != null)
+            {
+                User chosenManager = ChooseProjectManager.SelectedItem as User;
+                newProject.ProjectManager = chosenManager.UserId;
             }
 
-            int pid = Pc.CreateProject(projectUpdate);
+            int pid = Pc.CreateProject(newProject);
             if (pid != -1)
             {
                 ProjectId = pid;
@@ -47,7 +56,6 @@ namespace APP2000V_DesktopApp_g11.Views
                 ConfirmationBox.Text = "Project was created!";
                 GoToProjectBtn.Visibility = Visibility.Visible;
                 GoToProjectBtn.Focus();
-
             }
         }
 

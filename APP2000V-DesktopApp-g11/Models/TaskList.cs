@@ -17,13 +17,17 @@ namespace APP2000V_DesktopApp_g11.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TaskList()
         {
+            this.Events = new HashSet<Event>();
             this.PTasks = new HashSet<PTask>();
         }
     
         public int TaskListId { get; set; }
         public int ProjectId { get; set; }
         public string ListName { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Event> Events { get; set; }
         public virtual Project Project { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PTask> PTasks { get; set; }

@@ -43,9 +43,10 @@
         <Setter Property="Margin" Value="0, 0, 0, 30" />
         <Setter Property="Padding" Value="30, 20, 0, 25" />
     </Style>
+    
     <Style x:Key="NormalTaskText" TargetType="TextBlock">
         <Setter Property="Background" Value="White" />
-        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Padding" Value="30, 20, 30, 25" />
     </Style>
@@ -54,4 +55,44 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
     </Style>
+    
+    <Style x:Key="PmemberPanel" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Height" Value="50"/>
+    </Style>
+    <Style x:Key="PmemberDropBtn" TargetType="Button">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Content" Value="X"/>
+    </Style>
+    <Style x:Key="PmemberText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+    <Style x:Key="PmemberBtn" TargetType="Button">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="0, 0, 0, 10"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="ListNameText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="15"/>
+    </Style>
+    <Style x:Key="ListNameBorder" TargetType="Border">
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="0, 0, 0, 1"/>
+    </Style>
+    <Style x:Key="ListTaskScrollbar" TargetType="ScrollViewer">
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+    </Style>
+    <Style x:Key="ListPanel" TargetType="StackPanel">
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Margin" Value="30, 30, 0, 30"/>
+        <Setter Property="Background" Value="AliceBlue"/>
+    </Style>
+    
 </ResourceDictionary>

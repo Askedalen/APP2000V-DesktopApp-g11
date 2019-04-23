@@ -37,13 +37,13 @@ namespace APP2000V_DesktopApp_g11.Views
                 StackPanel userPanel = new StackPanel
                 {
                     Background = new SolidColorBrush(Colors.White),
-                    Width = 300,
-                    Height = 300,
-                    Margin = new Thickness(30, 30, 30, 0)
                 };
                 userPanel.Children.Add(name);
                 UserButton userButton = new UserButton(u)
                 {
+                    Width = 300,
+                    Height = 300,
+                    Margin = new Thickness(30, 30, 30, 0),
                     Content = userPanel
                 };
                 userButton.Click += new RoutedEventHandler(UserButton_Click);

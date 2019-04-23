@@ -73,7 +73,7 @@
             BorderBrush="Black"
             />
 
-        <StackPanel Grid.Column="0" Background="#FF6B7893">
+        <StackPanel Grid.Column="0" Background="#212529">
 
             <Image 
                 x:Name="logoImage"
@@ -82,46 +82,48 @@
                 Margin="50,50,50,10"
                 Source="/Assets/Logo.png"/>
             <TextBlock 
-                 Grid.Row="0"
+                Grid.Row="0"
                 Margin="0, 0, 0, 100"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
                 Text="WørkFlow"
                 FontSize="24"
-                FontFamily="Segoe UI Black" Cursor="None" Foreground="#DDFFFFFF" />
+                FontWeight="Bold"
+                Cursor="None" 
+                Foreground="#DDFFFFFF" />
 
             <Button 
                 x:Name="DashboardBtn"
                 Height="60" 
                 Content="Dashboard" 
                 FontSize="36"
-                Background="#FF434547"
-                BorderBrush="#FF474747"
-                Click="NavBtn_Click"/>
+                Background="#41474c"
+                Click="NavBtn_Click"
+                BorderThickness="0"/>
             <Button 
                 x:Name="ProjectsBtn"
                 Height="60" 
                 Content="Projects" 
                 FontSize="36"
                 Click="NavBtn_Click"
-                Background="#FF66A8F7"
-                BorderBrush="#FF474747"/>
+                Background="#68737c"
+                BorderThickness="0"/>
             <Button 
                 x:Name="EmployeesBtn" 
                 Height="60" 
                 Content="Employees" 
                 FontSize="36" 
                 Click="NavBtn_Click"
-                Background="#FF66A8F7"
-                BorderBrush="#FF474747"/>
+                Background="#68737c"
+                BorderThickness="0"/>
             <Button 
                 x:Name="ArchiveBtn"
                 Height="60" 
                 Content="Archive" 
                 FontSize="36"
                 Click="NavBtn_Click"
-                Background="#FF66A8F7"
-                BorderBrush="#FF474747"/>
+                Background="#68737c"
+                BorderThickness="0"/>
 
         </StackPanel>
         <Border 

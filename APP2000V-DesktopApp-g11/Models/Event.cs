@@ -31,6 +31,7 @@ namespace APP2000V_DesktopApp_g11.Models
     
         public virtual Project Project { get; set; }
         public virtual PTask PTask { get; set; }
+        public virtual TaskList TaskList { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

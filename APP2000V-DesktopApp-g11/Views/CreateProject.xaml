@@ -66,6 +66,25 @@
                 x:Name="ProjectDeadlinePicker"
                 FontSize="28"
                 Margin="0, 0, 0, 30"/>
+            <Label
+                Content="Project _Manager"
+                Target="{Binding ElementName=ChooseTaskList}"
+                FontSize="28"/>
+            <ComboBox
+                    x:Name="ChooseProjectManager"
+                    Width="400"
+                    FontSize="28"
+                    Background="White"
+                    HorizontalAlignment="Left">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding FirstName}"/>
+                            <Run Text="{Binding LastName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button
                 x:Name="RegisterProjectBtn"
                 Content="Register project" 

@@ -42,11 +42,15 @@
             Content="New Project"
             FontSize="28" Click="NewProjectBtn_Click" Height="Auto" Margin="689,10,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7"
             />
-        <StackPanel
+        <ScrollViewer
             Grid.Row="1"
-            x:Name="ProjectsDisplay"
-            Orientation="Horizontal"
-            Background="#FF7D8193">
-        </StackPanel>
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Disabled">
+            <StackPanel
+                x:Name="ProjectsDisplay"
+                Orientation="Horizontal"
+                Background="#FF7D8193">
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </assets:AnimatedUserControl>

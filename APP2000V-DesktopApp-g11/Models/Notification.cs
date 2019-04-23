@@ -16,10 +16,12 @@ namespace APP2000V_DesktopApp_g11.Models
     {
         public int NId { get; set; }
         public int EventId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public Nullable<bool> Viewed { get; set; }
         public Nullable<bool> Email { get; set; }
         public Nullable<bool> InApp { get; set; }
     
         public virtual Event Event { get; set; }
+        public virtual User User { get; set; }
     }
 }
