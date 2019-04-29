@@ -11,16 +11,16 @@ namespace APP2000V_DesktopApp_g11.Views
     {
         private Persistence Db = new Persistence();
         private DesktopGUI AppWindow;
-        public Projects(DesktopGUI gui) : base(gui)
+        public Projects() : base()
         {
             InitializeComponent();
-            AppWindow = gui;
+            AppWindow = App.Current.MainWindow as DesktopGUI;
             DisplayAllProjects();
         }
 
         private void DisplayAllProjects()
         {
-            List<Project> allProjects = Db.GetAllProjects();
+            List<Project> allProjects = Db.GetAllCurrentProjects();
             if (allProjects != null && allProjects.Count != 0)
             {
                 allProjects.ForEach(DisplaySingleProject);
@@ -92,12 +92,12 @@ namespace APP2000V_DesktopApp_g11.Views
         private void ProjectButton_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            SwitchContent(new ProjectPage(btn.ProjectId, AppWindow));
+            SwitchContent(new ProjectPage(btn.ProjectId));
         }
 
         private void NewProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new CreateProject(AppWindow));
+            SwitchContent(new CreateProject());
         }
     }
 

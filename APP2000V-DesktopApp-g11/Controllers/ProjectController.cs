@@ -1,6 +1,7 @@
 ﻿using APP2000V_DesktopApp_g11.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,82 @@ namespace APP2000V_DesktopApp_g11.Controllers
                 Log.Error("Unknown error!");
                 return 2;
             }
+        }
+
+        internal int DisapproveProject(int pid)
+        {
+            Project project = new Project
+            {
+                ProjectId = pid,
+                MarkedAsFinished = false
+            };
+            int result = Db.DisapproveProject(project);
+            if (result == 0)
+            {
+                Log.Message("Project disapproved!", "Project successfully disapproved. Assigned employees will continue working.");
+                return 0;
+            } 
+            else if (result == 1)
+            {
+                Log.Error("Project could not be disapproved!");
+                return 1;
+            }
+            else if (result == 2)
+            {
+                Log.Error("Could not find project!");
+                return 2;
+            }
+            else
+            {
+                Log.Error("Unknown error!");
+                return 3;
+            }
+        }
+
+        internal int ApproveProject(int pid)
+        {
+            Project project = new Project
+            {
+                ProjectId = pid,
+                CompletionDate = DateTime.Now
+            };
+            int result = Db.ApproveProject(project);
+            if (result == 0)
+            {
+                Log.Message("Project Approved!", "Project was successfully approved.");
+                return 0;
+            }
+            else if (result == 1)
+            {
+                Log.Error("Could not approve project!");
+                return 1;
+            }
+            else if (result == 2)
+            {
+                Log.Error("Could not find project!");
+                return 2;
+            }
+            else
+            {
+                Log.Error("Unknown error");
+                return 3;
+            }
+        }
+
+        internal dynamic GetStats()
+        {
+            dynamic statsObject = new ExpandoObject();
+
+            statsObject.ActiveProjects = Db.GetActiveProjectCount();
+            statsObject.EmployeesWorking = Db.GetEmployeesWorkingCount();
+            statsObject.FinishedTasks = Db.GetAllFinishedTasksCount();
+            statsObject.FinishedProjects = Db.GetFinishedProjectsCount();
+            statsObject.BeforeDeadline = Db.GetProjectsDoneInTimeCount(); // Jeg er veldig god på metodenavn
+            statsObject.BeforeDeadlinePercent = ((double)statsObject.BeforeDeadline / (double)statsObject.FinishedProjects) * 100;
+            statsObject.AfterDeadline = Db.GetProjectsNotDoneInTimecount();
+            statsObject.AfterDeadlinePercent = ((double)statsObject.AfterDeadline / (double)statsObject.FinishedProjects) * 100;
+
+            return statsObject;
         }
 
         public int AddTaskAssignment(int userId, int projectId, int taskId)
@@ -119,6 +196,52 @@ namespace APP2000V_DesktopApp_g11.Controllers
             {
                 Log.Error("Unknown error!");
                 return -1;
+            }
+        }
+
+        internal int DeleteProject(int pid)
+        {
+            int result = Db.DeleteProject(pid);
+            if (result == 0)
+            {
+                return 0;
+            }
+            else if (result == 2)
+            {
+                Log.Error("Could not find project!");
+                return 2;
+            }
+            else
+            {
+                Log.Error("Unknown error!");
+                return 1;
+            }
+        }
+
+        internal int DeleteTask(PTask currentTask)
+        {
+            PTask taskUpdate = currentTask;
+            taskUpdate.Deleted = true;
+
+            int result = Db.DeleteTask(taskUpdate);
+            if (result == 0)
+            {
+                return 0;
+            }
+            else if (result == 1)
+            {
+                Log.Error("Could not delete task!");
+                return 1;
+            }
+            else if (result == 2)
+            {
+                Log.Error("Could not find task in database!");
+                return 2;
+            }
+            else
+            {
+                Log.Error("Unknown error!");
+                return 3;
             }
         }
 

@@ -24,7 +24,7 @@ namespace APP2000V_DesktopApp_g11.Views
     public partial class CreateUser : AnimatedUserControl
     {
         Persistence Db = new Persistence();
-        public CreateUser(DesktopGUI gui) : base(gui)
+        public CreateUser() : base()
         {
             InitializeComponent();
 

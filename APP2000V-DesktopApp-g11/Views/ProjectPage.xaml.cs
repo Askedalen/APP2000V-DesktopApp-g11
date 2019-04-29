@@ -21,10 +21,10 @@ namespace APP2000V_DesktopApp_g11.Views
         Project CurrentProject;
         DesktopGUI AppWindow;
 
-        public ProjectPage(int projectID, DesktopGUI gui) : base(gui)
+        public ProjectPage(int projectID) : base()
         {
             InitializeComponent();
-            AppWindow = gui;
+            AppWindow = App.Current.MainWindow as DesktopGUI;
             Console.WriteLine("Project: " + projectID);
             CurrentProject = Db.GetSingleProject(projectID);
             DisplayProjectName.Text = CurrentProject.ProjectName;
@@ -88,7 +88,13 @@ namespace APP2000V_DesktopApp_g11.Views
             UpdateTask(currentTask);
         }
 
+        private void DeleteTaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PTask currentTask = PopupTaskName.DataContext as PTask;
+            DeleteTask(currentTask);
+        }
 
+        
 
         private void OpenEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -128,7 +134,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void ProjectSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectSettings(CurrentProject, AppWindow));
+            SwitchContent(new ProjectSettings(CurrentProject));
         }
 
         private void ToggleBacklogColBtn_Click(object sender, RoutedEventArgs e)
@@ -141,11 +147,48 @@ namespace APP2000V_DesktopApp_g11.Views
             AnimateColWidth(sender as Button);
         }
 
+        private void ViewOldTasksBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateTaskPanel.Visibility = Visibility.Collapsed;
+            ViewOldTasksBtn.Visibility = Visibility.Collapsed;
+            ViewBacklogBtn.Visibility = Visibility.Visible;
+            PrintFinishedTasks();
+        }
+
+        private void ViewBacklogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateTaskPanel.Visibility = Visibility.Visible;
+            ViewBacklogBtn.Visibility = Visibility.Collapsed;
+            ViewOldTasksBtn.Visibility = Visibility.Visible;
+            PrintBacklog();
+        }
+
         // PRINT ELEMENTS
         private void PrintBacklog()
         {
             BacklogPanel.Children.Clear();
             List<PTask> taskList = Db.GetBacklog(CurrentProject.ProjectId);
+            taskList.ForEach(t =>
+            {
+                TextBlock taskBlock = new TextBlock
+                {
+                    Text = t.TaskName,
+                    Style = AppWindow.FindResource("NormalTaskText") as Style
+                };
+                TaskButton taskButton = new TaskButton(t)
+                {
+                    Content = taskBlock,
+                    Style = AppWindow.FindResource("NormalTaskButton") as Style
+                };
+                taskButton.Click += new RoutedEventHandler(TaskButton_Click);
+                BacklogPanel.Children.Add(taskButton);
+            });
+        }
+
+        private void PrintFinishedTasks()
+        {
+            BacklogPanel.Children.Clear();
+            List<PTask> taskList = Db.GetFinishedTasks(CurrentProject.ProjectId);
             taskList.ForEach(t =>
             {
                 TextBlock taskBlock = new TextBlock
@@ -405,7 +448,8 @@ namespace APP2000V_DesktopApp_g11.Views
             {
                 TaskName = CreateTaskTb.Text,
                 TaskProjectId = CurrentProject.ProjectId,
-                TaskCreationDate = DateTime.Now
+                TaskCreationDate = DateTime.Now,
+                Deleted = false
             };
 
             if (Pc.CreateTask(newTask) == 0)
@@ -422,7 +466,8 @@ namespace APP2000V_DesktopApp_g11.Views
             TaskList newTaskList = new TaskList
             {
                 ListName = CreateListTb.Text,
-                ProjectId = CurrentProject.ProjectId
+                ProjectId = CurrentProject.ProjectId,
+                Deleted = false
             };
 
             if (Pc.CreateTaskList(newTaskList) == 0)
@@ -471,6 +516,16 @@ namespace APP2000V_DesktopApp_g11.Views
             }
 
             if (Pc.UpdateTask(taskUpdate) == 0)
+            {
+                TaskPopup.IsOpen = false;
+                PrintBacklog();
+                PrintLists();
+            }
+        }
+
+        private void DeleteTask(PTask currentTask)
+        {
+            if (Pc.DeleteTask(currentTask) == 0)
             {
                 TaskPopup.IsOpen = false;
                 PrintBacklog();
@@ -563,5 +618,6 @@ namespace APP2000V_DesktopApp_g11.Views
             }
         }
 
+        
     }
 }

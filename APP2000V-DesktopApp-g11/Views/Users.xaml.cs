@@ -15,11 +15,10 @@ namespace APP2000V_DesktopApp_g11.Views
     {
         private Persistence Db = new Persistence();
         private DesktopGUI AppWindow;
-        public Employees(DesktopGUI gui) : base(gui)
+        public Employees() : base()
         {
             InitializeComponent();
-            InitializeComponent();
-            AppWindow = gui;
+            AppWindow = App.Current.MainWindow as DesktopGUI;
             PrintUsers();
         }
 
@@ -61,7 +60,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void NewEmpBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new CreateUser(AppWindow));
+            SwitchContent(new CreateUser());
         }
     }
 }

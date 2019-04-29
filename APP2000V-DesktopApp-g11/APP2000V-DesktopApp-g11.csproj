@@ -157,6 +157,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkflowDatabase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Archive.xaml.cs">
+      <DependentUpon>Archive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,9 @@
     </Compile>
     <Compile Include="Views\DesktopGUI.xaml.cs">
       <DependentUpon>DesktopGUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectReport.xaml.cs">
+      <DependentUpon>ProjectReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectSettings.xaml.cs">
       <DependentUpon>ProjectSettings.xaml</DependentUpon>
@@ -194,7 +200,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Archive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreateUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -46,6 +46,257 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal List<Project> GetArchive()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    List<Project> archive = context.Projects
+                                                   .Where(p => p.MarkedAsFinished == true
+                                                            && p.CompletionDate.HasValue)
+                                                   .OrderByDescending(o => o.CompletionDate)
+                                                   .ToList();
+                    return archive;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal Report GetReport(int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    Report report = context.Reports
+                                           .Where(r => r.ProjectId == pid)
+                                           .Include(r => r.Project)
+                                           .OrderByDescending(o => o.CompletionDate)
+                                           .FirstOrDefault();
+                    return report;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int DisapproveProject(Project projectUpdate)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    Project project = context.Projects.Where(p => p.ProjectId == projectUpdate.ProjectId).FirstOrDefault();
+                    if (project != null)
+                    {
+                        project.MarkedAsFinished = projectUpdate.MarkedAsFinished;
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return 1;
+                }
+            }
+        }
+
+        internal int ApproveProject(Project projectUpdate)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    Project project = context.Projects.Where(p => p.ProjectId == projectUpdate.ProjectId).FirstOrDefault();
+                    if (project != null)
+                    {
+                        project.CompletionDate = projectUpdate.CompletionDate;
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return 1;
+                }
+            }
+        }
+
+        internal List<Project> GetProjectsMarkedAsFinished()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    List<Project> projects = context.Projects
+                                                    .Where(p => !p.CompletionDate.HasValue
+                                                              && p.MarkedAsFinished.HasValue
+                                                              && p.MarkedAsFinished.Value == true)
+                                                    .Include(p => p.User)
+                                                    .ToList();
+                    return projects;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int GetEmployeesWorkingCount()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    int employeesCount = context.ProjectParticipants.Select(pp => pp.UserId).Distinct().Count();
+                    return employeesCount;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int GetProjectsNotDoneInTimecount()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    int projectsCount = context.Projects
+                                               .Where(p => p.CompletionDate.HasValue
+                                                        && DateTime.Compare(p.CompletionDate.Value, p.ProjectDeadline.Value) >= 0)
+                                               .Count();
+                    return projectsCount;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int GetProjectsDoneInTimeCount()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    int projectsCount = context.Projects
+                                               .Where(p => p.CompletionDate.HasValue
+                                                        && DateTime.Compare(p.CompletionDate.Value, p.ProjectDeadline.Value) < 0)
+                                               .Count();
+                    return projectsCount;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int GetFinishedProjectsCount()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    int projectsCount = context.Projects.Where(p => p.CompletionDate.HasValue).Count();
+                    return projectsCount;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int GetAllFinishedTasksCount()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    int taskCount = context.Tasks.Where(t => t.CompletionDate.HasValue).Count();
+                    return taskCount;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int GetActiveProjectCount()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    int projectCount = context.Projects
+                                              .Where(p => !p.CompletionDate.HasValue
+                                                      && (!p.MarkedAsFinished.HasValue
+                                                        || p.MarkedAsFinished.Value == false))
+                                              .Count();
+                    return projectCount;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal List<Project> GetTopProjects()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    List<Project> projects = context.Projects
+                                                    .Where(p => !p.CompletionDate.HasValue
+                                                             && (!p.MarkedAsFinished.HasValue 
+                                                               || p.MarkedAsFinished.Value == false))
+                                                    .OrderByDescending(p => p.ProjectParticipants.Count)
+                                                    .Take(4)
+                                                    .ToList();
+                    return projects;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
         internal List<User> GetAllEmployees()
         {
             using (WorkflowContext context = new WorkflowContext())
@@ -53,6 +304,76 @@ namespace APP2000V_DesktopApp_g11.Models
                 try
                 {
                     return context.Users.Where(u => u.Role != 0).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal List<Project> GetProjectUpcomingDeadlines()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    return context.Projects.Where(p => p.ProjectDeadline.HasValue
+                                                   && !p.CompletionDate.HasValue
+                                                  && (!p.MarkedAsFinished.HasValue
+                                                    || p.MarkedAsFinished.Value == false))
+                                           .OrderBy(o => o.ProjectDeadline.Value)
+                                           .Take(4)
+                                           .ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal List<PTask> GetTaskUpcomingDeadlines()
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    return context.Tasks.Where(t => t.TaskDeadline.HasValue
+                                                && !t.CompletionDate.HasValue
+                                               && (!t.Deleted.HasValue
+                                                 || t.Deleted.Value == false))
+                                        .Include(t => t.Project)
+                                        .OrderBy(o => o.TaskDeadline)
+                                        .Take(4)
+                                        .ToList(); 
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        internal int GetActiveTaskCount(int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    IQueryable<int> activeTasks = context.Tasks
+                                                         .Where(t => !t.CompletionDate.HasValue
+                                                                 && (!t.Deleted.HasValue
+                                                                   || t.Deleted.Value == false))
+                                                         .Select(t => t.TaskId);
+
+                    int taskCount = context.Projects
+                                           .Where(p => p.ProjectId == pid)
+                                           .Count(p => p.PTasks.Any(t => activeTasks.Contains(t.TaskId)));
+                    return taskCount;
                 }
                 catch (Exception e)
                 {
@@ -104,6 +425,34 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal int DeleteProject(int pid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    Project removeProject = context.Projects.Where(p => p.ProjectId == pid).FirstOrDefault();
+                    if (removeProject != null)
+                    {
+                        context.Projects.Remove(removeProject);
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return 1;
+                }
+            }
+        }
+
+        
+
         internal int AddNotification(Event e)
         {
             using (WorkflowContext context = new WorkflowContext())
@@ -134,6 +483,32 @@ namespace APP2000V_DesktopApp_g11.Models
                         Console.WriteLine(exc.Message);
                         return 1;
                     }
+                }
+            }
+        }
+
+        internal int DeleteTask(PTask taskUpdate)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    PTask oldTask = context.Tasks.Where(t => t.TaskId == taskUpdate.TaskId).FirstOrDefault();
+                    if (oldTask != null)
+                    {
+                        oldTask.Deleted = true;
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return 1;
                 }
             }
         }
@@ -188,6 +563,23 @@ namespace APP2000V_DesktopApp_g11.Models
                 Console.WriteLine("Project update failed: ");
                 Console.WriteLine(e.Message);
                 return 1;
+            }
+        }
+
+        internal List<PTask> GetFinishedTasks(int projectId)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    return context.Tasks.Where(t => t.CompletionDate.HasValue
+                                                 && t.TaskProjectId.Value == projectId).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
             }
         }
 
@@ -301,7 +693,9 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectId == pid).ToList();
+                    List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectId == pid
+                                                              && !t.CompletionDate.HasValue
+                                                              && t.Deleted == false).ToList();
                     return tasks;
                 }
             }
@@ -454,13 +848,15 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
-        public List<Project> GetAllProjects()
+        public List<Project> GetAllCurrentProjects()
         {
             try
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    List<Project> projects = context.Projects.ToList();
+                    List<Project> projects = context.Projects.Where(p => !p.CompletionDate.HasValue 
+                                                                      && (!p.MarkedAsFinished.HasValue
+                                                                       || p.MarkedAsFinished.Value == false)).ToList();
                     return projects;
                 }
             }
@@ -478,7 +874,10 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    List<PTask> tasks = context.Tasks.Where(t => t.TaskListId == l.TaskListId && t.TaskProjectId == l.ProjectId).ToList();
+                    List<PTask> tasks = context.Tasks.Where(t => t.TaskListId == l.TaskListId 
+                                                              && t.TaskProjectId == l.ProjectId 
+                                                              && !t.CompletionDate.HasValue
+                                                              && t.Deleted == false).ToList();
                     return tasks;
                 }
             }

@@ -16,10 +16,8 @@ namespace APP2000V_DesktopApp_g11.Views
         Persistence Db = new Persistence();
         ProjectController Pc = new ProjectController();
         int ProjectId;
-        DesktopGUI AppWindow;
-        public CreateProject(DesktopGUI gui) : base(gui)
+        public CreateProject() : base()
         {
-            AppWindow = gui;
             InitializeComponent();
 
             List<User> users = Db.GetAllEmployees();
@@ -61,7 +59,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void GoToProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectPage(ProjectId, AppWindow));
+            SwitchContent(new ProjectPage(ProjectId));
         }
     }
 }

@@ -39,30 +39,19 @@
             x:Name="ErrorPopup"
             Grid.ColumnSpan="2"
             Width="400"
-            Height="200"
+            Height="500"
             VerticalAlignment="Top"
             HorizontalAlignment="Right" 
             Placement="Absolute" 
             PopupAnimation="Slide" 
+            IsOpen="true"
             AllowsTransparency="True"
             HorizontalOffset="1520"
             VerticalOffset="23"
             >
-            <StackPanel 
-                Opacity="50"
-                Background="DarkRed"
-                >
-                <TextBlock
-                    Text="Something went wrong!"
-                    FontSize="28"
-                    Foreground="White"
-                    Margin="15"/>
-                <TextBlock 
-                    x:Name="ErrorMessage"
-                    FontSize="24"
-                    TextWrapping="Wrap"
-                    Margin="15, 0"
-                    Foreground="White"/>
+            <StackPanel
+                x:Name="MessagesPanel">
+                
             </StackPanel>
         </Popup>
 

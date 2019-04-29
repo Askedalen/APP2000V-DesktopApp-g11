@@ -15,7 +15,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFFAFAFA"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid Background="#FFE3E4E6">
+    <Grid Background="#E3E4E6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
@@ -51,18 +51,239 @@
         <TextBlock 
             Grid.Column="0"
             Text="Top ongoing projects"
-            FontSize="30" Background="#FF434547" Foreground="#DDFFFFFF"
+            FontSize="24" 
+            Padding="15, 10, 0, 0"
+            Background="#FF434547" 
+            Foreground="#DDFFFFFF"
+            
             />
         <TextBlock 
             Grid.Column="1"
             Text="Upcoming Deadlines"
-            FontSize="30" Background="#FF434547" Foreground="#DDFFFFFF"
+            FontSize="24" 
+            Padding="15, 10, 15, 0"
+            Background="#FF434547" 
+            Foreground="#DDFFFFFF"
             />
         <TextBlock 
             Grid.Column="2"
             Text="Other"
-            FontSize="30" Background="#FF434547" Foreground="#DDFFFFFF" Margin="0"
+            FontSize="24" 
+            Padding="15, 10, 0, 0"
+            Background="#FF434547" 
+            Foreground="#DDFFFFFF" 
+            Margin="0"
             />
+
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="1"
+            x:Name="OngoingProjectsPanel">
+            <StackPanel
+                Margin="15, 30">
+                <TextBlock
+                    Text="Project 1"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Margin="0, 0, 0, 10"
+                    />
+                <TextBlock
+                    Text="Lorem ipsum dolor sit amet, quot sonet vulputate et his, 
+atqui lobortis cu vis. Ad illud graeco sit. Has soluta quaeque 
+definiebas cu, an eam vero graeco feugait. Vel ea lorem impedit. 
+At inimicus necessitatibus eum, vide commune qui no..."
+                    FontSize="20"
+                    TextWrapping="Wrap"
+                    Margin="0, 0, 0, 15"/>
+                <Button
+                    Content="View Project"
+                    Width="150"
+                    FontSize="20"
+                    HorizontalAlignment="Left"/>
+            </StackPanel>            
+        </StackPanel>
+
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="1">
+            <TextBlock
+                    Text="Projects"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Margin="15, 30, 15, 0"/>
+            <StackPanel
+                x:Name="ProjectDeadlines"
+                Margin="15, 0, 15, 0">
+                <Grid
+                    Margin="0, 0, 0, 30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Text="Project 5"
+                        FontWeight="SemiBold"
+                        FontSize="22"
+                        Margin="0, 15, 15, 5"/>
+                    <TextBlock
+                        Grid.Row="1"
+                        Text="3 tasks left"
+                        FontSize="18"
+                        Margin="0, 0, 15, 5"/>
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="18.12 15:00"
+                        FontSize="20"
+                        Foreground="Red"
+                        FontWeight="SemiBold"
+                        Margin="15, 15, 0, 5"/>
+                    <Button
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Content="View project"
+                        FontSize="18"
+                        FontStyle="Italic"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Foreground="Black"
+                        Padding="0"
+                        VerticalContentAlignment="Top"
+                        Margin="15,0, 0,5" 
+                        Height="Auto"/>
+                </Grid>
+            </StackPanel>
+            
+            <TextBlock
+                    Text="Tasks"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Margin="15, 15, 15, 0"/>
+            <StackPanel
+                x:Name="TaskDeadlines"
+                Margin="15, 0, 15, 15">
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="2">
+            <TextBlock
+                Text="Marked as finished"
+                FontSize="24"
+                FontWeight="Bold"
+                Margin="15, 30, 15, 0"/>
+            <StackPanel
+                x:Name="FinishedProjectsPanel"
+                Margin="15, 0, 15, 15">
+                <TextBlock
+                    Text="No projects"
+                    FontSize="20"
+                    Margin="0, 15, 0, 0"
+                    FontStyle="Italic"/>
+            </StackPanel>
+
+            <TextBlock
+                Text="Statistics"
+                FontSize="24"
+                FontWeight="Bold"
+                Margin="15, 30, 15, 15"/>
+            <Grid
+                x:Name="StatsGrid"
+                Margin="15, 0, 0, 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Active projects: "
+                    FontSize="20"/>
+                <TextBlock 
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    FontSize="18"
+                    Text="{Binding ActiveProjects}"/>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Text="Employees working: "
+                    FontSize="20"/>
+                <TextBlock 
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    FontSize="18"
+                    Text="{Binding EmployeesWorking}"/>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Text="Finished tasks: "
+                    FontSize="20"/>
+                <TextBlock 
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    FontSize="18"
+                    Text="{Binding FinishedTasks}"/>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Text="Finished projects: "
+                    FontSize="20"/>
+                <TextBlock 
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    FontSize="18"
+                    Text="{Binding FinishedProjects}"/>
+                
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Text="  Before deadline: "
+                    FontSize="20"
+                    FontStyle="Italic"/>
+                <TextBlock 
+                    Grid.Column="1"
+                    Grid.Row="4"
+                    FontSize="18">
+                    <Run Text="{Binding BeforeDeadline}"/>
+                    <Run Text="("/>
+                    <Run Text="{Binding BeforeDeadlinePercent}"/>
+                    <Run Text="%)"/>
+                </TextBlock>
+                
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="5"
+                    Text="  After deadline: "
+                    FontSize="20"
+                    FontStyle="Italic"/>
+                <TextBlock 
+                    Grid.Column="1"
+                    Grid.Row="5"
+                    FontSize="18">
+                    <Run Text="{Binding AfterDeadline}"/>
+                    <Run Text="("/>
+                    <Run Text="{Binding AfterDeadlinePercent}"/>
+                    <Run Text="%)"/>
+                </TextBlock>
+            </Grid>
+        </StackPanel>
     </Grid>
 
 </assets:AnimatedUserControl>

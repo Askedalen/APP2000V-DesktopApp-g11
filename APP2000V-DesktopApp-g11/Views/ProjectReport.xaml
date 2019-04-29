@@ -1,0 +1,93 @@
+﻿<assets:AnimatedUserControl
+    xmlns:assets="clr-namespace:APP2000V_DesktopApp_g11.Assets"
+    x:Class="APP2000V_DesktopApp_g11.Views.ProjectReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1620">
+    <Grid 
+        x:Name="ReportGrid"
+        Background="#E3E4E6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            BorderThickness="0, 0, 0, 1"
+            BorderBrush="Black"
+            />
+        <TextBlock
+            Grid.Column="0"
+            Grid.Row="0"
+            Padding="15"
+            Grid.ColumnSpan="3"
+            Background="#FF434547"
+            Foreground="White"
+            Text="{Binding Project.ProjectName}"
+            />
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="0, 200">
+            <TextBlock
+                FontSize="16">
+                <Run Text="Submitted"/>
+                <Run Text="{Binding CompletionDate}"/>
+            </TextBlock>
+            <TextBlock
+                x:Name="CommentBlock"
+                Width="600"
+                Background="LightGray"
+                MinHeight="200"
+                MaxHeight="600"
+                Margin="0, 0, 0, 30"
+                FontSize="20"
+                Padding="10, 5"
+                TextWrapping="Wrap"/>
+            <Button
+                x:Name="ApproveProjectBtn"
+                Content="Approve project"
+                Width="200"
+                Margin="0, 0, 0, 15"
+                FontSize="20"
+                Height="Auto"
+                VerticalContentAlignment="Top"
+                Click="ApproveProjectBtn_Click"/>
+            <Button
+                x:Name="DisapproveProjectBtn"
+                Content="Disapprove project"
+                Width="250"
+                FontSize="20"
+                Height="Auto"
+                Margin="0, 0, 0, 15"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Foreground="Red"
+                VerticalContentAlignment="Top"
+                Click="DisapproveProjectBtn_Click"/>
+            <Button
+                x:Name="ViewProjectBtn"
+                Content="View project"
+                Width="250"
+                FontSize="18"
+                FontStyle="Italic"
+                Height="Auto"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Foreground="Black"
+                VerticalContentAlignment="Top"
+                Click="ViewProjectBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</assets:AnimatedUserControl>

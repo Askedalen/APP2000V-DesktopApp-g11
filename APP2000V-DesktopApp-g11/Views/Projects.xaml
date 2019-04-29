@@ -33,14 +33,15 @@
 
         <TextBlock
             Text="Projects"
+            Padding="15"
             FontSize="30" Background="#FF434547" Foreground="#DDF3F3F3"
             />
         <Button 
             x:Name="NewProjectBtn"
             Width="200"
-            
             Content="New Project"
-            FontSize="28" Click="NewProjectBtn_Click" Height="Auto" Margin="689,10,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7"
+            FontSize="28" Click="NewProjectBtn_Click" Height="Auto" 
+            Margin="689,15,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7"
             />
         <ScrollViewer
             Grid.Row="1"
@@ -49,7 +50,7 @@
             <StackPanel
                 x:Name="ProjectsDisplay"
                 Orientation="Horizontal"
-                Background="#FF7D8193">
+                Background="#7D8193">
             </StackPanel>
         </ScrollViewer>
     </Grid>

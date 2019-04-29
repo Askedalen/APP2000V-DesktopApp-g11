@@ -12,9 +12,6 @@ namespace APP2000V_DesktopApp_g11.Assets
     /// - Bytte ut alle UserControl med AnimatedUserControl.
     /// - Content i ContentArea byttes ikke lenger ut med ContentArea.Content,
     ///   men med SwitchContent(AnimatedUserControl newContent).
-    /// - Alle AnimatedUserControl må kalle base(DesktopGUI gui) for at
-    ///   konstruktøren i denne klassen skal kjøres. Hvis ikke base kalles, 
-    ///   vil ikke animasjonene fungere. "DesktopGUI gui" er hovedinduet.
     /// - Se Dashboard.xaml og Dashbard.xaml.cs for eksempler.
     /// - Jeg har skrevet kommentarene her på engelsk i tilfelle Boban skal
     ///   se på det.
@@ -32,29 +29,31 @@ namespace APP2000V_DesktopApp_g11.Assets
 
         public AnimatedUserControl() : base()
         {
-            // Needs default constructor for UserControl to work properly
-        }
-        public AnimatedUserControl(DesktopGUI gui) : base()
-        {
-            ContentArea = gui.ContentArea;
+            if (Application.Current is App) 
+                // Only runs default constructor if something other than App is running the user control
+                // Without this the XAML-editor in Visual Studio does not work
+            {
+                DesktopGUI gui = App.Current.MainWindow as DesktopGUI;
+                ContentArea = gui.ContentArea;
 
-            /*
-                CREATE ANIMATIONS
-            */
+                /*
+                    CREATE ANIMATIONS
+                */
             
-            // Animation for fade out
-            FadeOutAnimation = new DoubleAnimation();
-            FadeOutAnimation.From = 1;
-            FadeOutAnimation.To = 0;
-            FadeOutAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
-            //EventHandler for animation completed
-            FadeOutAnimation.Completed += new EventHandler(fadeOutAnimation_Completed);
+                // Animation for fade out
+                FadeOutAnimation = new DoubleAnimation();
+                FadeOutAnimation.From = 1;
+                FadeOutAnimation.To = 0;
+                FadeOutAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+                //EventHandler for animation completed
+                FadeOutAnimation.Completed += new EventHandler(fadeOutAnimation_Completed);
 
-            //Animation for fade in
-            FadeInAnimation = new DoubleAnimation();
-            FadeInAnimation.From = 0;
-            FadeInAnimation.To = 1;
-            FadeInAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+                //Animation for fade in
+                FadeInAnimation = new DoubleAnimation();
+                FadeInAnimation.From = 0;
+                FadeInAnimation.To = 1;
+                FadeInAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+            }
         }
 
         private void fadeOutAnimation_Completed(object sender, EventArgs e)

@@ -21,15 +21,15 @@ namespace APP2000V_DesktopApp_g11.Views
 {
     public partial class DesktopGUI : Window
     {
-        AnimatedUserControl Dashboard;
-        AnimatedUserControl Projects;
-        AnimatedUserControl Employees;
-        //AnimatedUserControl Archive;
+        public AnimatedUserControl Dashboard { get; set; }
+        public AnimatedUserControl Projects { get; set; }
+        public AnimatedUserControl Employees { get; set; }
+        public AnimatedUserControl Archive { get; set; }
 
         public DesktopGUI()
         {
             InitializeComponent();
-            ContentArea.Content = new Dashboard(this);
+            ContentArea.Content = new Dashboard();
             Log.Gui = this;
         }
         BlurEffect myEffect = new BlurEffect();
@@ -43,7 +43,7 @@ namespace APP2000V_DesktopApp_g11.Views
             {
                 if (Dashboard is null)
                 {
-                    currentContent.SwitchContent(Dashboard = new Dashboard(this));
+                    currentContent.SwitchContent(Dashboard = new Dashboard());
                 }
                 else
                 {
@@ -52,9 +52,9 @@ namespace APP2000V_DesktopApp_g11.Views
             }
             else if (sender.Equals(ProjectsBtn))
             {
-                if (Dashboard is null)
+                if (Projects is null)
                 {
-                    currentContent.SwitchContent(Projects = new Projects(this));
+                    currentContent.SwitchContent(Projects = new Projects());
                 }
                 else
                 {
@@ -63,9 +63,9 @@ namespace APP2000V_DesktopApp_g11.Views
             }
             else if (sender.Equals(EmployeesBtn))
             {
-                if (Dashboard is null)
+                if (Employees is null)
                 {
-                    currentContent.SwitchContent(Employees = new Employees(this));
+                    currentContent.SwitchContent(Employees = new Employees());
                 }
                 else
                 {
@@ -74,13 +74,13 @@ namespace APP2000V_DesktopApp_g11.Views
             }
             else if (sender.Equals(ArchiveBtn))
             {
-                if (Dashboard is null)
+                if (Archive is null)
                 {
-                    //currentContent.SwitchContent(Archive = new Archive(this));
+                    currentContent.SwitchContent(Archive = new Archive());
                 }
                 else
                 {
-                    //currentContent.SwitchContent(Archive);
+                    currentContent.SwitchContent(Archive);
                 }
             }
             myEffect.Radius = 10;
@@ -94,6 +94,8 @@ namespace APP2000V_DesktopApp_g11.Views
             myEffect.Radius = 0;
             Effect = myEffect;
         }
+
+
 
         private void ClearBtnColor()
         {

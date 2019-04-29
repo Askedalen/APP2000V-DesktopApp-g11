@@ -28,11 +28,11 @@ namespace APP2000V_DesktopApp_g11.Views
         Project CurrentProject;
         DesktopGUI AppWindow;
 
-        public ProjectSettings(Project project, DesktopGUI gui) : base(gui)
+        public ProjectSettings(Project project) : base()
         {
             InitializeComponent();
             CurrentProject = project;
-            AppWindow = gui;
+            AppWindow = App.Current.MainWindow as DesktopGUI;
             ProjectSettingsGrid.DataContext = project;
             List<User> projectMembers = Db.GetAllProjectMembers(project.ProjectId);
             ChooseProjectManager.ItemsSource = projectMembers;
@@ -47,10 +47,10 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectPage(CurrentProject.ProjectId, AppWindow));
+            SwitchContent(new ProjectPage(CurrentProject.ProjectId));
         }
 
-        private void RegisterProjectBtn_Click(object sender, RoutedEventArgs e)
+        private void UpdateProjectBtn_Click(object sender, RoutedEventArgs e)
         {
             UpdateProjectInformation();
         }
@@ -64,12 +64,27 @@ namespace APP2000V_DesktopApp_g11.Views
                 ProjectStart = ProjectStartPicker.SelectedDate,
                 ProjectDeadline = ProjectDeadlinePicker.SelectedDate,
             };
-            User chosenManager = ChooseProjectManager.SelectedItem as User;
-            projectUpdate.ProjectManager = chosenManager.UserId;
+            if (ChooseProjectManager.SelectedIndex >= 0)
+            {
+                User chosenManager = ChooseProjectManager.SelectedItem as User;
+                projectUpdate.ProjectManager = chosenManager.UserId;
+            }
 
             if (Pc.UpdateProject(projectUpdate, CurrentProject.ProjectId) == 0)
             {
-                SwitchContent(new ProjectPage(CurrentProject.ProjectId, AppWindow));
+                SwitchContent(new ProjectPage(CurrentProject.ProjectId));
+            }
+        }
+
+        private void DeleteProjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult answer = MessageBox.Show("Are you sure you want to delete this project?", "Delete project", MessageBoxButton.YesNo);
+            if (answer == MessageBoxResult.Yes)
+            {
+                if (Pc.DeleteProject(CurrentProject.ProjectId) == 0)
+                {
+                    SwitchContent(new Projects());
+                }
             }
         }
     }

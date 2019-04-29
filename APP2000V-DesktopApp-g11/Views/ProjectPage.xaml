@@ -51,12 +51,32 @@
         <StackPanel 
             Grid.Column="0"
             Grid.Row="1"
-            Background="#212529">
+            Background="#FF30363C">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
             <TextBlock
+                Grid.Column="0"
                 Text="Backlog"
                 FontSize="24"
                 Foreground="White"
                 Margin="15, 15, 0, 30"/>
+            <Button 
+                Grid.Column="1"
+                x:Name="ViewOldTasksBtn"
+                Content="View finished tasks"
+                Margin="0, 0, 15, 0"
+                Click="ViewOldTasksBtn_Click"/>
+            <Button 
+                Grid.Column="1"
+                x:Name="ViewBacklogBtn"
+                Visibility="Collapsed"
+                Content="View backlog"
+                Margin="0, 0, 15, 0"
+                Click="ViewBacklogBtn_Click"/>
+            </Grid>
             <ScrollViewer
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Margin="15, 0, 15, 0"
@@ -132,7 +152,7 @@
         <StackPanel
             Grid.Column="2"
             Grid.Row="1"
-            Background="#212529">
+            Background="#FF30363C">
             <TextBlock
                 Text="Employees"
                 FontSize="22"
@@ -192,29 +212,45 @@
                         Grid.Row="1"
                         BorderBrush="Black"
                         BorderThickness="0, 0, 1, 0"/>
-                    <StackPanel
-                        Orientation="Horizontal"
+                    <Grid
                         Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
                         <TextBox 
+                            Grid.Column="0"
                             x:Name="PopupTaskName"
                             Text="{Binding TaskName}"
                             Background="White"
-                            Width="700"
+                            Width="500"
                             Padding="5, 0, 0, 5"
                             TextAlignment="Left"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            FontSize="20"
-                            Margin="0, 0, 30, 0"/>
+                            FontSize="20"/>
                         <Button
+                            Grid.Column="1"
+                            x:Name="DeleteTaskBtn"
+                            Content="Delete task"
+                            FontSize="18"
+                            Height="Auto"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Foreground="#FFCF0000"
+                            Click="DeleteTaskBtn_Click"/>
+                        <Button
+                            Grid.Column="2"
                             x:Name="PopupSaveTaskBtn"
                             Content="Save Changes"
                             FontSize="20" 
                             Height="Auto"
-                            Margin="0, 0, 7, 0"
                             Click="PopupSaveTaskBtn_Click"
                             />
                         <Button
+                            Grid.Column="3"
                             x:Name="CloseTaskPopupBtn"
                             Content="X"
                             FontSize="20"
@@ -224,7 +260,7 @@
                             Background="{x:Null}"
                             Click="CloseTaskPopupBtn_Click"
                             />
-                    </StackPanel>
+                    </Grid>
 
                     <StackPanel
                         Grid.Row="1"

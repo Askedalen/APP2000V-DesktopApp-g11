@@ -101,13 +101,23 @@
             </ComboBox>
 
             <Button
-                x:Name="RegisterProjectBtn"
-                Content="Register project" 
+                x:Name="UpdateProjectBtn"
+                Content="Save changes" 
                 FontSize="28"
                 Padding="10"
                 Margin="0, 30, 0, 30"
                 Height="69"
-                Click="RegisterProjectBtn_Click"/>
+                Click="UpdateProjectBtn_Click"/>
+            <Button 
+                x:Name="DeleteProjectBtn"
+                Content="Delete project"
+                FontSize="24"
+                Padding="0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Foreground="Red"
+                Width="160"
+                Click="DeleteProjectBtn_Click"/>
             <TextBlock
                 x:Name="ConfirmationBox"
                 FontSize="28"/>
