@@ -18,7 +18,7 @@
                 d:DesignHeight="1080" d:DesignWidth="1620"
 >
 
-    <Grid Background="White">
+    <Grid Background="#FF7D8193">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
@@ -36,10 +36,11 @@
             FontSize="30" Background="#FF434547" Foreground="#DDF3F3F3" Padding="15,15,0,0"
             />
         <WrapPanel
+            
             Grid.Row="2"
-            x:Name="EmployeesDisplay"
+            x:Name="UserProfileDisplay"
             Orientation="Horizontal"
-            Background="#FF7D8193">
+            Background="#FF7D8193" HorizontalAlignment="Center" Margin="0,100,0,0">
             <StackPanel
                 Background="White"
                 Width="219"
@@ -50,12 +51,10 @@
             </StackPanel>
             <StackPanel
                 Background="White"
-                Width="480"
-                Height="288"
+                Width="483"
+                Height="277"
                 Margin="30, 30, 30, 0">
-                <materialDesign:ColorZone Mode="PrimaryDark" Padding="30" Background="#FF403E44" Height="27"/>
-
-
+                <materialDesign:ColorZone Mode="PrimaryDark" Padding="30" Background="#FF403E44" Height="30"/>
 
 
                 <Grid Height="166">
@@ -69,7 +68,7 @@
                         <RowDefinition Height="78*"/>
                     </Grid.RowDefinitions>
                     <TextBlock TextWrapping="Wrap" Margin="13,9,264,136" Text="Username" Height="21" FontSize="16" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
-                    <TextBlock TextWrapping="Wrap" Margin="13,26,264,112" Grid.Row="1" RenderTransformOrigin="0.517,1.853" FontSize="16" Grid.ColumnSpan="3">
+                    <TextBlock TextWrapping="Wrap" Margin="13,26,264,109" Grid.Row="1" RenderTransformOrigin="0.517,1.853" FontSize="16" Grid.ColumnSpan="3" Text="Firstname">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -77,19 +76,20 @@
                                 <RotateTransform/>
                                 <TranslateTransform X="-1.144"/>
                             </TransformGroup>
-                        </TextBlock.RenderTransform><Run Text="Firstname"/><LineBreak/><Run/></TextBlock>
+                        </TextBlock.RenderTransform></TextBlock>
                     <TextBlock TextWrapping="Wrap" Margin="13,56,264,83" Text="Lastname" RenderTransformOrigin="0.516,1.559" Grid.Row="1" FontSize="16" Grid.ColumnSpan="3"/>
-                    <TextBlock TextWrapping="Wrap" Margin="177,25,80,116" Grid.Row="1" FontSize="16" Grid.Column="2"><Run Text="Email"/><LineBreak/></TextBlock>
-                    <TextBlock TextWrapping="Wrap" Margin="177,56,68,83" Grid.Row="1" FontSize="16" Grid.Column="2"><Run Text="Phone"/></TextBlock>
-                    <TextBox x:Name="User" Margin="19,9,270,136" Grid.Column="2" Grid.RowSpan="2"/>
-                    <materialDesign:ColorZone Mode="PrimaryDark" Padding="10" Background="#FF403E44" Margin="0,94,0,-97" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch">
-                        <TextBlock TextWrapping="Wrap" Margin="0,0,409,111" Text="About:"  FontSize="16"/>
+                    <TextBlock TextWrapping="Wrap" Margin="177,25,80,116" Grid.Row="1" FontSize="16" Grid.Column="2" Text="Email"/>
+                    <TextBlock TextWrapping="Wrap" Margin="177,56,68,83" Grid.Row="1" FontSize="16" Grid.Column="2" Text="Phone"/>
+                    <TextBlock x:Name="User" Margin="19,9,270,136" Grid.Column="2" Grid.RowSpan="2"/>
+                    <materialDesign:ColorZone Mode="PrimaryDark" Padding="10" Background="#FF403E44" Margin="0,94,0,-94" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch">
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,409,111" Text="About:"  FontSize="16"
+/>
                     </materialDesign:ColorZone>
-                    <TextBox  x:Name="Firstname" Margin="19,25,270,110" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.653,0.603"/>
-                    <TextBox  x:Name="Lastname" Margin="19,56,270,79" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Grid.Row="1"/>
-                    <TextBox x:Name="Email" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,23,55,112" Grid.Row="1"/>
-                    <TextBox  x:Name="Phone" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,55,55,80" Grid.Row="1"/>
-                    <TextBox  x:Name="About" Margin="10,131,10,-85" RenderTransformOrigin="0.653,0.603" Grid.Row="1" Grid.ColumnSpan="3" Background="#FFE8E8E8"/>
+                    <TextBlock  x:Name="Firstname" Margin="19,25,270,110" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.653,0.603"/>
+                    <TextBlock  x:Name="Lastname" Margin="19,56,270,79" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Grid.Row="1"/>
+                    <TextBlock x:Name="Email" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,23,55,112" Grid.Row="1"/>
+                    <TextBlock  x:Name="Phone" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,55,55,80" Grid.Row="1"/>
+                    <TextBlock  x:Name="About" Margin="10,131,10,-85" RenderTransformOrigin="0.653,0.603" Grid.Row="1" Grid.ColumnSpan="3" Background="#FFE8E8E8"/>
 
                 </Grid>
 
