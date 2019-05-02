@@ -46,6 +46,24 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal User GetSingleUser(int uid)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    User user = context.Users.Where(u => u.UserId == uid).FirstOrDefault();
+                    return user;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+        
+
         internal List<Project> GetArchive()
         {
             using (WorkflowContext context = new WorkflowContext())

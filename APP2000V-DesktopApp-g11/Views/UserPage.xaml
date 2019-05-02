@@ -57,7 +57,9 @@
                 <materialDesign:ColorZone Mode="PrimaryDark" Padding="30" Background="#FF403E44" Height="30"/>
 
 
-                <Grid Height="166">
+                <Grid 
+                    x:Name="UserInfoGrid"
+                    Height="166">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="41*"/>
                         <ColumnDefinition Width="13*"/>
@@ -80,16 +82,21 @@
                     <TextBlock TextWrapping="Wrap" Margin="13,56,264,83" Text="Lastname" RenderTransformOrigin="0.516,1.559" Grid.Row="1" FontSize="16" Grid.ColumnSpan="3"/>
                     <TextBlock TextWrapping="Wrap" Margin="177,25,80,116" Grid.Row="1" FontSize="16" Grid.Column="2" Text="Email"/>
                     <TextBlock TextWrapping="Wrap" Margin="177,56,68,83" Grid.Row="1" FontSize="16" Grid.Column="2" Text="Phone"/>
-                    <TextBlock x:Name="User" Margin="19,9,270,136" Grid.Column="2" Grid.RowSpan="2"/>
+                    <TextBlock 
+                        x:Name="User" 
+                        Text="{Binding Username}"
+                        Margin="19,9,270,136" 
+                        Grid.Column="2" 
+                        Grid.RowSpan="2"/>
                     <materialDesign:ColorZone Mode="PrimaryDark" Padding="10" Background="#FF403E44" Margin="0,94,0,-94" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch">
                         <TextBlock TextWrapping="Wrap" Margin="0,0,409,111" Text="About:"  FontSize="16"
 />
                     </materialDesign:ColorZone>
-                    <TextBlock  x:Name="Firstname" Margin="19,25,270,110" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.653,0.603"/>
-                    <TextBlock  x:Name="Lastname" Margin="19,56,270,79" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Grid.Row="1"/>
-                    <TextBlock x:Name="Email" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,23,55,112" Grid.Row="1"/>
-                    <TextBlock  x:Name="Phone" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,55,55,80" Grid.Row="1"/>
-                    <TextBlock  x:Name="About" Margin="10,131,10,-85" RenderTransformOrigin="0.653,0.603" Grid.Row="1" Grid.ColumnSpan="3" Background="#FFE8E8E8"/>
+                    <TextBlock  x:Name="Firstname" Text="{Binding FirstName}" Margin="19,25,270,110" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.653,0.603"/>
+                    <TextBlock  x:Name="Lastname" Text="{Binding LastName}" Margin="19,56,270,79" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Grid.Row="1"/>
+                    <TextBlock x:Name="Email" Text="{Binding Email}" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,23,55,112" Grid.Row="1"/>
+                    <TextBlock  x:Name="Phone" Text="{Binding PhoneNumber}" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,55,55,80" Grid.Row="1"/>
+                    <TextBlock  x:Name="About" Text="{Binding About}" Margin="10,131,10,-85" RenderTransformOrigin="0.653,0.603" Grid.Row="1" Grid.ColumnSpan="3" Background="#FFE8E8E8"/>
 
                 </Grid>
 

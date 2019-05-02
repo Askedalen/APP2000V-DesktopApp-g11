@@ -24,6 +24,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void PrintUsers()
         {
+            EmployeesDisplay.Children.Clear();
             List<User> users = Db.GetAllEmployees();
             users.ForEach(u =>
             {
@@ -53,9 +54,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void UserButton_Click(object sender, RoutedEventArgs e)
         {
             UserButton userButton = sender as UserButton;
-            //SwitchContent(new UserPage(userButton.UserId));
-            userButton.Background = new SolidColorBrush(Colors.Red);
-            userButton.Content = userButton.UserId;
+            SwitchContent(new UserPage(userButton.UserId));
         }
 
         private void NewEmpBtn_Click(object sender, RoutedEventArgs e)
