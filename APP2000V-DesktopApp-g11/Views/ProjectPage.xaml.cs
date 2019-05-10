@@ -20,6 +20,7 @@ namespace APP2000V_DesktopApp_g11.Views
         ProjectController Pc = new ProjectController();
         Project CurrentProject;
         DesktopGUI AppWindow;
+        bool ArchiveView = false;
 
         public ProjectPage(int projectID) : base()
         {
@@ -27,10 +28,33 @@ namespace APP2000V_DesktopApp_g11.Views
             AppWindow = App.Current.MainWindow as DesktopGUI;
             Console.WriteLine("Project: " + projectID);
             CurrentProject = Db.GetSingleProject(projectID);
+            if (CurrentProject.CompletionDate.HasValue)
+            {
+                SetArchivedProjectView();
+            }
             DisplayProjectName.Text = CurrentProject.ProjectName;
             PrintBacklog();
             PrintLists();
             PrintParticipants();
+        }
+
+        private void SetArchivedProjectView()
+        {
+            ArchiveView = true;
+            CreateTaskPanel.Visibility = Visibility.Collapsed;
+            CreateListPanel.Visibility = Visibility.Collapsed;
+            ProjectSettingsBtn.Visibility = Visibility.Collapsed;
+            OpenEmployeePopupBtn.Visibility = Visibility.Collapsed;
+            PopupTaskName.IsEnabled = false;
+            TaskDescription.IsEnabled = false;
+            TaskDeadlinePicker.IsEnabled = false;
+            ChooseTaskList.IsEnabled = false;
+            ChoosePriorityList.IsEnabled = false;
+            DeleteTaskBtn.Visibility = Visibility.Collapsed;
+            PopupSaveTaskBtn.Visibility = Visibility.Collapsed;
+            AddTaskAssignmentsLabel.Visibility = Visibility.Collapsed;
+            AddTaskAssignmentsPanel.Visibility = Visibility.Collapsed;
+
         }
 
         // EVENTS
@@ -94,7 +118,11 @@ namespace APP2000V_DesktopApp_g11.Views
             DeleteTask(currentTask);
         }
 
-        
+        private void DeleteListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TaskListButton btn = sender as TaskListButton;
+            DeleteTaskList(btn.ListId);
+        }
 
         private void OpenEmployeePopupBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -110,18 +138,13 @@ namespace APP2000V_DesktopApp_g11.Views
         private void AddEmpBtn_Click(object sender, RoutedEventArgs e)
         {
             UserButton emp = sender as UserButton;
-            AddProjectMember(emp);
-        }
-
-        private void SearchEmployeeBtn_Click(object sender, RoutedEventArgs e)
-        {
-
+            AddProjectMember(emp.UserId);
         }
 
         private void DropParticipantBtn_Click(object sender, RoutedEventArgs e)
         {
             UserButton emp = sender as UserButton;
-            DropProjectMember(emp);
+            DropProjectMember(emp.UserId);
         }
 
 
@@ -129,12 +152,12 @@ namespace APP2000V_DesktopApp_g11.Views
         private void EmpBtn_Click(object sender, RoutedEventArgs e)
         {
             UserButton emp = sender as UserButton;
-            //SwitchContent(new EmployeePage(emp.UserId));
+            //SwitchContent(AppWindow.Employees = new EmployeePage(emp.UserId));
         }
 
         private void ProjectSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectSettings(CurrentProject));
+            SwitchContent(AppWindow.Projects = new ProjectSettings(CurrentProject));
         }
 
         private void ToggleBacklogColBtn_Click(object sender, RoutedEventArgs e)
@@ -157,7 +180,10 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void ViewBacklogBtn_Click(object sender, RoutedEventArgs e)
         {
-            CreateTaskPanel.Visibility = Visibility.Visible;
+            if (!ArchiveView)
+            {
+                CreateTaskPanel.Visibility = Visibility.Visible;
+            }
             ViewBacklogBtn.Visibility = Visibility.Collapsed;
             ViewOldTasksBtn.Visibility = Visibility.Visible;
             PrintBacklog();
@@ -221,20 +247,35 @@ namespace APP2000V_DesktopApp_g11.Views
                 {
                     Style = AppWindow.FindResource("PmemberDropBtn") as Style
                 };
-                StackPanel empPanel = new StackPanel
-                {
-                    Style = AppWindow.FindResource("PmemberPanel") as Style
-                };
-                empPanel.Children.Add(empNameBlock);
-                if (e.UserId != CurrentProject.ProjectManager)
-                {
-                    empPanel.Children.Add(deleteBtn);
-                }
                 deleteBtn.Click += new RoutedEventHandler(DropParticipantBtn_Click);
+
+                Grid empGrid = new Grid()
+                {
+                    Style = AppWindow.FindResource("PmemberGrid") as Style
+                };
+                empGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(1, GridUnitType.Star)
+                });
+                empGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(50)
+                });
+
+                Grid.SetColumn(empNameBlock, 0);
+                empGrid.Children.Add(empNameBlock);
+                
+                if (e.UserId != CurrentProject.ProjectManager
+                && !ArchiveView)
+                {
+                    Grid.SetColumn(deleteBtn, 1);
+                    empGrid.Children.Add(deleteBtn);
+                }
+                
                 UserButton empBtn = new UserButton(e)
                 {
                     Style = AppWindow.FindResource("PmemberBtn") as Style,
-                    Content = empPanel,
+                    Content = empGrid
                 };
                 empBtn.Click += new RoutedEventHandler(EmpBtn_Click);
                 ParticipantsPanel.Children.Add(empBtn);
@@ -252,11 +293,29 @@ namespace APP2000V_DesktopApp_g11.Views
                     Text = l.ListName,
                     Style = AppWindow.FindResource("ListNameText") as Style
                 };
+                TaskListButton deleteListBtn = new TaskListButton(l)
+                {
+                    Style = AppWindow.FindResource("DeleteListBtn") as Style
+                };
+                deleteListBtn.Click += new RoutedEventHandler(DeleteListBtn_Click);
+                Grid listTopGrid = new Grid();
+                listTopGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(1, GridUnitType.Star)
+                });
+                listTopGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = GridLength.Auto
+                });
+                Grid.SetColumn(listName, 0);
+                listTopGrid.Children.Add(listName);
+                Grid.SetColumn(deleteListBtn, 1);
+                listTopGrid.Children.Add(deleteListBtn);
 
                 Border nameBorder = new Border
                 {
                     Style = AppWindow.FindResource("ListNameBorder") as Style,
-                    Child = listName
+                    Child = listTopGrid
                 };
 
                 StackPanel panelInScroll = new StackPanel();
@@ -290,7 +349,9 @@ namespace APP2000V_DesktopApp_g11.Views
             List<TaskList> taskLists = Db.GetLists(CurrentProject.ProjectId);
             ChooseTaskList.ItemsSource = taskLists;
 
-            ChooseTaskList.SelectedIndex = taskInfo.TaskListId.HasValue ? taskInfo.TaskListId.Value - 1 : -1;
+            TaskList selectedTaskList = taskLists.Find(l => l.TaskListId == taskInfo.TaskListId);
+
+            ChooseTaskList.SelectedItem = selectedTaskList;
 
             switch (taskInfo.Priority)
             {
@@ -323,21 +384,33 @@ namespace APP2000V_DesktopApp_g11.Views
                 TextBlock empNameText = new TextBlock
                 {
                     Text = emp.FirstName + " " + emp.LastName,
-                    FontSize = 24
+                    FontSize = 20
                 };
-                UserTaskButton removeBtn = new UserTaskButton(emp, new PTask { TaskId = tid })
+                UserTaskButton addEmpBtn = new UserTaskButton(emp, new PTask { TaskId = tid })
                 {
                     FontSize = 18,
-                    Content = "Add"
+                    Content = "Add",
+                    Width = 50
                 };
-                removeBtn.Click += new RoutedEventHandler(AddTaskAssignmentBtn_Click);
-                StackPanel empPanel = new StackPanel
+                addEmpBtn.Click += new RoutedEventHandler(AddTaskAssignmentBtn_Click);
+                Grid empGrid = new Grid()
                 {
-                    Orientation = Orientation.Horizontal
+                    Style = AppWindow.FindResource("PmemberGrid") as Style
                 };
-                empPanel.Children.Add(empNameText);
-                empPanel.Children.Add(removeBtn);
-                TaskNotAssignedView.Children.Add(empPanel);
+                empGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(1, GridUnitType.Star)
+                });
+                empGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(50)
+                });
+
+                Grid.SetColumn(empNameText, 0);
+                empGrid.Children.Add(empNameText);
+                Grid.SetColumn(addEmpBtn, 1);
+                empGrid.Children.Add(addEmpBtn);
+                TaskNotAssignedView.Children.Add(empGrid);
             });
         }
 
@@ -350,21 +423,36 @@ namespace APP2000V_DesktopApp_g11.Views
                 TextBlock empNameText = new TextBlock
                 {
                     Text = emp.FirstName + " " + emp.LastName,
-                    FontSize = 24
+                    FontSize = 20
                 };
                 UserTaskButton removeBtn = new UserTaskButton(emp, new PTask { TaskId = tid })
                 {
                     FontSize = 18,
-                    Content = "X"
+                    Content = "X",
+                    Width = 50
                 };
                 removeBtn.Click += new RoutedEventHandler(RemoveTaskAssignmentBtn_Click);
-                StackPanel empPanel = new StackPanel
+                Grid empGrid = new Grid()
                 {
-                    Orientation = Orientation.Horizontal
+                    Style = AppWindow.FindResource("PmemberGrid") as Style
                 };
-                empPanel.Children.Add(empNameText);
-                empPanel.Children.Add(removeBtn);
-                TaskAssignmentView.Children.Add(empPanel);
+                empGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(1, GridUnitType.Star)
+                });
+                empGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(50)
+                });
+
+                Grid.SetColumn(empNameText, 0);
+                empGrid.Children.Add(empNameText);
+                if (!ArchiveView)
+                {
+                    Grid.SetColumn(removeBtn, 1);
+                    empGrid.Children.Add(removeBtn);
+                }
+                TaskAssignmentView.Children.Add(empGrid);
             });
         }
 
@@ -452,7 +540,7 @@ namespace APP2000V_DesktopApp_g11.Views
                 Deleted = false
             };
 
-            if (Pc.CreateTask(newTask) == 0)
+            if (Pc.CreateTask(newTask))
             {
                 CreateTaskBtn.Visibility = Visibility.Collapsed;
                 CreateTaskTb.Text = "Create new task...";
@@ -475,6 +563,16 @@ namespace APP2000V_DesktopApp_g11.Views
                 CreateListBtn.Visibility = Visibility.Collapsed;
                 CreateListTb.Text = "Create new list...";
                 CreateListTb.Foreground = new SolidColorBrush(Colors.Gray);
+                PrintLists();
+            }
+        }
+
+        private void DeleteTaskList(int listId)
+        {
+            if (Pc.DropTaskList(listId, CurrentProject.ProjectId))
+            {
+                TaskPopup.IsOpen = false;
+                EmployeePopup.IsOpen = false;
                 PrintLists();
             }
         }
@@ -515,7 +613,7 @@ namespace APP2000V_DesktopApp_g11.Views
                     break;
             }
 
-            if (Pc.UpdateTask(taskUpdate) == 0)
+            if (Pc.UpdateTask(taskUpdate))
             {
                 TaskPopup.IsOpen = false;
                 PrintBacklog();
@@ -551,18 +649,18 @@ namespace APP2000V_DesktopApp_g11.Views
             }
         }
 
-        private void AddProjectMember(UserButton emp)
+        private void AddProjectMember(int userId)
         {
-            if (Pc.AddProjectParticipant(emp.UserId, CurrentProject.ProjectId) == 0)
+            if (Pc.AddProjectParticipant(userId, CurrentProject.ProjectId) == 0)
             {
                 PrintAvaliableEmployees();
                 PrintParticipants();
             }
         }
 
-        private void DropProjectMember(UserButton emp)
+        private void DropProjectMember(int userId)
         {
-            if (Pc.DropProjectParticipant(emp.UserId, CurrentProject.ProjectId) == 0)
+            if (Pc.DropProjectParticipant(userId, CurrentProject.ProjectId) == 0)
             {
                 PrintParticipants();
             }

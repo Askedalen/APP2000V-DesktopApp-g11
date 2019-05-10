@@ -25,6 +25,15 @@ namespace APP2000V_DesktopApp_g11.Assets
         }
     }
 
+    public class TaskListButton : Button
+    {
+        public int ListId { get; set; }
+        public TaskListButton(TaskList l) : base()
+        {
+            ListId = l.TaskListId;
+        }
+    }
+
     public class UserButton : Button
     {
         public int UserId { get; set; }

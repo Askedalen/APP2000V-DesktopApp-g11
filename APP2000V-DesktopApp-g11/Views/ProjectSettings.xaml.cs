@@ -47,7 +47,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectPage(CurrentProject.ProjectId));
+            SwitchContent(AppWindow.Projects = new ProjectPage(CurrentProject.ProjectId));
         }
 
         private void UpdateProjectBtn_Click(object sender, RoutedEventArgs e)
@@ -70,9 +70,9 @@ namespace APP2000V_DesktopApp_g11.Views
                 projectUpdate.ProjectManager = chosenManager.UserId;
             }
 
-            if (Pc.UpdateProject(projectUpdate, CurrentProject.ProjectId) == 0)
+            if (Pc.UpdateProject(projectUpdate, CurrentProject.ProjectId))
             {
-                SwitchContent(new ProjectPage(CurrentProject.ProjectId));
+                SwitchContent(AppWindow.Projects = new ProjectPage(CurrentProject.ProjectId));
             }
         }
 
@@ -81,9 +81,9 @@ namespace APP2000V_DesktopApp_g11.Views
             MessageBoxResult answer = MessageBox.Show("Are you sure you want to delete this project?", "Delete project", MessageBoxButton.YesNo);
             if (answer == MessageBoxResult.Yes)
             {
-                if (Pc.DeleteProject(CurrentProject.ProjectId) == 0)
+                if (Pc.DeleteProject(CurrentProject.ProjectId))
                 {
-                    SwitchContent(new Projects());
+                    SwitchContent(AppWindow.Projects = new Projects());
                 }
             }
         }

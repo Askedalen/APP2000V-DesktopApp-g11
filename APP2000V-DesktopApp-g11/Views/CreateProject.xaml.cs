@@ -21,6 +21,12 @@ namespace APP2000V_DesktopApp_g11.Views
             InitializeComponent();
 
             List<User> users = Db.GetAllEmployees();
+            users.Insert(0, new User
+            {
+                UserId = -1,
+                FirstName = "No manager",
+                LastName = "",
+            });
             ChooseProjectManager.ItemsSource = users;
         }
 
@@ -43,7 +49,11 @@ namespace APP2000V_DesktopApp_g11.Views
             if (ChooseProjectManager.SelectedItem != null)
             {
                 User chosenManager = ChooseProjectManager.SelectedItem as User;
-                newProject.ProjectManager = chosenManager.UserId;
+                if (chosenManager.UserId >= 0)
+                {
+                    newProject.ProjectManager = chosenManager.UserId;
+                }
+               
             }
 
             int pid = Pc.CreateProject(newProject);
@@ -59,7 +69,8 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void GoToProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectPage(ProjectId));
+            DesktopGUI gui = App.Current.MainWindow as DesktopGUI;
+            SwitchContent(gui.Projects = new ProjectPage(ProjectId));
         }
     }
 }

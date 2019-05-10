@@ -29,9 +29,16 @@ namespace APP2000V_DesktopApp_g11.Views
         public DesktopGUI()
         {
             InitializeComponent();
+            OpenWindow();
+        }
+
+        public void OpenWindow()
+        {
             ContentArea.Content = new Dashboard();
             Log.Gui = this;
+            this.Show();
         }
+
         BlurEffect myEffect = new BlurEffect();
         private void NavBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -42,6 +49,10 @@ namespace APP2000V_DesktopApp_g11.Views
             if (sender.Equals(DashboardBtn))
             {
                 if (Dashboard is null)
+                {
+                    currentContent.SwitchContent(Dashboard = new Dashboard());
+                }
+                else if (currentContent == Dashboard)
                 {
                     currentContent.SwitchContent(Dashboard = new Dashboard());
                 }
@@ -56,6 +67,10 @@ namespace APP2000V_DesktopApp_g11.Views
                 {
                     currentContent.SwitchContent(Projects = new Projects());
                 }
+                else if (currentContent == Projects)
+                {
+                    currentContent.SwitchContent(Projects = new Projects());
+                }
                 else
                 {
                     currentContent.SwitchContent(Projects);
@@ -67,6 +82,10 @@ namespace APP2000V_DesktopApp_g11.Views
                 {
                     currentContent.SwitchContent(Employees = new Employees());
                 }
+                else if (currentContent == Employees)
+                {
+                    currentContent.SwitchContent(Employees = new Employees());
+                }
                 else
                 {
                     currentContent.SwitchContent(Employees);
@@ -75,6 +94,10 @@ namespace APP2000V_DesktopApp_g11.Views
             else if (sender.Equals(ArchiveBtn))
             {
                 if (Archive is null)
+                {
+                    currentContent.SwitchContent(Archive = new Archive());
+                }
+                else if (currentContent == Archive)
                 {
                     currentContent.SwitchContent(Archive = new Archive());
                 }

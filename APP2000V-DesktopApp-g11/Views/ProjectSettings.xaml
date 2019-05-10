@@ -25,7 +25,8 @@
 
         <TextBlock
             Text="Project Settings"
-            FontSize="30"/>
+            FontSize="26"
+            Margin="15, 0, 0, 0"/>
 
         <StackPanel
             Grid.Row="1"
@@ -39,7 +40,7 @@
                 Width="250"
                 Height="50"
                 Content="Back to project"
-                FontSize="28"
+                FontSize="22"
                 HorizontalAlignment="Left"
                 Margin="0, 0, 0, 30"
                 Click="BackBtn_Click"
@@ -47,47 +48,47 @@
             <Label
                 Content="Project _Name"
                 Target="{Binding ElementName=ProjectNameInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <TextBox
                 x:Name="ProjectNameInput"
                 Text="{Binding ProjectName}"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project _Description"
                 Target="{Binding ElementName=ProjectDescInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <TextBox
                 x:Name="ProjectDescInput"
                 Text="{Binding ProjectDescription}"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project _Start (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectStartInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <DatePicker
                 x:Name="ProjectStartPicker"
                 SelectedDate="{Binding ProjectStart}"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project D_eadline (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectDeadlineInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <DatePicker
                 x:Name="ProjectDeadlinePicker"
                 SelectedDate="{Binding ProjectDeadline}"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project _Manager"
                 Target="{Binding ElementName=ChooseTaskList}"
-                FontSize="28"/>
+                FontSize="20"/>
             <ComboBox
                     x:Name="ChooseProjectManager"
                     Width="400"
-                    FontSize="28"
+                    FontSize="20"
                     Background="White"
                     HorizontalAlignment="Left">
                 <ComboBox.ItemTemplate>
@@ -103,7 +104,7 @@
             <Button
                 x:Name="UpdateProjectBtn"
                 Content="Save changes" 
-                FontSize="28"
+                FontSize="22"
                 Padding="10"
                 Margin="0, 30, 0, 30"
                 Height="69"
@@ -111,7 +112,7 @@
             <Button 
                 x:Name="DeleteProjectBtn"
                 Content="Delete project"
-                FontSize="24"
+                FontSize="20"
                 Padding="0"
                 Background="Transparent"
                 BorderBrush="Transparent"

@@ -67,7 +67,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void ViewProjectBtn_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            SwitchContent(new ProjectPage(btn.ProjectId));
+            SwitchContent(AppWindow.Archive = new ProjectPage(btn.ProjectId));
         }
     }
 }

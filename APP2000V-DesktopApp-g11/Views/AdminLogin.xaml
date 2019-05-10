@@ -15,8 +15,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -26,42 +26,35 @@
         </Grid.RowDefinitions>
 
         <StackPanel
-            
             Grid.Column="1" Grid.Row="1">
+            
+            <Label
+                Content="_Username"
+                Target="{Binding ElementName=UsernameInput}"
+                FontSize="14"/>
+            <TextBox 
+                x:Name="UsernameInput"
+                />
+
+            <Label
+                Content="_Password"
+                Target="{Binding ElementName=PasswordInput}"
+                FontSize="14"/>
+            <PasswordBox 
+                x:Name="PasswordInput"
+                />
+            
+            <Button
+                Margin="0,15,0,15"
+                x:Name="LoginBtn"
+                Content="Login" 
+                Click="LoginBtn_Click" Background="#FF66A8F7"
+                />
             <TextBlock
                 x:Name="ErrorMessage" 
                 Foreground="Red" 
                 FontWeight="Bold"
-                />
-            <TextBlock 
-                Grid.Row="1"
-                Text="Username"
-                />
-            <TextBox 
-                x:Name="UsernameInput"
-                Background="#FF999999" 
-                Height="20" 
-                Width="100" 
-                />
-
-            <TextBlock 
-                 Margin="0,5,0,0"
-                Grid.Row="2"
-                Text="Password"
-                />
-            <TextBox 
-                
-                x:Name="PasswordInput"
-                Background="#FF999999" 
-                Height="20" 
-                Width="100" 
-                />
-            <Button
-                Margin="0,15,0,0"
-                x:Name="LoginBtn"
-                Height="26"
-                Content="Login" 
-                Click="LoginBtn_Click" Background="#FF66A8F7"
+                Text=""
                 />
         </StackPanel>
 

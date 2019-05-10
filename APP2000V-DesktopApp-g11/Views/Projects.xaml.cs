@@ -35,34 +35,34 @@ namespace APP2000V_DesktopApp_g11.Views
             }
         }
 
-        private void DisplaySingleProject(Project obj)
+        private void DisplaySingleProject(Project p)
         {
             StackPanel projectPanel = new StackPanel();
 
             TextBlock headline = new TextBlock
             {
-                Text = obj.ProjectName,
+                Text = p.ProjectName,
                 Style = AppWindow.FindResource("ProjectHeadline") as Style
             };
             projectPanel.Children.Add(headline);
 
             TextBlock participantCount = new TextBlock
             {
-                Text = "5" + " participants", // Midlertidig antall deltakere
+                Text = p.ProjectParticipants.Count + " participants", // Midlertidig antall deltakere
                 Style = AppWindow.FindResource("ProjectParticipantsCount") as Style
             };
             projectPanel.Children.Add(participantCount);
 
             TextBlock description = new TextBlock
             {
-                Text = obj.ProjectDescription,
+                Text = p.ProjectDescription,
                 Style = AppWindow.FindResource("ProjectShortDescription") as Style
             };
             projectPanel.Children.Add(description);
 
             StackPanel tasksPanel = new StackPanel();
 
-            List<PTask> taskList = Db.GetBacklog(obj.ProjectId);
+            List<PTask> taskList = Db.GetBacklog(p.ProjectId);
             taskList.ForEach(t =>
             {
                 TextBlock taskInScroll = new TextBlock();
@@ -80,7 +80,7 @@ namespace APP2000V_DesktopApp_g11.Views
             projectPanel.Children.Add(tasksScroll);
             projectPanel.Style = AppWindow.FindResource("ProjectPanel") as Style;
 
-            ProjectButton projectButton = new ProjectButton(obj)
+            ProjectButton projectButton = new ProjectButton(p)
             {
                 Style = AppWindow.FindResource("ProjectButton") as Style,
                 Content = projectPanel
@@ -92,12 +92,12 @@ namespace APP2000V_DesktopApp_g11.Views
         private void ProjectButton_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            SwitchContent(new ProjectPage(btn.ProjectId));
+            SwitchContent(AppWindow.Projects = new ProjectPage(btn.ProjectId));
         }
 
         private void NewProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new CreateProject());
+            SwitchContent(AppWindow.Projects = new CreateProject());
         }
     }
 

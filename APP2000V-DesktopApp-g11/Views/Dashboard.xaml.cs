@@ -61,6 +61,10 @@ namespace APP2000V_DesktopApp_g11.Views
             int currentRow = 0;
 
             List<Project> finishedProjects = Db.GetProjectsMarkedAsFinished();
+            if (finishedProjects.Count > 0)
+            {
+                MarkedAsFinishedContainer.Visibility = Visibility.Visible;
+            }
             finishedProjects.ForEach(p =>
             {
                 for (int i = 0; i < 2; i++)
@@ -122,7 +126,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void ViewReportBtn_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            SwitchContent(new ProjectReport(btn.ProjectId));
+            SwitchContent(AppWindow.Dashboard = new ProjectReport(btn.ProjectId));
         }
 
         private void PrintTopProjects()
@@ -165,13 +169,14 @@ namespace APP2000V_DesktopApp_g11.Views
             {
                 Style = AppWindow.FindResource("DeadlineViewGrid") as Style
             };
-            for (int i = 0; i < 2; i++)
+            projectGrid.ColumnDefinitions.Add(new ColumnDefinition
             {
-                projectGrid.ColumnDefinitions.Add(new ColumnDefinition
-                {
-                    Width = GridLength.Auto
-                });
-            }
+                Width = GridLength.Auto
+            });
+            projectGrid.ColumnDefinitions.Add(new ColumnDefinition
+            {
+                Width = new GridLength(1, GridUnitType.Star)
+            });
             int currentRow = 0;
            
             List<Project> projects = Db.GetProjectUpcomingDeadlines();
@@ -263,13 +268,14 @@ namespace APP2000V_DesktopApp_g11.Views
             {
                 Style = AppWindow.FindResource("DeadlineViewGrid") as Style
             };
-            for (int i = 0; i < 2; i++)
+            taskGrid.ColumnDefinitions.Add(new ColumnDefinition
             {
-                taskGrid.ColumnDefinitions.Add(new ColumnDefinition
-                {
-                    Width = GridLength.Auto
-                });
-            }
+                Width = GridLength.Auto
+            });
+            taskGrid.ColumnDefinitions.Add(new ColumnDefinition
+            {
+                Width = new GridLength(1, GridUnitType.Star)
+            });
             int currentRow = 0;
 
             List<PTask> tasks = Db.GetTaskUpcomingDeadlines();
@@ -358,7 +364,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void GoToProjectBtn_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            SwitchContent(new ProjectPage(btn.ProjectId));
+            SwitchContent(AppWindow.Projects = new ProjectPage(btn.ProjectId));
         }
     }
 }

@@ -171,19 +171,19 @@ At inimicus necessitatibus eum, vide commune qui no..."
         <StackPanel
             Grid.Row="1"
             Grid.Column="2">
-            <TextBlock
-                Text="Marked as finished"
-                FontSize="24"
-                FontWeight="Bold"
-                Margin="15, 30, 15, 0"/>
             <StackPanel
-                x:Name="FinishedProjectsPanel"
-                Margin="15, 0, 15, 15">
+                x:Name="MarkedAsFinishedContainer"
+                Visibility="Collapsed">
                 <TextBlock
-                    Text="No projects"
-                    FontSize="20"
-                    Margin="0, 15, 0, 0"
-                    FontStyle="Italic"/>
+                    Text="Marked as finished"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Margin="15, 30, 15, 0"
+                    />
+                <StackPanel
+                    x:Name="FinishedProjectsPanel"
+                    Margin="15, 0, 15, 15">
+                </StackPanel>
             </StackPanel>
 
             <TextBlock

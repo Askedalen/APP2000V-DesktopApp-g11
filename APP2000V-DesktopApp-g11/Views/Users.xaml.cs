@@ -54,12 +54,12 @@ namespace APP2000V_DesktopApp_g11.Views
         private void UserButton_Click(object sender, RoutedEventArgs e)
         {
             UserButton userButton = sender as UserButton;
-            SwitchContent(new UserPage(userButton.UserId));
+            SwitchContent(AppWindow.Employees = new UserPage(userButton.UserId));
         }
 
         private void NewEmpBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new CreateUser());
+            SwitchContent(AppWindow.Employees = new CreateUser());
         }
     }
 }

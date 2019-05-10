@@ -362,7 +362,8 @@ namespace APP2000V_DesktopApp_g11.Models
                     return context.Tasks.Where(t => t.TaskDeadline.HasValue
                                                 && !t.CompletionDate.HasValue
                                                && (!t.Deleted.HasValue
-                                                 || t.Deleted.Value == false))
+                                                 || t.Deleted.Value == false)
+                                                && !t.Project.CompletionDate.HasValue)
                                         .Include(t => t.Project)
                                         .OrderBy(o => o.TaskDeadline)
                                         .Take(4)
@@ -397,6 +398,35 @@ namespace APP2000V_DesktopApp_g11.Models
                 {
                     Console.WriteLine(e.Message);
                     throw;
+                }
+            }
+        }
+
+        internal int DropTaskList(TaskList list)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    TaskList oldList = context.TaskLists
+                                              .Where(l => l.TaskListId == list.TaskListId
+                                                       && l.ProjectId == list.ProjectId)
+                                              .FirstOrDefault();
+                    if (oldList != null)
+                    {
+                        context.TaskLists.Remove(oldList);
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return 1;
                 }
             }
         }
@@ -711,9 +741,12 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    List<PTask> tasks = context.Tasks.Where(t => t.TaskProjectId == pid
-                                                              && !t.CompletionDate.HasValue
-                                                              && t.Deleted == false).ToList();
+                    List<PTask> tasks = context.Tasks
+                                               .Where(t => t.TaskProjectId == pid
+                                                       && !t.CompletionDate.HasValue
+                                                        && t.Deleted == false)
+                                               .OrderByDescending(o => o.TaskCreationDate)
+                                               .ToList();
                     return tasks;
                 }
             }
@@ -749,7 +782,10 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    PTask task = context.Tasks.Where(t => t.TaskId == tid).FirstOrDefault();
+                    PTask task = context.Tasks
+                                        .Where(t => t.TaskId == tid)
+                                        .Include(i => i.TaskList)
+                                        .FirstOrDefault();
                     return task;
                 }
             }
@@ -872,9 +908,12 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    List<Project> projects = context.Projects.Where(p => !p.CompletionDate.HasValue 
-                                                                      && (!p.MarkedAsFinished.HasValue
-                                                                       || p.MarkedAsFinished.Value == false)).ToList();
+                    List<Project> projects = context.Projects
+                                                    .Where(p => !p.CompletionDate.HasValue 
+                                                            && (!p.MarkedAsFinished.HasValue
+                                                              || p.MarkedAsFinished.Value == false))
+                                                    .Include(i => i.ProjectParticipants)
+                                                    .ToList();
                     return projects;
                 }
             }
@@ -892,10 +931,13 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    List<PTask> tasks = context.Tasks.Where(t => t.TaskListId == l.TaskListId 
-                                                              && t.TaskProjectId == l.ProjectId 
-                                                              && !t.CompletionDate.HasValue
-                                                              && t.Deleted == false).ToList();
+                    List<PTask> tasks = context.Tasks
+                                               .Where(t => t.TaskListId == l.TaskListId 
+                                                        && t.TaskProjectId == l.ProjectId 
+                                                       && !t.CompletionDate.HasValue
+                                                        && t.Deleted == false)
+                                               .OrderByDescending(o => o.TaskCreationDate)
+                                               .ToList();
                     return tasks;
                 }
             }

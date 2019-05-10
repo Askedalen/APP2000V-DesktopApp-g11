@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -27,53 +29,37 @@ namespace APP2000V_DesktopApp_g11
             InitializeComponent();
         }
 
-        DesktopGUI desktopGUI;
+        DesktopGUI DesktopGUI = new DesktopGUI();
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameInput.Text;
-            string password = PasswordInput.Text;
-            User userInput = new User() { Username = username, Password = password };
-            string connectionString = "server=localhost;port=3306;database=app2000v;uid=root;";
+            string password = PasswordInput.Password;
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (WorkflowContext context = new WorkflowContext())
             {
-                connection.Open();
-
                 try
                 {
-                    using (MySqlCommand cmd = connection.CreateCommand())
+                    User user = context.Users
+                                       .Where(u => u.Username == username
+                                                && u.Password == password
+                                                && u.Role == 0)
+                                       .FirstOrDefault();
+                    if (user != null)
                     {
-                        cmd.CommandText = "SELECT * FROM users WHERE Username=@username AND Password=@password AND IsAdmin=true";
-                        cmd.Parameters.AddWithValue("@username", username);
-                        cmd.Parameters.AddWithValue("@password", password);
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                var ii = reader.FieldCount;
-                                for (int i = 0; i < ii; i++)
-                                {
-                                    if (reader[i] is DBNull)
-                                        ErrorMessage.Text = "Username and password do not match.";
-                                    else
-                                    {
-                                        desktopGUI = new DesktopGUI();
-                                        desktopGUI.Show();
-                                        this.Hide();
-                                    }
-                                }
-                            }
-                        }
+                        DesktopGUI.OpenWindow();
+                        this.Close();
                     }
-                }
-                catch (MySqlException ex)
-                {
-                    ErrorMessage.Text = "Username and password do not match.";
-                    Console.WriteLine(ex.Message);
-                }
+                    else
+                    {
+                        ErrorMessage.Text = "Wrong username/password";
+                    }
 
-                connection.Close();
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                }
             }
         }
     }

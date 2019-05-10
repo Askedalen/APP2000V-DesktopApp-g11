@@ -24,7 +24,7 @@
 
         <TextBlock
             Text="Create new project"
-            FontSize="30"
+            FontSize="26"
             />
 
         <StackPanel
@@ -37,43 +37,43 @@
             <Label
                 Content="Project _Name"
                 Target="{Binding ElementName=ProjectNameInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <TextBox
                 x:Name="ProjectNameInput"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project _Description"
                 Target="{Binding ElementName=ProjectDescInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <TextBox
                 x:Name="ProjectDescInput"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project _Start (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectStartInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <DatePicker
                 x:Name="ProjectStartPicker"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project D_eadline (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectDeadlineInput}"
-                FontSize="28"/>
+                FontSize="20"/>
             <DatePicker
                 x:Name="ProjectDeadlinePicker"
-                FontSize="28"
+                FontSize="20"
                 Margin="0, 0, 0, 30"/>
             <Label
                 Content="Project _Manager"
                 Target="{Binding ElementName=ChooseTaskList}"
-                FontSize="28"/>
+                FontSize="20"/>
             <ComboBox
                     x:Name="ChooseProjectManager"
                     Width="400"
-                    FontSize="28"
+                    FontSize="20"
                     Background="White"
                     HorizontalAlignment="Left">
                 <ComboBox.ItemTemplate>
@@ -88,7 +88,7 @@
             <Button
                 x:Name="RegisterProjectBtn"
                 Content="Register project" 
-                FontSize="28"
+                FontSize="22"
                 Padding="10"
                 Margin="0, 30, 0, 30"
                 Click="RegisterProjectBtn_Click" Height="69" >

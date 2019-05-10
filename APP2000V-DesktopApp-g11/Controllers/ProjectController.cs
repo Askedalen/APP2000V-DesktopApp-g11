@@ -12,22 +12,30 @@ namespace APP2000V_DesktopApp_g11.Controllers
     {
         private readonly Persistence Db = new Persistence();
 
-        public int CreateTask(PTask newTask)
+        public bool CreateTask(PTask newTask)
         {
+            if (newTask.TaskDeadline.HasValue)
+            {
+                if (DateTime.Compare(DateTime.Now, newTask.TaskDeadline.Value) >= 0)
+                {
+                    Log.Error("Deadline cannot be a previous date!");
+                    return false;
+                }
+            }
             int result = Db.CreateTask(newTask);
             if (result == 0)
             {
-                return 0;
+                return true;
             }
             else if (result == 1)
             {
                 Log.Error("Could not create task!");
-                return 1;
+                return false;
             }
             else
             {
                 Log.Error("Unknown error!");
-                return 2;
+                return false;
             }
         }
 
@@ -165,6 +173,31 @@ namespace APP2000V_DesktopApp_g11.Controllers
                 return -1;
             }
 
+            if (newProject.ProjectStart.HasValue)
+            {
+                if (DateTime.Compare(DateTime.Now, newProject.ProjectStart.Value) >= 0)
+                {
+                    Log.Error("Project start cannot be a previous date!");
+                    return -1;
+                }
+            }
+            if (newProject.ProjectDeadline.HasValue)
+            {
+                if (DateTime.Compare(DateTime.Now, newProject.ProjectDeadline.Value) >= 0)
+                {
+                    Log.Error("Project deadline cannot be a previous date!");
+                    return -1;
+                }
+            }
+            if (newProject.ProjectStart.HasValue && newProject.ProjectDeadline.HasValue)
+            {
+                if (DateTime.Compare(newProject.ProjectStart.Value, newProject.ProjectDeadline.Value) >= 0)
+                {
+                    Log.Error("Project deadline must be later than project start!");
+                    return -1;
+                }
+            }
+
             int result = Db.CreateProject(newProject);
             if (result != -1)
             {
@@ -199,22 +232,22 @@ namespace APP2000V_DesktopApp_g11.Controllers
             }
         }
 
-        internal int DeleteProject(int pid)
+        internal bool DeleteProject(int pid)
         {
             int result = Db.DeleteProject(pid);
             if (result == 0)
             {
-                return 0;
+                return true;
             }
             else if (result == 2)
             {
                 Log.Error("Could not find project!");
-                return 2;
+                return false;
             }
             else
             {
                 Log.Error("Unknown error!");
-                return 1;
+                return false;
             }
         }
 
@@ -245,22 +278,53 @@ namespace APP2000V_DesktopApp_g11.Controllers
             }
         }
 
-        internal int UpdateProject(Project projectUpdate, int pid)
+        internal bool UpdateProject(Project projectUpdate, int pid)
         {
+            if (projectUpdate.ProjectName == null || projectUpdate.ProjectName == "")
+            {
+                Log.Error("The project must have a name!");
+                return false;
+            }
+
+            if (projectUpdate.ProjectStart.HasValue)
+            {
+                if (DateTime.Compare(DateTime.Now, projectUpdate.ProjectStart.Value) >= 0)
+                {
+                    Log.Error("Project start cannot be a previous date!");
+                    return false;
+                }
+            }
+            if (projectUpdate.ProjectDeadline.HasValue)
+            {
+                if (DateTime.Compare(DateTime.Now, projectUpdate.ProjectDeadline.Value) >= 0)
+                {
+                    Log.Error("Project deadline cannot be a previous date!");
+                    return false;
+                }
+            }
+            if (projectUpdate.ProjectStart.HasValue && projectUpdate.ProjectDeadline.HasValue)
+            {
+                if (DateTime.Compare(projectUpdate.ProjectStart.Value, projectUpdate.ProjectDeadline.Value) >= 0)
+                {
+                    Log.Error("Project deadline must be later than project start!");
+                    return false;
+                }
+            }
+
             int result = Db.UpdateProject(projectUpdate, pid);
             if (result == 0)
             {
-                return 0;
+                return true;
             }
             else if (result == 1)
             {
                 Log.Error("Project not found!");
-                return 1;
+                return false;
             }
             else
             {
                 Log.Error("Unknown error!");
-                return 2;
+                return false;
             }
         }
 
@@ -283,27 +347,35 @@ namespace APP2000V_DesktopApp_g11.Controllers
             }
         }
 
-        public int UpdateTask(PTask taskUpdate)
+        public bool UpdateTask(PTask taskUpdate)
         {
+            if (taskUpdate.TaskDeadline.HasValue)
+            {
+                if (DateTime.Compare(DateTime.Now, taskUpdate.TaskDeadline.Value) >= 0)
+                {
+                    Log.Error("Deadline cannot be a previous date!");
+                    return false;
+                }
+            }
             int result = Db.UpdateTask(taskUpdate);
             if (result == 0)
             {
-                return 0;
+                return true;
             }
             else if (result == 1)
             {
                 Log.Error("Could not update task!");
-                return 1;
+                return false;
             }
             else if (result == 2)
             {
                 Log.Error("Task not found!");
-                return 2;
+                return false;
             }
             else
             {
                 Log.Error("Unknown error!");
-                return 3;
+                return false;
             }
         }
 
@@ -348,6 +420,30 @@ namespace APP2000V_DesktopApp_g11.Controllers
             {
                 Log.Error("Unknown error!");
                 return 2;
+            }
+        }
+
+        internal bool DropTaskList(int listId, int projectId)
+        {
+            TaskList list = new TaskList
+            {
+                TaskListId = listId,
+                ProjectId = projectId
+            };
+            int result = Db.DropTaskList(list);
+            if (result == 0)
+            {
+                return true;
+            }
+            else if (result == 1)
+            {
+                Log.Error("Could not delete list!");
+                return false;
+            }
+            else
+            {
+                Log.Error("Unknown error!");
+                return false;
             }
         }
     }

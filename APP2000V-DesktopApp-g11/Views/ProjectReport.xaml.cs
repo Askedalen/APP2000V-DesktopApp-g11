@@ -42,7 +42,7 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             if (Pc.ApproveProject(CurrentReport.ProjectId.Value) == 0)
             {
-                SwitchContent(new Dashboard());
+                SwitchContent(AppWindow.Dashboard = new Dashboard());
             }
         }
 
@@ -50,13 +50,13 @@ namespace APP2000V_DesktopApp_g11.Views
         {
             if (Pc.DisapproveProject(CurrentReport.ProjectId.Value) == 0)
             {
-                SwitchContent(new Dashboard());
+                SwitchContent(AppWindow.Dashboard = new Dashboard());
             }
         }
 
         private void ViewProjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(new ProjectPage(CurrentReport.Project.ProjectId));
+            SwitchContent(AppWindow.Projects = new ProjectPage(CurrentReport.Project.ProjectId));
         }
     }
 }

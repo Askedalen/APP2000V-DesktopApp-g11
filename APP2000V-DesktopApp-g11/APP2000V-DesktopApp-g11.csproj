@@ -105,7 +105,7 @@
     <Compile Include="Assets\Buttons.cs" />
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
-    <Compile Include="Controllers\Log.cs" />
+    <Compile Include="Assets\Log.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
