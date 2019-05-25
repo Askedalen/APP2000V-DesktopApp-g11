@@ -18,7 +18,7 @@
                 d:DesignHeight="1080" d:DesignWidth="1620"
 >
 
-    <Grid Background="#FF7D8193">
+    <Grid Background="#E3E4E6">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
@@ -32,72 +32,144 @@
             />
 
         <TextBlock
-            Text="Userprofile"
-            FontSize="30" Background="#FF434547" Foreground="#DDF3F3F3" Padding="15,15,0,0"
+            Text="User profile"
+            FontSize="30" 
+            Background="#FF434547" 
+            Foreground="#DDF3F3F3" 
+            Padding="15,15,0,0"
             />
         <WrapPanel
-            
             Grid.Row="2"
             x:Name="UserProfileDisplay"
             Orientation="Horizontal"
-            Background="#FF7D8193" HorizontalAlignment="Center" Margin="0,100,0,0">
-            <StackPanel
-                Background="White"
-                Width="219"
-                Height="174"
-                Margin="30, 30, 30, 0">
-                <TextBlock
-                    FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="131" Margin="72,0,39,0" Width="108" ><Run/><LineBreak/><Run/><LineBreak/><Run Text="Photo"/></TextBlock>
-            </StackPanel>
-            <StackPanel
-                Background="White"
-                Width="483"
-                Height="277"
-                Margin="30, 30, 30, 0">
-                <materialDesign:ColorZone Mode="PrimaryDark" Padding="30" Background="#FF403E44" Height="30"/>
+            HorizontalAlignment="Center" 
+            Margin="0,100,0,0">
+            
+            <StackPanel>
 
+                <Button 
+                    x:Name="EditUserBtn"
+                    Content="Edit user"
+                    FontSize="20"
+                    Margin="1, 0, 0, 15"
+                    HorizontalAlignment="Left"
+                    Padding="10"
+                    Height="Auto"
+                    Click="EditUserBtn_Click"
+                    />
 
                 <Grid 
                     x:Name="UserInfoGrid"
-                    Height="166">
+                    Background="#FF434547"
+                    MinWidth="400">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="41*"/>
-                        <ColumnDefinition Width="13*"/>
-                        <ColumnDefinition Width="299*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="78*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock TextWrapping="Wrap" Margin="13,9,264,136" Text="Username" Height="21" FontSize="16" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
-                    <TextBlock TextWrapping="Wrap" Margin="13,26,264,109" Grid.Row="1" RenderTransformOrigin="0.517,1.853" FontSize="16" Grid.ColumnSpan="3" Text="Firstname">
-                        <TextBlock.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleX="-1.414"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="-1.144"/>
-                            </TransformGroup>
-                        </TextBlock.RenderTransform></TextBlock>
-                    <TextBlock TextWrapping="Wrap" Margin="13,56,264,83" Text="Lastname" RenderTransformOrigin="0.516,1.559" Grid.Row="1" FontSize="16" Grid.ColumnSpan="3"/>
-                    <TextBlock TextWrapping="Wrap" Margin="177,25,80,116" Grid.Row="1" FontSize="16" Grid.Column="2" Text="Email"/>
-                    <TextBlock TextWrapping="Wrap" Margin="177,56,68,83" Grid.Row="1" FontSize="16" Grid.Column="2" Text="Phone"/>
-                    <TextBlock 
-                        x:Name="User" 
-                        Text="{Binding Username}"
-                        Margin="19,9,270,136" 
-                        Grid.Column="2" 
-                        Grid.RowSpan="2"/>
-                    <materialDesign:ColorZone Mode="PrimaryDark" Padding="10" Background="#FF403E44" Margin="0,94,0,-94" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch">
-                        <TextBlock TextWrapping="Wrap" Margin="0,0,409,111" Text="About:"  FontSize="16"
-/>
-                    </materialDesign:ColorZone>
-                    <TextBlock  x:Name="Firstname" Text="{Binding FirstName}" Margin="19,25,270,110" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.653,0.603"/>
-                    <TextBlock  x:Name="Lastname" Text="{Binding LastName}" Margin="19,56,270,79" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Grid.Row="1"/>
-                    <TextBlock x:Name="Email" Text="{Binding Email}" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,23,55,112" Grid.Row="1"/>
-                    <TextBlock  x:Name="Phone" Text="{Binding PhoneNumber}" RenderTransformOrigin="0.653,0.603" Grid.Column="2" Margin="235,55,55,80" Grid.Row="1"/>
-                    <TextBlock  x:Name="About" Text="{Binding About}" Margin="10,131,10,-85" RenderTransformOrigin="0.653,0.603" Grid.Row="1" Grid.ColumnSpan="3" Background="#FFE8E8E8"/>
 
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Padding="15"
+                        Foreground="White"
+                        FontSize="24">
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text="{Binding LastName}"/>
+                    </TextBlock>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="15, 0, 0, 0"
+                        Padding="10, 5"
+                        Background="White"
+                        FontSize="20">
+                        <Run Text="Username:"/>
+                        <Run Text="{Binding Username}"/>
+                    </TextBlock>
+
+                    <TextBlock  
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Margin="15, 0, 0, 0"
+                        Padding="10, 5"
+                        Background="White"
+                        FontSize="20">
+                        <Run Text="Firstname:"/>
+                        <Run Text="{Binding FirstName}"/>
+                    </TextBlock>
+                    
+                    <TextBlock  
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        Margin="15, 0, 0, 0"
+                        Padding="10, 5"
+                        Background="White"
+                        FontSize="20">
+                        <Run Text="Lastname:"/>
+                        <Run Text="{Binding LastName}"/>
+                    </TextBlock>
+
+                    <TextBlock  
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="0, 0, 15, 0"
+                        Padding="10, 5"
+                        Background="White"
+                        FontSize="20">
+                        <Run Text="Email:"/>
+                        <Run Text="{Binding Email}"/>
+                    </TextBlock>
+
+                    <TextBlock  
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Margin="0, 0, 15, 0"
+                        Padding="10, 5"
+                        Background="White"
+                        FontSize="20">
+                        <Run Text="Phone:"/>
+                        <Run Text="{Binding PhoneNumber}"/>
+                    </TextBlock>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Margin="0, 0, 15, 0"
+                        Padding="10, 5"
+                        Background="White"/>
+
+                    <StackPanel
+                        Grid.Column="0"
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2">
+                        <TextBlock
+                            Margin="15, 10"
+                            Foreground="White"
+                            Text="About:"
+                            FontSize="20">
+                        </TextBlock>
+
+                        <TextBlock
+                            Margin="15, 0, 15, 20"
+                            Background="White"
+                            MinHeight="200"
+                            MinWidth="500"
+                            MaxWidth="800"
+                            Padding="10"
+                            TextWrapping="Wrap"
+                            FontSize="20">
+                            <Run Text="{Binding About}"/>
+                        </TextBlock>
+                    </StackPanel>
                 </Grid>
 
 

@@ -1,0 +1,1554 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "d:\\Development\\APP2000V-FinalProject\\APP2000V-DesktopApp-g11\\APP2000V-DesktopApp-g11",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2019-05-24 17:46:53",
+            "filesum": 245,
+            "codesum": 81187,
+            "commentsum": 1250,
+            "blanksum": 3089,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "App.config"
+                },
+                {
+                    "blank": 0,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "App.xaml"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 3,
+                    "filename": "App.xaml.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 342,
+                    "comment": 0,
+                    "filename": "APP2000V-DesktopApp-g11.csproj"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "APP2000V-DesktopApp-g11.csproj.user"
+                },
+                {
+                    "blank": 10,
+                    "code": 47,
+                    "comment": 28,
+                    "filename": "Assets\\AnimatedUserControl.cs"
+                },
+                {
+                    "blank": 2,
+                    "code": 173,
+                    "comment": 0,
+                    "filename": "Assets\\Animations.xaml"
+                },
+                {
+                    "blank": 5,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "Assets\\Buttons.cs"
+                },
+                {
+                    "blank": 5,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "Assets\\Log.cs"
+                },
+                {
+                    "filename": "Assets\\Logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 18,
+                    "code": 224,
+                    "comment": 0,
+                    "filename": "Assets\\StylesDictionary.xaml"
+                },
+                {
+                    "filename": "Assets\\WorkMotion.gif",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Debug\\APP2000V-DesktopApp-g11.exe",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "bin\\Debug\\APP2000V-DesktopApp-g11.exe.config"
+                },
+                {
+                    "filename": "bin\\Debug\\APP2000V-DesktopApp-g11.pdb",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Debug\\EntityFramework.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Debug\\EntityFramework.SqlServer.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 862,
+                    "comment": 0,
+                    "filename": "bin\\Debug\\EntityFramework.SqlServer.xml"
+                },
+                {
+                    "blank": 62,
+                    "code": 23342,
+                    "comment": 0,
+                    "filename": "bin\\Debug\\EntityFramework.xml"
+                },
+                {
+                    "filename": "bin\\Debug\\Google.Protobuf.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 77,
+                    "code": 4138,
+                    "comment": 0,
+                    "filename": "bin\\Debug\\Google.Protobuf.xml"
+                },
+                {
+                    "filename": "bin\\Debug\\MaterialDesignColors.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Debug\\MaterialDesignColors.pdb",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Debug\\MaterialDesignThemes.Wpf.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Debug\\MaterialDesignThemes.Wpf.pdb",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 933,
+                    "comment": 0,
+                    "filename": "bin\\Debug\\MaterialDesignThemes.Wpf.xml"
+                },
+                {
+                    "filename": "bin\\Debug\\MySql.Data.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Debug\\MySql.Data.EntityFramework.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 252,
+                    "comment": 0,
+                    "filename": "bin\\Debug\\MySql.Data.EntityFramework.xml"
+                },
+                {
+                    "blank": 100,
+                    "code": 3118,
+                    "comment": 0,
+                    "filename": "bin\\Debug\\MySql.Data.xml"
+                },
+                {
+                    "filename": "bin\\Release\\APP2000V-DesktopApp-g11.exe",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": "bin\\Release\\APP2000V-DesktopApp-g11.exe.config"
+                },
+                {
+                    "filename": "bin\\Release\\APP2000V-DesktopApp-g11.pdb",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Release\\EntityFramework.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Release\\EntityFramework.SqlServer.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 862,
+                    "comment": 0,
+                    "filename": "bin\\Release\\EntityFramework.SqlServer.xml"
+                },
+                {
+                    "blank": 62,
+                    "code": 23342,
+                    "comment": 0,
+                    "filename": "bin\\Release\\EntityFramework.xml"
+                },
+                {
+                    "filename": "bin\\Release\\Google.Protobuf.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 77,
+                    "code": 4138,
+                    "comment": 0,
+                    "filename": "bin\\Release\\Google.Protobuf.xml"
+                },
+                {
+                    "filename": "bin\\Release\\MySql.Data.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bin\\Release\\MySql.Data.EntityFramework.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 252,
+                    "comment": 0,
+                    "filename": "bin\\Release\\MySql.Data.EntityFramework.xml"
+                },
+                {
+                    "blank": 100,
+                    "code": 3118,
+                    "comment": 0,
+                    "filename": "bin\\Release\\MySql.Data.xml"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Controllers\\AccessController.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Controllers\\EmployeeController.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Controllers\\LoginController.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Controllers\\NotificationController.cs"
+                },
+                {
+                    "blank": 25,
+                    "code": 425,
+                    "comment": 1,
+                    "filename": "Controllers\\ProjectController.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Controllers\\RegistrationController.cs"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 8,
+                    "filename": "Models\\AssignedTask.cs"
+                },
+                {
+                    "blank": 14,
+                    "code": 235,
+                    "comment": 2,
+                    "filename": "Models\\CreateDatabase.cs"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 8,
+                    "filename": "Models\\EmployeeLeave.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 28,
+                    "comment": 8,
+                    "filename": "Models\\Event.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "Models\\KodeForÅLageFremmednøkler.txt"
+                },
+                {
+                    "blank": 3,
+                    "code": 16,
+                    "comment": 8,
+                    "filename": "Models\\Notification.cs"
+                },
+                {
+                    "blank": 56,
+                    "code": 914,
+                    "comment": 0,
+                    "filename": "Models\\Persistence.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 36,
+                    "comment": 8,
+                    "filename": "Models\\Project.cs"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 8,
+                    "filename": "Models\\ProjectParticipant.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 30,
+                    "comment": 8,
+                    "filename": "Models\\PTask.cs"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 8,
+                    "filename": "Models\\Report.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 23,
+                    "comment": 8,
+                    "filename": "Models\\TaskList.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 40,
+                    "comment": 8,
+                    "filename": "Models\\User.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 28,
+                    "comment": 8,
+                    "filename": "Models\\WorkflowDatabase.Context.cs"
+                },
+                {
+                    "blank": 96,
+                    "code": 530,
+                    "comment": 10,
+                    "filename": "Models\\WorkflowDatabase.Context.tt"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 8,
+                    "filename": "Models\\WorkflowDatabase.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 9,
+                    "filename": "Models\\WorkflowDatabase.Designer.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 952,
+                    "comment": 0,
+                    "filename": "Models\\WorkflowDatabase.edmx"
+                },
+                {
+                    "blank": 0,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "Models\\WorkflowDatabase.edmx.diagram"
+                },
+                {
+                    "blank": 107,
+                    "code": 618,
+                    "comment": 8,
+                    "filename": "Models\\WorkflowDatabase.tt"
+                },
+                {
+                    "blank": 11,
+                    "code": 49,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\AnotherWindow.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\App.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 13,
+                    "code": 52,
+                    "comment": 18,
+                    "filename": "obj\\Debug\\App.g.cs"
+                },
+                {
+                    "blank": 13,
+                    "code": 52,
+                    "comment": 18,
+                    "filename": "obj\\Debug\\App.g.i.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.csproj.CopyComplete"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "blank": 0,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.csproj.FileListAbsolute.txt"
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.csproj.GenerateResource.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.csprojAssemblyReference.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.exe",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.g.resources",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11.pdb",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 3,
+                    "comment": 9,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_Content.g.cs"
+                },
+                {
+                    "blank": 3,
+                    "code": 3,
+                    "comment": 9,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_Content.g.i.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_fnnxdloj_wpftmp.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_fnnxdloj_wpftmp.csprojAssemblyReference.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_MarkupCompile.cache"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_MarkupCompile.i.cache"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_MarkupCompile.i.lref"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_MarkupCompile.lref"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_pocqs1ee_wpftmp.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_pocqs1ee_wpftmp.csprojAssemblyReference.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\APP2000V-DesktopApp-g11_vesqamda_wpftmp.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "filename": "obj\\Debug\\APP2000V_DesktopApp_g11.Properties.Resources.resources",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\Assets\\Animations.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\Assets\\StylesDictionary.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\DesignTimeResolveAssemblyReferences.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\DesignTimeResolveAssemblyReferencesInput.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 414,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\edmxResourcesToEmbed\\Models\\WorkflowDatabase.csdl"
+                },
+                {
+                    "blank": 0,
+                    "code": 125,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\edmxResourcesToEmbed\\Models\\WorkflowDatabase.msl"
+                },
+                {
+                    "blank": 0,
+                    "code": 382,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\edmxResourcesToEmbed\\Models\\WorkflowDatabase.ssdl"
+                },
+                {
+                    "blank": 0,
+                    "code": 279,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\edmxResourcesToEmbed\\Models\\WorkflowModel.csdl"
+                },
+                {
+                    "blank": 0,
+                    "code": 96,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\edmxResourcesToEmbed\\Models\\WorkflowModel.msl"
+                },
+                {
+                    "blank": 0,
+                    "code": 259,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\edmxResourcesToEmbed\\Models\\WorkflowModel.ssdl"
+                },
+                {
+                    "blank": 9,
+                    "code": 27,
+                    "comment": 27,
+                    "filename": "obj\\Debug\\GeneratedInternalTypeHelper.g.cs"
+                },
+                {
+                    "blank": 9,
+                    "code": 27,
+                    "comment": 27,
+                    "filename": "obj\\Debug\\GeneratedInternalTypeHelper.g.i.cs"
+                },
+                {
+                    "blank": 11,
+                    "code": 49,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\MainWindow.g.i.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\TempPE\\Controllers.WorkflowDatabase.Context.cs.dll"
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Controllers.WorkflowDatabase.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Controllers.WorkflowDatabase.Designer.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Model1.Context.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Model1.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Models.waindordb.Context.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Models.waindordb.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Models.waindordb.Designer.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\TempPE\\Models.WorkflowDatabase.Context.cs.dll"
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Models.WorkflowDatabase.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Models.WorkflowDatabase.Designer.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\TempPE\\Models.WorkflowModel.Context.cs.dll"
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Models.WorkflowModel.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Models.WorkflowModel.Designer.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\TempPE\\Properties.Resources.Designer.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\AdminLogin.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 25,
+                    "code": 88,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\AdminLogin.g.cs"
+                },
+                {
+                    "blank": 25,
+                    "code": 88,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\AdminLogin.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\Archive.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 14,
+                    "code": 61,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Archive.g.cs"
+                },
+                {
+                    "blank": 14,
+                    "code": 61,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Archive.g.i.cs"
+                },
+                {
+                    "blank": 51,
+                    "code": 159,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\CreateEmployee.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\CreateProject.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 78,
+                    "code": 229,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\CreateProject.g.cs"
+                },
+                {
+                    "blank": 78,
+                    "code": 229,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\CreateProject.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\CreateUser.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 54,
+                    "code": 167,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\CreateUser.g.cs"
+                },
+                {
+                    "blank": 54,
+                    "code": 167,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\CreateUser.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\Dashboard.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 30,
+                    "code": 107,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Dashboard.g.cs"
+                },
+                {
+                    "blank": 30,
+                    "code": 107,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Dashboard.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\DesktopGUI.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 49,
+                    "code": 148,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\DesktopGUI.g.cs"
+                },
+                {
+                    "blank": 49,
+                    "code": 148,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\DesktopGUI.g.i.cs"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Employees.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\LoadingWindow.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 37,
+                    "code": 122,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\LoadingWindow.g.cs"
+                },
+                {
+                    "blank": 37,
+                    "code": 122,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\LoadingWindow.g.i.cs"
+                },
+                {
+                    "blank": 11,
+                    "code": 49,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\MainWindow.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\ProjectPage.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 147,
+                    "code": 397,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\ProjectPage.g.cs"
+                },
+                {
+                    "blank": 147,
+                    "code": 397,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\ProjectPage.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\ProjectReport.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 32,
+                    "code": 105,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\ProjectReport.g.cs"
+                },
+                {
+                    "blank": 32,
+                    "code": 105,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\ProjectReport.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\Projects.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Projects.g.cs"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Projects.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\ProjectSettings.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 47,
+                    "code": 145,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\ProjectSettings.g.cs"
+                },
+                {
+                    "blank": 47,
+                    "code": 145,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\ProjectSettings.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\SplashScreen.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 14,
+                    "code": 60,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\SplashScreen.g.cs"
+                },
+                {
+                    "blank": 14,
+                    "code": 60,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\SplashScreen.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\UserPage.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 36,
+                    "code": 125,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\UserPage.g.cs"
+                },
+                {
+                    "blank": 36,
+                    "code": 125,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\UserPage.g.i.cs"
+                },
+                {
+                    "filename": "obj\\Debug\\Views\\Users.baml",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Users.g.cs"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 15,
+                    "filename": "obj\\Debug\\Views\\Users.g.i.cs"
+                },
+                {
+                    "blank": 13,
+                    "code": 52,
+                    "comment": 18,
+                    "filename": "obj\\Release\\App.g.cs"
+                },
+                {
+                    "blank": 10,
+                    "code": 42,
+                    "comment": 18,
+                    "filename": "obj\\Release\\App.g.i.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.csproj.CopyComplete"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "blank": 0,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.csproj.FileListAbsolute.txt"
+                },
+                {
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.csproj.GenerateResource.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.csprojAssemblyReference.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.exe",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.g.resources",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11.pdb",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 3,
+                    "comment": 9,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11_Content.g.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11_fnnxdloj_wpftmp.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11_MarkupCompile.cache"
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11_MarkupCompile.lref"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11_pocqs1ee_wpftmp.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "obj\\Release\\APP2000V-DesktopApp-g11_vesqamda_wpftmp.csproj.CoreCompileInputs.cache"
+                },
+                {
+                    "filename": "obj\\Release\\APP2000V_DesktopApp_g11.Properties.Resources.resources",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "obj\\Release\\DesignTimeResolveAssemblyReferencesInput.cache",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 9,
+                    "code": 27,
+                    "comment": 27,
+                    "filename": "obj\\Release\\GeneratedInternalTypeHelper.g.cs"
+                },
+                {
+                    "blank": 9,
+                    "code": 27,
+                    "comment": 27,
+                    "filename": "obj\\Release\\GeneratedInternalTypeHelper.g.i.cs"
+                },
+                {
+                    "blank": 16,
+                    "code": 64,
+                    "comment": 15,
+                    "filename": "obj\\Release\\MainWindow.g.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Release\\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Release\\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Release\\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs"
+                },
+                {
+                    "filename": "obj\\Release\\TempPE\\Properties.Resources.Designer.cs.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 25,
+                    "code": 88,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\AdminLogin.g.cs"
+                },
+                {
+                    "blank": 25,
+                    "code": 88,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\AdminLogin.g.i.cs"
+                },
+                {
+                    "blank": 67,
+                    "code": 201,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\CreateProject.g.cs"
+                },
+                {
+                    "blank": 31,
+                    "code": 104,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\CreateProject.g.i.cs"
+                },
+                {
+                    "blank": 12,
+                    "code": 56,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\Dashboard.g.cs"
+                },
+                {
+                    "blank": 14,
+                    "code": 61,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\Dashboard.g.i.cs"
+                },
+                {
+                    "blank": 40,
+                    "code": 124,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\DesktopGUI.g.cs"
+                },
+                {
+                    "blank": 40,
+                    "code": 124,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\DesktopGUI.g.i.cs"
+                },
+                {
+                    "blank": 18,
+                    "code": 75,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\Employees.g.cs"
+                },
+                {
+                    "blank": 11,
+                    "code": 49,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\Employees.g.i.cs"
+                },
+                {
+                    "blank": 37,
+                    "code": 122,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\LoadingWindow.g.cs"
+                },
+                {
+                    "blank": 74,
+                    "code": 213,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\ProjectPage.g.cs"
+                },
+                {
+                    "blank": 27,
+                    "code": 92,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\ProjectPage.g.i.cs"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\Projects.g.cs"
+                },
+                {
+                    "blank": 22,
+                    "code": 81,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\Projects.g.i.cs"
+                },
+                {
+                    "blank": 14,
+                    "code": 60,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\SplashScreen.g.cs"
+                },
+                {
+                    "blank": 14,
+                    "code": 60,
+                    "comment": 15,
+                    "filename": "obj\\Release\\Views\\SplashScreen.g.i.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "packages.config"
+                },
+                {
+                    "blank": 8,
+                    "code": 20,
+                    "comment": 29,
+                    "filename": "Properties\\AssemblyInfo.cs"
+                },
+                {
+                    "blank": 8,
+                    "code": 41,
+                    "comment": 23,
+                    "filename": "Properties\\Resources.Designer.cs"
+                },
+                {
+                    "blank": 6,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "Properties\\Resources.resx"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 9,
+                    "filename": "Properties\\Settings.Designer.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "Properties\\Settings.settings"
+                },
+                {
+                    "blank": 5,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "Views\\AdminLogin.xaml"
+                },
+                {
+                    "blank": 5,
+                    "code": 58,
+                    "comment": 3,
+                    "filename": "Views\\AdminLogin.xaml.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "Views\\Archive.xaml"
+                },
+                {
+                    "blank": 3,
+                    "code": 67,
+                    "comment": 3,
+                    "filename": "Views\\Archive.xaml.cs"
+                },
+                {
+                    "blank": 7,
+                    "code": 275,
+                    "comment": 0,
+                    "filename": "Views\\CreateProject.xaml"
+                },
+                {
+                    "blank": 7,
+                    "code": 66,
+                    "comment": 3,
+                    "filename": "Views\\CreateProject.xaml.cs"
+                },
+                {
+                    "blank": 6,
+                    "code": 136,
+                    "comment": 0,
+                    "filename": "Views\\CreateUser.xaml"
+                },
+                {
+                    "blank": 17,
+                    "code": 54,
+                    "comment": 17,
+                    "filename": "Views\\CreateUser.xaml.cs"
+                },
+                {
+                    "blank": 14,
+                    "code": 272,
+                    "comment": 0,
+                    "filename": "Views\\Dashboard.xaml"
+                },
+                {
+                    "blank": 25,
+                    "code": 342,
+                    "comment": 3,
+                    "filename": "Views\\Dashboard.xaml.cs"
+                },
+                {
+                    "blank": 10,
+                    "code": 118,
+                    "comment": 0,
+                    "filename": "Views\\DesktopGUI.xaml"
+                },
+                {
+                    "blank": 10,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "Views\\DesktopGUI.xaml.cs"
+                },
+                {
+                    "blank": 1,
+                    "code": 96,
+                    "comment": 0,
+                    "filename": "Views\\LoadingWindow.xaml"
+                },
+                {
+                    "blank": 4,
+                    "code": 32,
+                    "comment": 3,
+                    "filename": "Views\\LoadingWindow.xaml.cs"
+                },
+                {
+                    "blank": 11,
+                    "code": 449,
+                    "comment": 0,
+                    "filename": "Views\\ProjectPage.xaml"
+                },
+                {
+                    "blank": 75,
+                    "code": 638,
+                    "comment": 8,
+                    "filename": "Views\\ProjectPage.xaml.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 93,
+                    "comment": 0,
+                    "filename": "Views\\ProjectReport.xaml"
+                },
+                {
+                    "blank": 6,
+                    "code": 53,
+                    "comment": 3,
+                    "filename": "Views\\ProjectReport.xaml.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": "Views\\Projects.xaml"
+                },
+                {
+                    "blank": 14,
+                    "code": 90,
+                    "comment": 1,
+                    "filename": "Views\\Projects.xaml.cs"
+                },
+                {
+                    "blank": 4,
+                    "code": 123,
+                    "comment": 0,
+                    "filename": "Views\\ProjectSettings.xaml"
+                },
+                {
+                    "blank": 7,
+                    "code": 81,
+                    "comment": 3,
+                    "filename": "Views\\ProjectSettings.xaml.cs"
+                },
+                {
+                    "blank": 6,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "Views\\SplashScreen.xaml"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 4,
+                    "filename": "Views\\SplashScreen.xaml.cs"
+                },
+                {
+                    "blank": 12,
+                    "code": 98,
+                    "comment": 0,
+                    "filename": "Views\\UserPage.xaml"
+                },
+                {
+                    "blank": 2,
+                    "code": 31,
+                    "comment": 3,
+                    "filename": "Views\\UserPage.xaml.cs"
+                },
+                {
+                    "blank": 5,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "Views\\Users.xaml"
+                },
+                {
+                    "blank": 4,
+                    "code": 58,
+                    "comment": 3,
+                    "filename": "Views\\Users.xaml.cs"
+                }
+            ]
+        }
+    ]
+}

@@ -46,6 +46,23 @@ namespace APP2000V_DesktopApp_g11.Models
             }
         }
 
+        internal object GetSingleUserByUsername(string username)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    User user = context.Users.Where(u => u.Username == username).FirstOrDefault();
+                    return user;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+        }
+
         internal User GetSingleUser(int uid)
         {
             using (WorkflowContext context = new WorkflowContext())
@@ -62,7 +79,70 @@ namespace APP2000V_DesktopApp_g11.Models
                 }
             }
         }
-        
+
+        internal int UpdateUser(User user)
+        {
+            try
+            {
+                using (WorkflowContext context = new WorkflowContext())
+                {
+                    User oldUser = context.Users.Where(u => u.Username == user.Username).FirstOrDefault();
+                    if (oldUser != null)
+                    {
+                        oldUser.Username = user.Username;
+                        oldUser.FirstName = user.FirstName;
+                        oldUser.LastName = user.LastName;
+                        oldUser.Email = user.Email;
+                        oldUser.PhoneNumber = user.PhoneNumber;
+                        oldUser.About = user.About;
+
+                        if (user.Password != null && !user.Password.Equals(""))
+                        {
+                            oldUser.Password = user.Password;
+                        }
+
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("User update failed: ");
+                Console.WriteLine(e.Message);
+                return 1;
+            }
+        }
+
+        internal int DeleteUser(string username)
+        {
+            using (WorkflowContext context = new WorkflowContext())
+            {
+                try
+                {
+                    User removeUser = context.Users.Where(u => u.Username == username).FirstOrDefault();
+                    if (removeUser != null)
+                    {
+                        context.Users.Remove(removeUser);
+                        context.SaveChanges();
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return 1;
+                }
+            }
+        }
 
         internal List<Project> GetArchive()
         {
@@ -459,12 +539,10 @@ namespace APP2000V_DesktopApp_g11.Models
             {
                 using (WorkflowContext context = new WorkflowContext())
                 {
-                    context.Database.Log = (string message) => { Console.WriteLine(message); };
-
                     context.Users.Add(employee);
                     context.SaveChanges();
+                    return 0;
                 }
-                return 0;
             }
             catch (Exception exc)
             {

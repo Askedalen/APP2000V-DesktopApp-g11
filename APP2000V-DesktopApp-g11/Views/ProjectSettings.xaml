@@ -10,7 +10,7 @@
              d:DesignHeight="1080" d:DesignWidth="1620">
     <Grid 
         x:Name="ProjectSettingsGrid"
-        Background="White">
+        Background="#E3E4E6">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -26,7 +26,9 @@
         <TextBlock
             Text="Project Settings"
             FontSize="26"
-            Margin="15, 0, 0, 0"/>
+            Padding="10"
+            Background="#434547"
+            Foreground="#E3E4E6"/>
 
         <StackPanel
             Grid.Row="1"
@@ -53,7 +55,9 @@
                 x:Name="ProjectNameInput"
                 Text="{Binding ProjectName}"
                 FontSize="20"
-                Margin="0, 0, 0, 30"/>
+                Background="White"
+                Margin="0, 0, 0, 30"
+                Padding="5, 0"/>
             <Label
                 Content="Project _Description"
                 Target="{Binding ElementName=ProjectDescInput}"
@@ -62,7 +66,9 @@
                 x:Name="ProjectDescInput"
                 Text="{Binding ProjectDescription}"
                 FontSize="20"
-                Margin="0, 0, 0, 30"/>
+                Background="White"
+                Margin="0, 0, 0, 30"
+                Padding="5, 0"/>
             <Label
                 Content="Project _Start (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectStartInput}"
@@ -71,7 +77,9 @@
                 x:Name="ProjectStartPicker"
                 SelectedDate="{Binding ProjectStart}"
                 FontSize="20"
-                Margin="0, 0, 0, 30"/>
+                Background="White"
+                Margin="0, 0, 0, 30"
+                Padding="5, 0"/>
             <Label
                 Content="Project D_eadline (yyyy-mm-dd)"
                 Target="{Binding ElementName=ProjectDeadlineInput}"
@@ -80,17 +88,20 @@
                 x:Name="ProjectDeadlinePicker"
                 SelectedDate="{Binding ProjectDeadline}"
                 FontSize="20"
-                Margin="0, 0, 0, 30"/>
+                Background="White"
+                Margin="0, 0, 0, 30"
+                Padding="100"/>
             <Label
                 Content="Project _Manager"
                 Target="{Binding ElementName=ChooseTaskList}"
                 FontSize="20"/>
             <ComboBox
-                    x:Name="ChooseProjectManager"
-                    Width="400"
-                    FontSize="20"
-                    Background="White"
-                    HorizontalAlignment="Left">
+                x:Name="ChooseProjectManager"
+                Width="400"
+                FontSize="20"
+                Background="White"
+                Padding="10"
+                HorizontalAlignment="Left">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>

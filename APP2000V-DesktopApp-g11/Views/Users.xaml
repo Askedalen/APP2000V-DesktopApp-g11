@@ -31,21 +31,26 @@
             />
 
         <TextBlock
-            Text="Employees"
+            Text="Users"
             FontSize="30" Background="#FF434547" Foreground="#DDF3F3F3"
+            Padding="15"
             />
         <Button 
             x:Name="NewEmpBtn"
-            Width="200"
-            
-            Content="New User"
-            FontSize="28"  Height="Auto" Margin="689,10,731,21" HorizontalContentAlignment="Center" BorderBrush="#FF474747" Background="#FF66A8F7" Click="NewEmpBtn_Click"
+            Width="250"
+            Content="Edit users"
+            FontSize="28"  
+            Height="Auto" 
+            Margin="10"
+            HorizontalContentAlignment="Center" 
+            HorizontalAlignment="Center"
+            Click="NewEmpBtn_Click"
             />
         <WrapPanel
             Grid.Row="1"
             x:Name="EmployeesDisplay"
             Orientation="Horizontal"
-            Background="#FF7D8193">
+            Background="#E3E4E6">
             <StackPanel
                 Background="White"
                 Width="300"

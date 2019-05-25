@@ -23,14 +23,21 @@ namespace APP2000V_DesktopApp_g11.Views
     /// </summary>
     public partial class UserPage : AnimatedUserControl
     {
+        DesktopGUI AppWindow;
         Persistence Db = new Persistence();
         User CurrentUser;
         public UserPage(int uid)
         {
             InitializeComponent();
+            AppWindow = App.Current.MainWindow as DesktopGUI;
             CurrentUser = Db.GetSingleUser(uid);
             UserInfoGrid.DataContext = CurrentUser;
         }
-        
+
+        private void EditUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EditUsers editPage = new EditUsers(CurrentUser);
+            SwitchContent(AppWindow.Employees = editPage);
+        }
     }
 }

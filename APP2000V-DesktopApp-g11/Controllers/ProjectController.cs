@@ -237,6 +237,7 @@ namespace APP2000V_DesktopApp_g11.Controllers
             int result = Db.DeleteProject(pid);
             if (result == 0)
             {
+                Log.Message("Project deleted!", "The project was successfully deleted.");
                 return true;
             }
             else if (result == 2)

@@ -364,7 +364,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void GoToProjectBtn_Click(object sender, RoutedEventArgs e)
         {
             ProjectButton btn = sender as ProjectButton;
-            SwitchContent(AppWindow.Projects = new ProjectPage(btn.ProjectId));
+            SwitchContent(AppWindow.Dashboard = new ProjectPage(btn.ProjectId));
         }
     }
 }

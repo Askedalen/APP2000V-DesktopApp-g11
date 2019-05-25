@@ -31,20 +31,12 @@ namespace APP2000V_DesktopApp_g11.Views
                 TextBlock name = new TextBlock
                 {
                     Text = u.FirstName + " " + u.LastName,
-                    FontSize = 28,
-                    Margin = new Thickness(15, 30, 15, 30),
+                    Style = AppWindow.FindResource("UserListFullName") as Style,
                 };
-                StackPanel userPanel = new StackPanel
-                {
-                    Background = new SolidColorBrush(Colors.White),
-                };
-                userPanel.Children.Add(name);
                 UserButton userButton = new UserButton(u)
                 {
-                    Width = 300,
-                    Height = 300,
-                    Margin = new Thickness(30, 30, 30, 0),
-                    Content = userPanel
+                    Style = AppWindow.FindResource("UserListButton") as Style,
+                    Content = name
                 };
                 userButton.Click += new RoutedEventHandler(UserButton_Click);
                 EmployeesDisplay.Children.Add(userButton);
@@ -59,7 +51,7 @@ namespace APP2000V_DesktopApp_g11.Views
 
         private void NewEmpBtn_Click(object sender, RoutedEventArgs e)
         {
-            SwitchContent(AppWindow.Employees = new CreateUser());
+            SwitchContent(AppWindow.Employees = new EditUsers());
         }
     }
 }

@@ -2,6 +2,7 @@
 using APP2000V_DesktopApp_g11.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,30 +36,33 @@ namespace APP2000V_DesktopApp_g11.Views
             }
         }
 
-        private void DisplaySingleProject(Project p)
+        private async void DisplaySingleProject(Project p)
         {
             StackPanel projectPanel = new StackPanel();
+
+            StackPanel infoPanel = new StackPanel();
+            projectPanel.Children.Add(infoPanel);
 
             TextBlock headline = new TextBlock
             {
                 Text = p.ProjectName,
                 Style = AppWindow.FindResource("ProjectHeadline") as Style
             };
-            projectPanel.Children.Add(headline);
+            infoPanel.Children.Add(headline);
 
             TextBlock participantCount = new TextBlock
             {
-                Text = p.ProjectParticipants.Count + " participants", // Midlertidig antall deltakere
+                Text = p.ProjectParticipants.Count + " participants",
                 Style = AppWindow.FindResource("ProjectParticipantsCount") as Style
             };
-            projectPanel.Children.Add(participantCount);
+            infoPanel.Children.Add(participantCount);
 
             TextBlock description = new TextBlock
             {
                 Text = p.ProjectDescription,
                 Style = AppWindow.FindResource("ProjectShortDescription") as Style
             };
-            projectPanel.Children.Add(description);
+            infoPanel.Children.Add(description);
 
             StackPanel tasksPanel = new StackPanel();
 
@@ -77,7 +81,13 @@ namespace APP2000V_DesktopApp_g11.Views
                 Style = AppWindow.FindResource("TasksScrollViewer") as Style
             };
 
-            projectPanel.Children.Add(tasksScroll);
+            Grid scrollContainer = new Grid
+            {
+                Style = AppWindow.FindResource("TasksScrollViewerContainer") as Style
+            };
+            scrollContainer.Children.Add(tasksScroll);
+
+            projectPanel.Children.Add(scrollContainer);
             projectPanel.Style = AppWindow.FindResource("ProjectPanel") as Style;
 
             ProjectButton projectButton = new ProjectButton(p)
@@ -87,6 +97,8 @@ namespace APP2000V_DesktopApp_g11.Views
             };
             projectButton.Click += new RoutedEventHandler(ProjectButton_Click);
             ProjectsDisplay.Children.Add(projectButton);
+            await Task.Delay(1000);
+            scrollContainer.Height = projectButton.ActualHeight - infoPanel.ActualHeight - 15;
         }
 
         private void ProjectButton_Click(object sender, RoutedEventArgs e)

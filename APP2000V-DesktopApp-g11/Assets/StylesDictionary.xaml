@@ -35,37 +35,46 @@
     <Style x:Key="ProjectButton" TargetType="Button">
         <Setter Property="Margin" Value="20, 20, 0, 20" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Width" Value="400" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
     </Style>
     <Style x:Key="ProjectPanel" TargetType="StackPanel">
         <Setter Property="Orientation" Value="Vertical" />
-        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Background" Value="#68737c" />
         <Setter Property="Width" Value="400" />
     </Style>
     <Style x:Key="ProjectHeadline" TargetType="TextBlock">
-        <Setter Property="Margin" Value="15, 20, 0, 10" />
-        <Setter Property="FontSize" Value="36" />
+        <Setter Property="Margin" Value="15, 20, 10, 10" />
+        <Setter Property="Foreground" Value="#DDF3F3F3" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
     <Style x:Key="ProjectParticipantsCount" TargetType="TextBlock">
         <Setter Property="Margin" Value="15, 20, 0, 10" />
+        <Setter Property="Foreground" Value="#DDF3F3F3" />
         <Setter Property="FontSize" Value="18" />
     </Style>
     <Style x:Key="ProjectShortDescription" TargetType="TextBlock">
         <Setter Property="Margin" Value="15, 0, 0, 30" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="#DDF3F3F3" />
     </Style>
     
     <!-- Tasks -->
-    
+
+    <Style x:Key="TasksScrollViewerContainer" TargetType="Grid">
+        <Setter Property="Margin" Value="15, 0"/>
+    </Style>
     <Style x:Key="TasksScrollViewer" TargetType="ScrollViewer">
-        <Setter Property="Margin" Value="15, 0, 15, 0" />
-        <Setter Property="Height" Value="720" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
     </Style>
     <Style x:Key="TaskInScrollViewer" TargetType="TextBlock">
         <Setter Property="Background" Value="White" />
-        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontSize" Value="22" />
         <Setter Property="Margin" Value="0, 0, 0, 30" />
         <Setter Property="Padding" Value="30, 20, 0, 25" />
     </Style>
@@ -238,5 +247,18 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
+    </Style>
+    
+    <!-- USERS -->
+    <Style x:Key="UserListButton" TargetType="Button">
+        <Setter Property="Height" Value="150"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="35, 30, 30, 0"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+    <Style x:Key="UserListFullName" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="15, 30"/>
     </Style>
 </ResourceDictionary>

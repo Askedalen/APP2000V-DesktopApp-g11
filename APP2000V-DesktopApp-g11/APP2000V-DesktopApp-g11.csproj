@@ -103,17 +103,13 @@
     </ApplicationDefinition>
     <Compile Include="Assets\AnimatedUserControl.cs" />
     <Compile Include="Assets\Buttons.cs" />
-    <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Assets\Log.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
-    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Models\AssignedTask.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CreateDatabase.cs" />
     <Compile Include="Models\EmployeeLeave.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
     </Compile>
@@ -163,8 +159,8 @@
     <Compile Include="Views\CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreateUser.xaml.cs">
-      <DependentUpon>CreateUser.xaml</DependentUpon>
+    <Compile Include="Views\EditUsers.xaml.cs">
+      <DependentUpon>EditUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
@@ -204,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CreateUser.xaml">
+    <Page Include="Views\EditUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

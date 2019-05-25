@@ -85,7 +85,7 @@
                 x:Name="DashboardBtn"
                 Height="60" 
                 Content="Dashboard" 
-                FontSize="36"
+                FontSize="26"
                 Background="#41474c"
                 Click="NavBtn_Click"
                 BorderThickness="0"/>
@@ -93,7 +93,7 @@
                 x:Name="ProjectsBtn"
                 Height="60" 
                 Content="Projects" 
-                FontSize="36"
+                FontSize="26"
                 Click="NavBtn_Click"
                 Background="#68737c"
                 BorderThickness="0"/>
@@ -101,7 +101,7 @@
                 x:Name="EmployeesBtn" 
                 Height="60" 
                 Content="Employees" 
-                FontSize="36" 
+                FontSize="26" 
                 Click="NavBtn_Click"
                 Background="#68737c"
                 BorderThickness="0"/>
@@ -109,7 +109,7 @@
                 x:Name="ArchiveBtn"
                 Height="60" 
                 Content="Archive" 
-                FontSize="36"
+                FontSize="26"
                 Click="NavBtn_Click"
                 Background="#68737c"
                 BorderThickness="0"/>
