@@ -28,7 +28,7 @@
             
             <WrapPanel
                 x:Name="ArchivePanel"
-                Background="#7D8193">
+                Background="#E3E4E6">
                 <StackPanel
                     Background="White"
                     Margin="30, 30, 0, 0"

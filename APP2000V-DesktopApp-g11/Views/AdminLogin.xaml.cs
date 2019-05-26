@@ -2,20 +2,8 @@
 using APP2000V_DesktopApp_g11.Views;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace APP2000V_DesktopApp_g11
 {
@@ -29,7 +17,7 @@ namespace APP2000V_DesktopApp_g11
             InitializeComponent();
         }
 
-        DesktopGUI DesktopGUI = new DesktopGUI();
+        //Views.SplashScreen DesktopGUI = new Views.SplashScreen();
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +35,8 @@ namespace APP2000V_DesktopApp_g11
                                        .FirstOrDefault();
                     if (user != null)
                     {
-                        DesktopGUI.OpenWindow();
+                        Views.SplashScreen splashScreen = new Views.SplashScreen();
+                        splashScreen.Show();
                         this.Close();
                     }
                     else

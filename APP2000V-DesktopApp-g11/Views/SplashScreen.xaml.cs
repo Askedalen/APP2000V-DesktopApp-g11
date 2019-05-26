@@ -21,7 +21,7 @@ namespace APP2000V_DesktopApp_g11.Views
     public partial class SplashScreen : Window
     {
         DispatcherTimer dT  = new DispatcherTimer();
-
+        DesktopGUI Gui = new DesktopGUI();
         public SplashScreen()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace APP2000V_DesktopApp_g11.Views
         }
         private void dt_Tick(object sender, EventArgs e)
         {
-            DesktopGUI dg = new DesktopGUI();dg.Show();
+            Gui.OpenWindow();
             //AdminLogin al = new AdminLogin();al.Show();
 
             dT.Stop();

@@ -6,19 +6,6 @@ using System.Windows.Media.Animation;
 
 namespace APP2000V_DesktopApp_g11.Assets
 {
-    /// <summary>
-    /// Denne klassen gjør at user controls fader inn og ut når de byttes ut.
-    /// Et par ting å tenke på her:
-    /// - Bytte ut alle UserControl med AnimatedUserControl.
-    /// - Content i ContentArea byttes ikke lenger ut med ContentArea.Content,
-    ///   men med SwitchContent(AnimatedUserControl newContent).
-    /// - Se Dashboard.xaml og Dashbard.xaml.cs for eksempler.
-    /// - Jeg har skrevet kommentarene her på engelsk i tilfelle Boban skal
-    ///   se på det.
-    /// - Jeg har ikke kopiert koden. Dette var fullstendig min egen idé,
-    ///   så hvis det er litt teit eller klønete, er det lov å si ifra.
-    /// - Jævlig nice animasjon, da.
-    /// </summary>
     public class AnimatedUserControl : UserControl
     {
         
