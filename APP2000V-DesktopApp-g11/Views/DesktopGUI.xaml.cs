@@ -29,7 +29,8 @@ namespace APP2000V_DesktopApp_g11.Views
         public DesktopGUI()
         {
             InitializeComponent();
-            OpenWindow();
+            this.Hide();
+            new SplashScreen();
         }
 
         public void OpenWindow()

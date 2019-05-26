@@ -24,17 +24,14 @@ namespace APP2000V_DesktopApp_g11.Views
         public SplashScreen()
         {
             InitializeComponent();
-
+            this.Show();
             dT.Tick += new EventHandler(dt_Tick);
             dT.Interval = new TimeSpan(0, 0, 3);
             dT.Start();
         }
         private void dt_Tick(object sender, EventArgs e)
         {
-            DesktopGUI dg = new DesktopGUI();
-
-            dg.Show();
-            //AdminLogin al = new AdminLogin();al.Show();
+            AdminLogin al = new AdminLogin();al.Show();
 
             dT.Stop();
             this.Close();

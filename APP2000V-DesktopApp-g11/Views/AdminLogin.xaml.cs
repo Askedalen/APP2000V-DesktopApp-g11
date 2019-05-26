@@ -2,6 +2,7 @@
 using APP2000V_DesktopApp_g11.Views;
 using MySql.Data.MySqlClient;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 
@@ -16,8 +17,6 @@ namespace APP2000V_DesktopApp_g11
         {
             InitializeComponent();
         }
-
-        //Views.SplashScreen DesktopGUI = new Views.SplashScreen();
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -35,8 +34,8 @@ namespace APP2000V_DesktopApp_g11
                                        .FirstOrDefault();
                     if (user != null)
                     {
-                        Views.SplashScreen splashScreen = new Views.SplashScreen();
-                        splashScreen.Show();
+                        DesktopGUI gui = App.Current.MainWindow as DesktopGUI;
+                        gui.OpenWindow();
                         this.Close();
                     }
                     else
