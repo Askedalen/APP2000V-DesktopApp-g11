@@ -4,15 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:APP2000V_DesktopApp_g11.Views"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         
-        Title="SplashScreen" Height="450" Width="700" ResizeMode="NoResize" WindowStyle="None" Background="Black">
+        Title="SplashScreen" Height="450" Width="700" ResizeMode="NoResize" WindowStyle="None" Background="Black" WindowStartupLocation="CenterScreen">
     <StackPanel VerticalAlignment="Center">
         <Image 
                 x:Name="WorkMotion"
                 Width="Auto" Height="316" 
                 Margin="40,20"
-                Source="../Assets/WorkMotion.gif"/>
+                gif:ImageBehavior.AnimatedSource="../Assets/WorkMotion.gif"/>
         <TextBlock FontSize="30" Foreground="White" TextAlignment="Center" Height="45" FontFamily="Segoe UI Semibold" Text="WørkFlow"/>
         <TextBlock FontSize="15" Foreground="White" TextAlignment="Center" Height="45" Text="More Control, More Efficient, Less Stress."/>
 

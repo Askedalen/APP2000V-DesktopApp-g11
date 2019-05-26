@@ -32,7 +32,9 @@ namespace APP2000V_DesktopApp_g11.Views
         }
         private void dt_Tick(object sender, EventArgs e)
         {
-            DesktopGUI dg = new DesktopGUI();dg.Show();
+            DesktopGUI dg = new DesktopGUI();
+
+             dg.Show();
             //AdminLogin al = new AdminLogin();al.Show();
 
             dT.Stop();
