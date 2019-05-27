@@ -29,10 +29,9 @@ namespace APP2000V_DesktopApp_g11
                 {
                     User user = context.Users
                                        .Where(u => u.Username == username
-                                                && u.Password == password
                                                 && u.Role == 0)
                                        .FirstOrDefault();
-                    if (user != null)
+                    if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
                     {
                         DesktopGUI gui = App.Current.MainWindow as DesktopGUI;
                         gui.OpenWindow();

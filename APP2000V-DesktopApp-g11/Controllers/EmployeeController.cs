@@ -51,6 +51,9 @@ namespace APP2000V_DesktopApp_g11.Controllers
                 return false;
             }
 
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Password = hashedPassword;
+
             if (Db.CreateUser(user) == 0)
             {
                 Log.Message("User is registered!", "The user was successfully registered.");
@@ -58,7 +61,7 @@ namespace APP2000V_DesktopApp_g11.Controllers
             }
             else
             {
-                Log.Error("Could not update user information!");
+                Log.Error("Could not create user!");
                 return false;
             }
         }
@@ -74,6 +77,12 @@ namespace APP2000V_DesktopApp_g11.Controllers
             {
                 Log.Error("There is no user with this username!");
                 return false;
+            }
+
+            if (user.Password != null && !user.Password.Equals(""))
+            {
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                user.Password = hashedPassword;
             }
 
             int result = Db.UpdateUser(user);
