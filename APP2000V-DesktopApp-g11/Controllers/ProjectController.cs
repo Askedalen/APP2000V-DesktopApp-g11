@@ -173,6 +173,12 @@ namespace APP2000V_DesktopApp_g11.Controllers
                 return -1;
             }
 
+            if (newProject.ProjectDescription.Length > 255)
+            {
+                Log.Error("Project description cannot be longer than 255 characters!");
+                return -1;
+            }
+
             if (newProject.ProjectStart.HasValue)
             {
                 if (DateTime.Compare(DateTime.Now, newProject.ProjectStart.Value) >= 0)
@@ -284,6 +290,12 @@ namespace APP2000V_DesktopApp_g11.Controllers
             if (projectUpdate.ProjectName == null || projectUpdate.ProjectName == "")
             {
                 Log.Error("The project must have a name!");
+                return false;
+            }
+
+            if (projectUpdate.ProjectDescription.Length > 255)
+            {
+                Log.Error("Project description cannot be longer than 255 characters!");
                 return false;
             }
 

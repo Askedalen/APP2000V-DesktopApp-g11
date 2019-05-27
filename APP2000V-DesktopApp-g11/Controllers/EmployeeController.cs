@@ -33,6 +33,7 @@ namespace APP2000V_DesktopApp_g11.Controllers
 
         internal bool CreateUser(User user)
         {
+            user.Role = 1;
             if (!ValidateUserInfo(user))
             {
                 return false;
