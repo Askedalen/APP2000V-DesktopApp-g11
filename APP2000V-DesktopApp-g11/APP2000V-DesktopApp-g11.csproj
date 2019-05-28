@@ -116,9 +116,6 @@
     <Compile Include="Models\AssignedTask.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmployeeLeave.cs">
-      <DependentUpon>WorkflowDatabase.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Event.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
     </Compile>

@@ -17,7 +17,6 @@ namespace APP2000V_DesktopApp_g11.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.EmployeeLeaves = new HashSet<EmployeeLeave>();
             this.Events = new HashSet<Event>();
             this.Events1 = new HashSet<Event>();
             this.Notifications = new HashSet<Notification>();
@@ -36,8 +35,6 @@ namespace APP2000V_DesktopApp_g11.Models
         public string About { get; set; }
         public byte[] Image { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeLeave> EmployeeLeaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

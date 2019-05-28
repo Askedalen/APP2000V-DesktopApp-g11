@@ -14,15 +14,6 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="TaskId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="EmployeeLeave">
-          <Key>
-            <PropertyRef Name="LeaveId" />
-          </Key>
-          <Property Name="LeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="FromDate" Type="date" />
-          <Property Name="ToDate" Type="date" />
-        </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="EventId" />
@@ -125,18 +116,6 @@
             </Principal>
             <Dependent Role="AssignedTask">
               <PropertyRef Name="TaskId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EmployeeLeaveUserFK">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="EmployeeLeave" Type="Self.EmployeeLeave" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="EmployeeLeave">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -310,7 +289,6 @@
         </Association>
         <EntityContainer Name="WorkflowModelStoreContainer">
           <EntitySet Name="AssignedTask" EntityType="Self.AssignedTask" Schema="app2000v" store:Type="Tables" />
-          <EntitySet Name="EmployeeLeave" EntityType="Self.EmployeeLeave" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="app2000v" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="app2000v" store:Type="Tables" />
@@ -322,10 +300,6 @@
           <AssociationSet Name="AssignedTaskPTaskFK" Association="Self.AssignedTaskPTaskFK">
             <End Role="PTask" EntitySet="PTask" />
             <End Role="AssignedTask" EntitySet="AssignedTask" />
-          </AssociationSet>
-          <AssociationSet Name="EmployeeLeaveUserFK" Association="Self.EmployeeLeaveUserFK">
-            <End Role="User" EntitySet="User" />
-            <End Role="EmployeeLeave" EntitySet="EmployeeLeave" />
           </AssociationSet>
           <AssociationSet Name="EventProjectFK" Association="Self.EventProjectFK">
             <End Role="Project" EntitySet="Project" />
@@ -398,16 +372,6 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="TaskId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PTask" Relationship="Self.AssignedTaskPTaskFK" FromRole="AssignedTask" ToRole="PTask" />
-        </EntityType>
-        <EntityType Name="EmployeeLeave">
-          <Key>
-            <PropertyRef Name="LeaveId" />
-          </Key>
-          <Property Name="LeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="FromDate" Type="DateTime" />
-          <Property Name="ToDate" Type="DateTime" />
-          <NavigationProperty Name="User" Relationship="Self.EmployeeLeaveUserFK" FromRole="EmployeeLeave" ToRole="User" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -525,7 +489,6 @@
           <Property Name="Role" Type="Int32" />
           <Property Name="About" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.EmployeeLeaveUserFK" FromRole="User" ToRole="EmployeeLeave" />
           <NavigationProperty Name="Events" Relationship="Self.EventUserFK" FromRole="User" ToRole="Event" />
           <NavigationProperty Name="Events1" Relationship="Self.EventUserIIFK" FromRole="User" ToRole="Event" />
           <NavigationProperty Name="Notifications" Relationship="Self.NotificationUserFK" FromRole="User" ToRole="Notification" />
@@ -541,18 +504,6 @@
             </Principal>
             <Dependent Role="AssignedTask">
               <PropertyRef Name="TaskId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EmployeeLeaveUserFK">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="EmployeeLeave" Type="Self.EmployeeLeave" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="EmployeeLeave">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -726,7 +677,6 @@
         </Association>
         <EntityContainer Name="WorkflowContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AssignedTasks" EntityType="Self.AssignedTask" />
-          <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeave" />
           <EntitySet Name="Events" EntityType="Self.Event" />
           <EntitySet Name="Notifications" EntityType="Self.Notification" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
@@ -738,10 +688,6 @@
           <AssociationSet Name="AssignedTaskPTaskFK" Association="Self.AssignedTaskPTaskFK">
             <End Role="PTask" EntitySet="PTasks" />
             <End Role="AssignedTask" EntitySet="AssignedTasks" />
-          </AssociationSet>
-          <AssociationSet Name="EmployeeLeaveUserFK" Association="Self.EmployeeLeaveUserFK">
-            <End Role="User" EntitySet="Users" />
-            <End Role="EmployeeLeave" EntitySet="EmployeeLeaves" />
           </AssociationSet>
           <AssociationSet Name="EventProjectFK" Association="Self.EventProjectFK">
             <End Role="Project" EntitySet="Projects" />
@@ -813,16 +759,6 @@
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="TaskId" ColumnName="TaskId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeLeaves">
-            <EntityTypeMapping TypeName="WorkflowModel.EmployeeLeave">
-              <MappingFragment StoreEntitySet="EmployeeLeave">
-                <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
