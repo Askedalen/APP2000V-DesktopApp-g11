@@ -32,6 +32,7 @@
             Grid.Row="0"
             Padding="15"
             Grid.ColumnSpan="3"
+            FontSize="22"
             Background="#FF434547"
             Foreground="White"
             Text="{Binding Project.ProjectName}"

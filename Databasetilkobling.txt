@@ -1,6 +1,0 @@
-Host: waindor.com
-Port: 3306
-Database: app2000g11
-Username: app2000g11
-Password: Wørkflow11
-PHPMyAdmin: https://www.waindor.com/phpmyadmin

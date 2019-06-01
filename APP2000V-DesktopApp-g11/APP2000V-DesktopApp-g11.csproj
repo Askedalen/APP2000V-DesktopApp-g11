@@ -111,7 +111,6 @@
     <Compile Include="Assets\Buttons.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Assets\Log.cs" />
-    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Models\AssignedTask.cs">
       <DependentUpon>WorkflowDatabase.tt</DependentUpon>
@@ -195,10 +194,6 @@
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Page Include="Assets\Animations.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Archive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

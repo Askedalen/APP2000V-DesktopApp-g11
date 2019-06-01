@@ -79,7 +79,7 @@
                 Background="White"/>
             
             <Label
-                Content="_First Name"
+                Content="_First name"
                 Target="{Binding ElementName=UserFNameInput}"
                 FontSize="20"/>
             <TextBox
@@ -89,7 +89,7 @@
                 Padding="5, 0"
                 Background="White"/>
             <Label
-                Content="_Lastname"
+                Content="_Last name"
                 Target="{Binding ElementName=UserLNameInput}"
                 FontSize="20"/>
             <TextBox
@@ -201,11 +201,11 @@
                         Binding="{Binding Username}"
                         Width="*"/>
                     <DataGridTextColumn
-                        Header="Firstname"
+                        Header="First name"
                         Binding="{Binding FirstName}"
                         Width="*"/>
                     <DataGridTextColumn
-                        Header="Lastname"
+                        Header="Last name"
                         Binding="{Binding LastName}"
                         Width="*"/>
                     <DataGridTextColumn

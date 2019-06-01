@@ -137,7 +137,7 @@ namespace APP2000V_DesktopApp_g11.Controllers
             statsObject.EmployeesWorking = Db.GetEmployeesWorkingCount();
             statsObject.FinishedTasks = Db.GetAllFinishedTasksCount();
             statsObject.FinishedProjects = Db.GetFinishedProjectsCount();
-            statsObject.BeforeDeadline = Db.GetProjectsDoneInTimeCount(); // Jeg er veldig god på metodenavn
+            statsObject.BeforeDeadline = Db.GetProjectsDoneInTimeCount();
             statsObject.BeforeDeadlinePercent = ((double)statsObject.BeforeDeadline / (double)statsObject.FinishedProjects) * 100;
             statsObject.AfterDeadline = Db.GetProjectsNotDoneInTimecount();
             statsObject.AfterDeadlinePercent = ((double)statsObject.AfterDeadline / (double)statsObject.FinishedProjects) * 100;

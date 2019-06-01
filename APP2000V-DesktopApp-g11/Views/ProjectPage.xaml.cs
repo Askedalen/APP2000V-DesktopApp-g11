@@ -152,7 +152,7 @@ namespace APP2000V_DesktopApp_g11.Views
         private void EmpBtn_Click(object sender, RoutedEventArgs e)
         {
             UserButton emp = sender as UserButton;
-            //SwitchContent(AppWindow.Employees = new EmployeePage(emp.UserId));
+            SwitchContent(AppWindow.Employees = new UserPage(emp.UserId));
         }
 
         private void ProjectSettingsBtn_Click(object sender, RoutedEventArgs e)
