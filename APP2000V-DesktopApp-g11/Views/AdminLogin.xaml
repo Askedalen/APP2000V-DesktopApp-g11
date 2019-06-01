@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="300"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -50,6 +50,11 @@
                 x:Name="LoginBtn"
                 Content="Login" 
                 Click="LoginBtn_Click" Background="#FF66A8F7"
+                />
+            <TextBlock
+                FontWeight="Bold"
+                TextWrapping="Wrap"
+                Text="Hint: Username and password is 'admin'"
                 />
             <TextBlock
                 x:Name="ErrorMessage" 
